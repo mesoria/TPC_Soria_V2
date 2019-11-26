@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 using Dominio;
 using Negocio;
 
-namespace TPC_Soria_v2
+namespace TPC_Soria_v2.FolderEstablecimiento
 {
     public partial class NewEstablecimiento : System.Web.UI.Page
     {
@@ -16,6 +16,8 @@ namespace TPC_Soria_v2
 
         public Direccion direccion = new Direccion();
         public Establecimiento establecimiento = new Establecimiento();
+
+        public Int64 isNew;
         private bool Completed(string text)
         {
             return text.ToString().Trim() != "";
@@ -28,14 +30,14 @@ namespace TPC_Soria_v2
             }
             else
             {
-                if (cbxNivel.Value == "Facultad" || cbxNivel.Value == "Univercidad")
+                if (cbxNivel.Value == "Facultad" || cbxNivel.Value == "Universidad")
                 {
                     return true;
                 }
             }
             return false;
         }
-        public string FirstTime()
+        public string IsNew()
         {
             if (Request.QueryString["idE"] == null)
             {
@@ -54,47 +56,50 @@ namespace TPC_Soria_v2
             {
                 if (Request.QueryString["idE"] == null)
                 {
+                    isNew = 0;
                     //Debería agregar un nuevo establecimiento.
                 }
                 else
                 {
-                    Int64 establecimientoId = Convert.ToInt32(Request.QueryString["idE"]);
-                    establecimiento = negocioEstablecimiento.GetEstablecimientoWithId( establecimientoId );
-
-                    //establecimiento = NegocioPersona.ListarPersonas().Find(J => J.ID == establecimientoId);
-                    //grid.DataSource = NegocioVoucher.ListarVouchers();
-                    //grid.DataBind();
-                    //txtNombre.Text = establecimiento.Name;
-                    txtNombre.Value = establecimiento.Name;
-                    switch (establecimiento.Nivel)
+                    isNew = Convert.ToInt32(Request.QueryString["idE"]);
+                    if (!IsPostBack)
                     {
-                        case "Secundaria":
-                            cbxNivel.SelectedIndex = 1;
-                            txtNumero.Value = establecimiento.Number.ToString();
-                            break;
-                        case "Facultad":
-                            cbxNivel.SelectedIndex = 2;
-                            break;
-                        case "Universidad":
-                            cbxNivel.SelectedIndex = 3;
-                            break;
-                        default:
-                            cbxNivel.SelectedIndex = 0;
-                            txtNumero.Value = establecimiento.Number.ToString();
-                            break;
+                        establecimiento = negocioEstablecimiento.GetEstablecimientoWithId(isNew);
+
+                        //establecimiento = NegocioPersona.ListarPersonas().Find(J => J.ID == establecimientoId);
+                        //grid.DataSource = NegocioVoucher.ListarVouchers();
+                        //grid.DataBind();
+                        //txtNombre.Text = establecimiento.Name;
+                        txtNombre.Value = establecimiento.Name;
+                        switch (establecimiento.Nivel)
+                        {
+                            case "Secundaria":
+                                cbxNivel.SelectedIndex = 1;
+                                txtNumero.Value = establecimiento.Number.ToString();
+                                break;
+                            case "Facultad":
+                                cbxNivel.SelectedIndex = 2;
+                                break;
+                            case "Universidad":
+                                cbxNivel.SelectedIndex = 3;
+                                break;
+                            default:
+                                cbxNivel.SelectedIndex = 0;
+                                txtNumero.Value = establecimiento.Number.ToString();
+                                break;
+                        }
+                        txtCalle.Value = establecimiento.Direccion.Calle;
+                        txtAltura.Value = establecimiento.Direccion.Number;
                     }
-                    
-                    txtCalle.Value  = establecimiento.Direccion.Calle;
-                    txtAltura.Value = establecimiento.Direccion.Number;
                 }
+                
             }
             catch (Exception ex)
             {
                 Session["Error" + Session.SessionID] = ex;
                 Response.Redirect("/frmLog.aspx");
-            } 
+            }
         }
-
         public static void Limpiar(Control control)
         {
             foreach (Control c in control.Controls)
@@ -140,9 +145,16 @@ namespace TPC_Soria_v2
                     {
                         establecimiento.Number = Convert.ToInt32(txtNumero.Value);
                     }
-                    establecimiento.Direccion = direccion;
-                    if (establecimiento.ID != 0)
+                    establecimiento.Direccion = new Direccion
                     {
+                        ID     = direccion.ID,
+                        Calle  = direccion.Calle,
+                        Number = direccion.Number
+
+                    };
+                    if (isNew != 0)
+                    {
+                        establecimiento.ID = isNew;
                         negocioDireccion.Modificar(establecimiento.Direccion);
                         negocioEstablecimiento.Modificar(establecimiento);
                     }
@@ -151,9 +163,6 @@ namespace TPC_Soria_v2
                         negocioEstablecimiento.Agregar(establecimiento);
                     }
 
-                    Response.Write("<script>alert('El establecimiento se a cargado correctamente')</script>");
-
-                    //txtNombre.Text = "";
                     txtNombre.Value = "";
                     cbxNivel.SelectedIndex = 0;
                     txtCalle.Value = "";
@@ -161,7 +170,14 @@ namespace TPC_Soria_v2
                     txtAltura.Value = "";
                     txtDepartamento.Value = "";
                     txtPiso.Value = "";
-                    //Response.Redirect("Maestra/MaestraPrincipal.aspx", false);
+
+                    //Response.Write("<script>alert('El establecimiento se a cargado correctamente')</script>");
+
+                    //txtNombre.Text = "";
+                    string ex = "El establecimiento se ha guardado correctamente.";
+                    Session["Aviso" + Session.SessionID] = ex;
+                    Response.Redirect("~/Establecimientos.aspx", false);
+
                     //Response.Redirect("javascript: window.history.back()");
                     //Response.Redirect(Request.UrlReferrer.ToString());
                 }
@@ -173,7 +189,8 @@ namespace TPC_Soria_v2
             }
             catch (Exception ex)
             {
-                throw ex;
+                Session["Error" + Session.SessionID] = ex;
+                Response.Redirect("frmLog.aspx");
             }
         }
     }

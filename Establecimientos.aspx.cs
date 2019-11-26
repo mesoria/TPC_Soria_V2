@@ -9,9 +9,11 @@ using Negocio;
 
 namespace TPC_Soria_v2
 {
-    public partial class _Default : Page
+    public partial class Establecimientos : Page
     {
+        public List<Establecimiento> ListEstablecimientos { get; set; }
         private readonly NegocioPersona negocioPersona = new NegocioPersona();
+        public Persona maestra = new Persona();
         public Persona persona = new Persona();
         public Usuario usuario = new Usuario();
         protected void Page_Load(object sender, EventArgs e)
@@ -19,7 +21,6 @@ namespace TPC_Soria_v2
             try
             {
                 usuario = (Usuario)Session["Usuario"];
-                Session["Usuario"] = usuario;
                 if (!IsPostBack)
                 {
                     if (usuario == null)
@@ -28,11 +29,22 @@ namespace TPC_Soria_v2
                     }
                 }
                 persona = negocioPersona.GetPersonaWithId(usuario.ID);
+                NegocioEstablecimiento negocioEstablecimiento = new NegocioEstablecimiento();
+                ListEstablecimientos = negocioEstablecimiento.ListarEstablecimiento();
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+        }
+
+        public string GetApellido()
+        {
+            return maestra.Apellido;
+        }
+        public string GetName()
+        {
+            return maestra.Name;
         }
     }
 }

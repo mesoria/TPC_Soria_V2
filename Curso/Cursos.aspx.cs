@@ -7,34 +7,34 @@ using System.Web.UI.WebControls;
 using Dominio;
 using Negocio;
 
-namespace TPC_Soria_v2
+namespace TPC_Soria_v2.Curso
 {
     public partial class Cursos : System.Web.UI.Page
     {
-        public NegocioPersona NegocioPersona = new NegocioPersona();
+        public List<Cursos> cursos { get; set; }
+        private readonly NegocioPersona negocioPersona = new NegocioPersona();
         public Persona maestra = new Persona();
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
-                if (Request.QueryString["idM"] == null)
-                {
-                    //por si accede a la pagina con el link
-                    Session["Error" + Session.SessionID] = "Ups, ¿Aún no eras maestra?";
-                    Response.Redirect("MaestraPrincipal.aspx", false);
-                }
-                Int64 maestraId = Convert.ToInt32(Request.QueryString["idM"]);
-                maestra = NegocioPersona.GetPersonaWithId(maestraId);
-                
-                //maestra = NegocioPersona.ListarPersonas().Find(J => J.ID == maestraId);
-                //grid.DataSource = NegocioVoucher.ListarVouchers();
-                //grid.DataBind();
+                NegocioCurso negocioCurso = new NegocioCurso();
+                //cursos = negocioCurso.ListarCursos();
+                maestra = negocioPersona.GetPersona("36475321");
             }
             catch (Exception ex)
             {
-                Session["Error" + Session.SessionID] = ex;
-                Response.Redirect("/frmLog.aspx");
+                throw ex;
             }
+        }
+
+        public string GetApellido()
+        {
+            return maestra.Apellido;
+        }
+        public string GetName()
+        {
+            return maestra.Name;
         }
     }
 }

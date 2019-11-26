@@ -8,13 +8,14 @@ using Dominio;
 
 namespace Negocio
 {
-    public class NegocioEstablecimiento
+    public class NegocioCurso
     {
-        public List<Establecimiento> ListarEstablecimiento()
+        /*
+        public List<Curso> ListarCurso()
         {
             Datos datos = new Datos();
-            List<Establecimiento> establecimientos = new List<Establecimiento>();
-            Establecimiento aux;
+            List<Curso> cursos = new List<Curso>();
+            Curso aux;
             try
             {
                 datos.SetearConsulta("Select esc.ID, esc.NOMBRE, esc.NUMERO, esc.NIVEL, dir.ID, dir.CALLE, dir.NUMERO from SORIA_TPC.dbo.ESTABLECIMIENTOS as esc inner join SORIA_TPC.dbo.DIRECCIONES as dir on dir.ID = esc.IDDIRECCION");
@@ -22,7 +23,7 @@ namespace Negocio
                 datos.EjecutarConsulta();
                 while (datos.Reader.Read())
                 {
-                    aux = new Establecimiento
+                    aux = new Curso
                     {
                         ID = (Int64)datos.Reader[0],
                         Name = (string)datos.Reader[1],
@@ -41,9 +42,9 @@ namespace Negocio
                     {
                         aux.Direccion = new Direccion
                         {
-                            ID      = (Int64)datos.Reader[4],
-                            Calle   = (string)datos.Reader[5],
-                            Number  = (string)datos.Reader[6]
+                            ID = (Int64)datos.Reader[4],
+                            Calle = (string)datos.Reader[5],
+                            Number = (string)datos.Reader[6]
                         };
                     }
                     //Telefono = new Telefono
@@ -51,9 +52,9 @@ namespace Negocio
                     //  ID             = (string)datos.Reader[8],
                     //  TipoTelefono   = (string)datos.Reader[9]
                     //}
-                    establecimientos.Add(aux);
+                    cursos.Add(aux);
                 }
-                return establecimientos;
+                return cursos;
             }
             catch (Exception ex)
             {
@@ -67,25 +68,25 @@ namespace Negocio
         }
 
 
-        public void Agregar(Establecimiento establecimiento)
+        public void Agregar(Curso curso)
         {
             Datos datos = new Datos();
             try
             {
-                if (this.GetEstablecimiento( establecimiento ).ID == 0)
+                if (this.GetCurso(curso).ID == 0)
                 {
                     datos.SetearConsulta("INSERT INTO SORIA_TPC.dbo.ESTABLECIMIENTOS (NOMBRE, NUMERO, NIVEL, IDDIRECCION) values (@Nombre, @Numero, @Nivel, @IDDireccion)");
                     datos.Comando.Parameters.Clear();
-                    datos.Comando.Parameters.AddWithValue("@Nombre",        establecimiento.Name);
-                    datos.Comando.Parameters.AddWithValue("@Numero",        establecimiento.Number);
-                    datos.Comando.Parameters.AddWithValue("@Nivel",         establecimiento.Nivel);
-                    datos.Comando.Parameters.AddWithValue("@IDDireccion",   establecimiento.Direccion.ID);
+                    datos.Comando.Parameters.AddWithValue("@Nombre", curso.Name);
+                    datos.Comando.Parameters.AddWithValue("@Numero", curso.Number);
+                    datos.Comando.Parameters.AddWithValue("@Nivel", curso.Nivel);
+                    datos.Comando.Parameters.AddWithValue("@IDDireccion", curso.Direccion.ID);
                     datos.AbrirConexion();
                     datos.EjecutarAccion();
                 }
                 else
                 {
-                    //ya existe un establecimiento asi... Deberia hacer un Trigger o un procedimiento almacenado.
+                    //ya existe un curso asi... Deberia hacer un Trigger o un procedimiento almacenado.
                 }
             }
             catch (Exception ex)
@@ -97,21 +98,21 @@ namespace Negocio
                 datos.CerrarConexion();
             }
         }
-        public void Modificar(Establecimiento establecimiento)
+        public void Modificar(Curso curso)
         {
             Datos datos = new Datos();
             try
             {
-                datos.SetearConsulta("update SORIA_TPC.dbo.ESTABLECIMIENTOS Set NOMBRE=@Nombre, NUMERO=@Numero, NIVEL=@Nivel, IDDIRECCION=@IdDireccion Where ID=@IdEstablecimiento");
+                datos.SetearConsulta("update SORIA_TPC.dbo.ESTABLECIMIENTOS Set NOMBRE=@Nombre, NUMERO=@Numero, NIVEL=@Nivel, IDDIRECCION=@IdDireccion Where ID=@IdCurso");
                 datos.Comando.Parameters.Clear();
-                datos.Comando.Parameters.AddWithValue("@Nombre",            establecimiento.Name);
-                datos.Comando.Parameters.AddWithValue("@Numero",            establecimiento.Number);
-                datos.Comando.Parameters.AddWithValue("@Nivel",             establecimiento.Nivel);
-                datos.Comando.Parameters.AddWithValue("@IdDireccion",       establecimiento.Direccion.ID);
-                datos.Comando.Parameters.AddWithValue("@IdEstablecimiento", establecimiento.ID);
-                // datos.Comando.Parameters.AddWithValue("@Ciudad", establecimiento.ciudad.ToString());
-                //datos.Comando.Parameters.AddWithValue("@CP", establecimiento.CP.ToString());
-                // datos.Comando.Parameters.AddWithValue("@FechaRegistro", establecimiento.fechaRegistro);
+                datos.Comando.Parameters.AddWithValue("@Nombre", curso.Name);
+                datos.Comando.Parameters.AddWithValue("@Numero", curso.Number);
+                datos.Comando.Parameters.AddWithValue("@Nivel", curso.Nivel);
+                datos.Comando.Parameters.AddWithValue("@IdDireccion", curso.Direccion.ID);
+                datos.Comando.Parameters.AddWithValue("@IdCurso", curso.ID);
+                // datos.Comando.Parameters.AddWithValue("@Ciudad", curso.ciudad.ToString());
+                //datos.Comando.Parameters.AddWithValue("@CP", curso.CP.ToString());
+                // datos.Comando.Parameters.AddWithValue("@FechaRegistro", curso.fechaRegistro);
                 datos.AbrirConexion();
                 datos.EjecutarAccion();
             }
@@ -140,49 +141,49 @@ namespace Negocio
             }
         }
 
-        public Establecimiento GetEstablecimiento( Establecimiento Establecimiento)
+        public Curso GetCurso(Curso curso)
         {
             Datos datos = new Datos();
             try
-            {   
+            {
                 datos.SetearConsulta("Select esc.ID, esc.NOMBRE, esc.NUMERO, esc.NIVEL, dir.ID, dir.CALLE, dir.NUMERO from SORIA_TPC.dbo.ESTABLECIMIENTOS as esc inner join SORIA_TPC.dbo.DIRECCIONES as dir on dir.ID = esc.IDDIRECCION where esc.NUMERO=@number AND esc.NOMBRE=@Nombre");
                 datos.Comando.Parameters.Clear();
-                datos.Comando.Parameters.AddWithValue("@Nombre", Establecimiento.Name);
-                datos.Comando.Parameters.AddWithValue("@number", Establecimiento.Number);
+                datos.Comando.Parameters.AddWithValue("@Nombre", curso.Name);
+                datos.Comando.Parameters.AddWithValue("@number", curso.Number);
                 datos.AbrirConexion();
                 datos.EjecutarConsulta();
-                Establecimiento establecimiento = new Establecimiento();
+                Curso curso = new Curso();
                 if (datos.Reader.Read())
                 {
-                    establecimiento = new Establecimiento
+                    curso = new Curso
                     {
-                        ID     = (Int64)datos.Reader[0],
-                        Name   = (string)datos.Reader[1],
-                        Nivel  = (string)datos.Reader[3]
+                        ID = (Int64)datos.Reader[0],
+                        Name = (string)datos.Reader[1],
+                        Nivel = (string)datos.Reader[3]
                     };
                     if (!Convert.IsDBNull(datos.Reader[2]))
                     {
-                        establecimiento.Number = (int)datos.Reader[2];
+                        curso.Number = (int)datos.Reader[2];
                     }
                     else
                     {
-                        establecimiento.Number = 0;
+                        curso.Number = 0;
                     }
                     if (!Convert.IsDBNull(datos.Reader[4]))
                     {
-                        establecimiento.Direccion = new Direccion
+                        curso.Direccion = new Direccion
                         {
-                            ID     = (Int64)datos.Reader[4],
-                            Calle  = (string)datos.Reader[5],
+                            ID = (Int64)datos.Reader[4],
+                            Calle = (string)datos.Reader[5],
                             Number = (string)datos.Reader[6]
                         };
                     }
                 }
                 else
                 {
-                    establecimiento.ID = 0;
+                    curso.ID = 0;
                 }
-                return establecimiento;
+                return curso;
             }
             catch (Exception ex)
             {
@@ -194,7 +195,7 @@ namespace Negocio
                 datos.CerrarConexion();
             }
         }
-        public Establecimiento GetEstablecimientoWithId( Int64 ID)
+        public Curso GetCursoWithId(Int64 ID)
         {
             Datos datos = new Datos();
             try
@@ -204,38 +205,38 @@ namespace Negocio
                 datos.Comando.Parameters.AddWithValue("@ID", ID);
                 datos.AbrirConexion();
                 datos.EjecutarConsulta();
-                Establecimiento establecimiento = new Establecimiento();
+                Curso curso = new Curso();
                 if (datos.Reader.Read())
                 {
-                    establecimiento = new Establecimiento
+                    curso = new Curso
                     {
-                        ID    = ID,
-                        Name  = (string)datos.Reader[1],
+                        ID = (Int64)datos.Reader[0],
+                        Name = (string)datos.Reader[1],
                         Nivel = (string)datos.Reader[3],
                     };
                     if (!Convert.IsDBNull(datos.Reader[2]))
                     {
-                        establecimiento.Number = (int)datos.Reader[2];
+                        curso.Number = (int)datos.Reader[2];
                     }
                     else
                     {
-                        establecimiento.Number = 0;
+                        curso.Number = 0;
                     }
                     if (!Convert.IsDBNull(datos.Reader[4]))
                     {
-                        establecimiento.Direccion = new Direccion
+                        curso.Direccion = new Direccion
                         {
-                            ID     = (Int64)datos.Reader[4],
-                            Calle  = (string)datos.Reader[5],
+                            ID = (Int64)datos.Reader[4],
+                            Calle = (string)datos.Reader[5],
                             Number = (string)datos.Reader[6]
                         };
                     }
                 }
                 else
                 {
-                    establecimiento.ID = 0;
+                    curso.ID = 0;
                 }
-                return establecimiento;
+                return curso;
             }
             catch (Exception ex)
             {
@@ -247,5 +248,6 @@ namespace Negocio
                 datos.CerrarConexion();
             }
         }
+        */
     }
 }

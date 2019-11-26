@@ -66,18 +66,22 @@ namespace Negocio
 
         public void Agregar(Persona persona)
         {
+            NegocioDireccion negocioDireccion = new NegocioDireccion();
             Datos datos = new Datos();
             try
             {
-                if ( this.GetID( persona.DNI) == 0)
+                negocioDireccion.Agregar(persona.Direccion);
+                persona.Direccion = negocioDireccion.GetDireccion(persona.Direccion);
+                if ( this.GetIDWithDNI( persona.DNI) == 0)
                 {
-                    datos.SetearConsulta("insert into SORIA_TPC.dbo.PERSONAS (DNI, Nombre, Apellido, Email, Nacimiento) values (@DNI, @Nombre, @Apellido, @Email, @Nacimiento)");
+                    datos.SetearConsulta("insert into SORIA_TPC.dbo.PERSONAS ( Nombre, Apellido, DNI, Email, Nacimiento, IDDIRECCION) values ( @Nombre, @Apellido, @DNI, @Email, @Nacimiento, @IdDireccion)");
                     datos.Comando.Parameters.Clear();
-                    datos.Comando.Parameters.AddWithValue("@DNI",           persona.DNI.ToString());
-                    datos.Comando.Parameters.AddWithValue("@Nombre",        persona.Name.ToString());
-                    datos.Comando.Parameters.AddWithValue("@Apellido",      persona.Apellido.ToString());
-                    datos.Comando.Parameters.AddWithValue("@Email",         persona.Email.ToString());
-                    datos.Comando.Parameters.AddWithValue("@Nacimiento",    persona.Nacimiento.ToString());
+                    datos.Comando.Parameters.AddWithValue("@Nombre",        persona.Name);
+                    datos.Comando.Parameters.AddWithValue("@Apellido",      persona.Apellido);
+                    datos.Comando.Parameters.AddWithValue("@DNI",           persona.DNI);
+                    datos.Comando.Parameters.AddWithValue("@Email",         persona.Email);
+                    datos.Comando.Parameters.AddWithValue("@Nacimiento",    persona.Nacimiento);
+                    datos.Comando.Parameters.AddWithValue("@IdDireccion",   persona.Direccion.ID);
                     datos.AbrirConexion();
                     datos.EjecutarAccion();
                 }
@@ -95,7 +99,7 @@ namespace Negocio
                 datos.CerrarConexion();
             }
         }
-        public Int64 GetID(string DNI)
+        public Int64 GetIDWithDNI(string DNI)
         {
             Datos datos = new Datos();
             try
@@ -105,7 +109,7 @@ namespace Negocio
                 datos.Comando.Parameters.AddWithValue("@DNI", DNI);
                 datos.AbrirConexion();
                 datos.EjecutarConsulta();
-                while (datos.Reader.Read())
+                if (datos.Reader.Read())
                 {
                     return (Int64)datos.Reader[0];
                 }
@@ -218,17 +222,17 @@ namespace Negocio
             Datos datos = new Datos();
             try
             {
-                datos.SetearConsulta("update SORIA_TPC.dbo.PERSONAS Set DNI=@DNI, Nombre=@Nombre, Apellido=@Apellido, Email=@Email, " +
-                    "Direccion=@Direccion, Ciudad=@Ciudad, CodigoPostal=@CP, FechaRegistro=FechaRegistro Where ID=" + persona.ID);
+                datos.SetearConsulta("update SORIA_TPC.dbo.PERSONAS SET NOMBRE=@Nombre, APELLIDO=@Apellido, DNI=@DNI, " +
+                    "EMAIL=@Email, IDDIRECCION=@IdDireccion WHERE ID=" + persona.ID);
                 datos.Comando.Parameters.Clear();
-                datos.Comando.Parameters.AddWithValue("@DNI", persona.DNI);
-                datos.Comando.Parameters.AddWithValue("@Nombre", persona.Name);
-                datos.Comando.Parameters.AddWithValue("@Apellido", persona.Apellido.ToString());
-                datos.Comando.Parameters.AddWithValue("@Email", persona.Email.ToString());
-                datos.Comando.Parameters.AddWithValue("@Direccion", persona.Direccion.Calle.ToString());
-               // datos.Comando.Parameters.AddWithValue("@Ciudad", persona.ciudad.ToString());
+                datos.Comando.Parameters.AddWithValue("@Nombre",      persona.Name);
+                datos.Comando.Parameters.AddWithValue("@Apellido",    persona.Apellido);
+                datos.Comando.Parameters.AddWithValue("@DNI",         persona.DNI);
+                datos.Comando.Parameters.AddWithValue("@Email",       persona.Email);
+                datos.Comando.Parameters.AddWithValue("@IdDireccion", persona.Direccion.ID);
+                //datos.Comando.Parameters.AddWithValue("@Ciudad", persona.ciudad.ToString());
                 //datos.Comando.Parameters.AddWithValue("@CP", persona.CP.ToString());
-               // datos.Comando.Parameters.AddWithValue("@FechaRegistro", persona.fechaRegistro);
+                //datos.Comando.Parameters.AddWithValue("@FechaRegistro", persona.fechaRegistro);
                 datos.AbrirConexion();
                 datos.EjecutarAccion();
             }

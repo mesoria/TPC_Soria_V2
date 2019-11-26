@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Información del establecimiento" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Info.aspx.cs" Inherits="TPC_Soria_v2.Info" %>
+﻿<%@ Page Title="Información del establecimiento" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Info.aspx.cs" Inherits="TPC_Soria_v2.FolderEstablecimiento.Info" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <h1>Establecimiento</h1>
     <div class="form-row">
@@ -40,7 +40,7 @@
     <hr />
     <div class="form-row">
         <div class="form-group col-md-5">
-            <asp:Button ID="Button2" runat="server" CssClass="btn btn-primary btn-lg" Text="Volver" PostBackUrl="~/Maestra/MaestraPrincipal.aspx"/>
+            <asp:Button ID="Button2" runat="server" CssClass="btn btn-primary btn-lg" Text="Volver" PostBackUrl="~/Establecimientos.aspx"/>
         </div>
         <div class="form-group col-md-6">
             <a class="btn-warning btn-lg" href="NewEstablecimiento.aspx?idE=<% = Aux.ID %>">Editar</a>
@@ -49,6 +49,4 @@
             <asp:Button ID="btnDelete" runat="server" OnClick="btnDelete_Click" Text="Eliminar" CssClass="btn btn-danger btn-lg"/>
         </div>
     </div>
-    <%--<asp:Button CssClass="alert-danger btn-lg" ID="btnEditar" runat="server" Text="Editar" PostBackUrl="~/FolderEstablecimiento/NewEstablecimiento.aspx?idE=<% = Aux.ID %>"/>--%>
-
 </asp:Content>

@@ -8,11 +8,10 @@ namespace Dominio
 {
     public class Curso
     {
-        public Int64 ID { get; set; }
+        public Int64        ID { get; set; }
+        public string       Nombre { get; set; }
         public Int64        IdEstablecimiento { get; set; }
-        public Int64        IdMaestras { get; set; }
-        public List<Int64>  IdAlumnos { get; set; }
-        public Int64        IdAula { get; set; }
-        public string       Turno { get; set; }
+        public Docente      Docente { get; set; }
+        public List<Alumno> Alumnos { get; set; }
     }
 }

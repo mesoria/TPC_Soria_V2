@@ -7,7 +7,7 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace TPC_Soria_v2 {
+namespace TPC_Soria_v2.FolderEstablecimiento {
     
     
     public partial class NewEstablecimiento {

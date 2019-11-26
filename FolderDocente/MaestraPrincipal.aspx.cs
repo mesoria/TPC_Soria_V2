@@ -7,11 +7,13 @@ using System.Web.UI.WebControls;
 using Dominio;
 using Negocio;
 
-namespace TPC_Soria_v2
+namespace TPC_Soria_v2.FolderDocente
 {
-    public partial class _Default : Page
+    public partial class MaestraPrincipal : System.Web.UI.Page
     {
+        public List< Docente > ListDocentes { get; set; }
         private readonly NegocioPersona negocioPersona = new NegocioPersona();
+        private readonly NegocioDocente negocioDocente = new NegocioDocente();
         public Persona persona = new Persona();
         public Usuario usuario = new Usuario();
         protected void Page_Load(object sender, EventArgs e)
@@ -19,7 +21,6 @@ namespace TPC_Soria_v2
             try
             {
                 usuario = (Usuario)Session["Usuario"];
-                Session["Usuario"] = usuario;
                 if (!IsPostBack)
                 {
                     if (usuario == null)
@@ -27,12 +28,23 @@ namespace TPC_Soria_v2
                         Response.Redirect("~/Login.aspx");
                     }
                 }
-                persona = negocioPersona.GetPersonaWithId(usuario.ID);
+                    NegocioEstablecimiento negocioEstablecimiento = new NegocioEstablecimiento();
+                    ListDocentes = negocioDocente.ListarDocentes();
+                    persona = negocioPersona.GetPersonaWithId(usuario.ID);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
+
+        //public string GetApellido()
+        //{
+        //    return docente.Apellido;
+        //}
+        //public string GetName()
+        //{
+        //    return docente.Name;
+        //}
     }
 }

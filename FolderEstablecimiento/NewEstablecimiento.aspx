@@ -1,7 +1,7 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="NewEstablecimiento.aspx.cs" Inherits="TPC_Soria_v2.NewEstablecimiento" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="NewEstablecimiento.aspx.cs" Inherits="TPC_Soria_v2.FolderEstablecimiento.NewEstablecimiento" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <%--<a class="btn btn-primary" href="javascript:window.history.back();">Atrás</a>--%>
-    <h3> <% =FirstTime() %></h3>
+    <h3> <% =IsNew() %></h3>
     <div class="form-row">
         <div class="form-group col-md-12">
             <label>Nombre</label>
@@ -85,7 +85,7 @@
     <hr />
     <div class="form-row">
         <div class="form-group col-md-5">
-            <asp:Button ID="btnVolver" runat="server" CssClass="btn btn-primary btn-lg" Text="Establecimientos" PostBackUrl="~/Maestra/MaestraPrincipal.aspx"/>
+            <asp:Button ID="btnVolver" runat="server" CssClass="btn btn-primary btn-lg" Text="Establecimientos" PostBackUrl="~/Default.aspx"/>
         </div>
         <div class="form-group col-md-7">
             <asp:Button ID="btnGuardar" runat="server" Onclick="btnGuardar_Click" Text="Guardar" CssClass="btn btn-success btn-lg"/>

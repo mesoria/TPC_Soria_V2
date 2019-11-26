@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 using Dominio;
 using Negocio;
 
-namespace TPC_Soria_v2
+namespace TPC_Soria_v2.FolderEstablecimiento
 {
     public partial class Info : System.Web.UI.Page
     {
@@ -29,7 +29,7 @@ namespace TPC_Soria_v2
                 if (Request.QueryString["idE"] == null)
                 {
                     //por si accede a la pagina con el link
-                    Session["Error" + Session.SessionID] = "Ups, Aún no has seleccionado un Estabblecimiento.";
+                    Session["Error" + Session.SessionID] = "Ups, Aún no has seleccionado un Establecimiento.";
                     Response.Redirect("/frmLog.aspx", false);
                 }
                 Int64 idE = Convert.ToInt32(Request.QueryString["idE"]);
@@ -48,7 +48,7 @@ namespace TPC_Soria_v2
             if (Aux.ID != 0)
             {
                 negocioEstablecimiento.Eliminar(Aux.ID);
-                Response.Redirect("~/Maestra/MaestraPrincipal.aspx");
+                Response.Redirect("~/Establecimientos.aspx");
             }
         }
     }

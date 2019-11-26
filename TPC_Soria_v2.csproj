@@ -235,6 +235,7 @@
     <Compile Include="Alumnos\New.aspx.designer.cs">
       <DependentUpon>New.aspx</DependentUpon>
     </Compile>
+    <Content Include="App_Code\Global.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Cursos.aspx.cs">
       <DependentUpon>Cursos.aspx</DependentUpon>

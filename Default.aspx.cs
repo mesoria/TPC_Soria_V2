@@ -18,7 +18,8 @@ namespace TPC_Soria_v2
         {
             try
             {
-                usuario = (Usuario)Session["Usuario"];
+                //usuario = (Usuario)Session["Usuario"];
+                usuario = (Usuario)Application["Usuario"];
                 Session["Usuario"] = usuario;
                 if (!IsPostBack)
                 {
@@ -27,7 +28,7 @@ namespace TPC_Soria_v2
                         Response.Redirect("~/Login.aspx");
                     }
                 }
-                persona = negocioPersona.GetPersonaWithId(usuario.ID);
+                persona = (Persona)Application["Persona"];
             }
             catch (Exception ex)
             {

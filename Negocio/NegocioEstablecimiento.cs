@@ -247,5 +247,58 @@ namespace Negocio
                 datos.CerrarConexion();
             }
         }
+        public Establecimiento GetMyEstablecimiento(Int64 ID)//CORREGIR
+        {
+            Datos datos = new Datos();
+            try
+            {
+                datos.SetearConsulta("Select esc.ID, esc.NOMBRE, esc.NUMERO, esc.NIVEL, dir.ID, dir.CALLE, dir.NUMERO from SORIA_TPC.dbo.ESTABLECIMIENTOS as esc inner join SORIA_TPC.dbo.DIRECCIONES as dir on dir.ID = esc.IDDIRECCION where esc.ID=@ID");
+                datos.Comando.Parameters.Clear();
+                datos.Comando.Parameters.AddWithValue("@ID", ID);
+                datos.AbrirConexion();
+                datos.EjecutarConsulta();
+                Establecimiento establecimiento = new Establecimiento();
+                if (datos.Reader.Read())
+                {
+                    establecimiento = new Establecimiento
+                    {
+                        ID = ID,
+                        Name = (string)datos.Reader[1],
+                        Nivel = (string)datos.Reader[3],
+                    };
+                    if (!Convert.IsDBNull(datos.Reader[2]))
+                    {
+                        establecimiento.Number = (int)datos.Reader[2];
+                    }
+                    else
+                    {
+                        establecimiento.Number = 0;
+                    }
+                    if (!Convert.IsDBNull(datos.Reader[4]))
+                    {
+                        establecimiento.Direccion = new Direccion
+                        {
+                            ID = (Int64)datos.Reader[4],
+                            Calle = (string)datos.Reader[5],
+                            Number = (string)datos.Reader[6]
+                        };
+                    }
+                }
+                else
+                {
+                    establecimiento.ID = 0;
+                }
+                return establecimiento;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+        }
     }
 }

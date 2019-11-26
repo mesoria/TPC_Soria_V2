@@ -35,7 +35,7 @@ namespace TPC_Soria_v2
                 Session["Usuario"] = usuario;
                 Session["Persona"] = persona;
                 Session["Docente"] = docente;
-                Establecimiento = negocioEstablecimiento.GetMyEstablecimiento(persona);
+                Establecimiento = negocioEstablecimiento.GetMyEstablecimiento(persona.ID);
             }
             catch (Exception ex)
             {

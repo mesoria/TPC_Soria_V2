@@ -11,7 +11,7 @@ namespace TPC_Soria_v2
 {
     public partial class _Default : Page
     {
-        private readonly NegocioPersona negocioPersona = new NegocioPersona();
+        //private readonly NegocioPersona negocioPersona = new NegocioPersona();
         public Persona persona = new Persona();
         public Usuario usuario = new Usuario();
         protected void Page_Load(object sender, EventArgs e)
@@ -23,7 +23,7 @@ namespace TPC_Soria_v2
                 Session["Usuario"] = usuario;
                 if (!IsPostBack)
                 {
-                    if (usuario == null)
+                    if (usuario == null || usuario.ID == 0)
                     {
                         Response.Redirect("~/Login.aspx");
                     }

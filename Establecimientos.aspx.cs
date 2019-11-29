@@ -12,7 +12,7 @@ namespace TPC_Soria_v2
     public partial class Establecimientos : Page
     {
         public List<Establecimiento> ListEstablecimientos { get; set; }
-        private readonly NegocioPersona negocioPersona = new NegocioPersona();
+        //private readonly NegocioPersona negocioPersona = new NegocioPersona();
         public Persona maestra = new Persona();
         public Persona persona = new Persona();
         public Usuario usuario = new Usuario();
@@ -23,12 +23,13 @@ namespace TPC_Soria_v2
                 usuario = (Usuario)Session["Usuario"];
                 if (!IsPostBack)
                 {
-                    if (usuario == null)
+                    if(usuario == null || usuario.ID == 0)
                     {
                         Response.Redirect("~/Login.aspx");
                     }
                 }
-                persona = negocioPersona.GetPersonaWithId(usuario.ID);
+                //persona = negocioPersona.GetPersonaWithId(usuario.ID);
+                persona = (Persona)Application["Persona"];
                 NegocioEstablecimiento negocioEstablecimiento = new NegocioEstablecimiento();
                 ListEstablecimientos = negocioEstablecimiento.ListarEstablecimiento();
             }

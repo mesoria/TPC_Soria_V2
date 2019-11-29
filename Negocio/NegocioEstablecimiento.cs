@@ -300,5 +300,33 @@ namespace Negocio
                 datos.CerrarConexion();
             }
         }
+        public List<Int64> GetIDsEstablecimientosWithPersona(Int64 ID)
+        {
+            Datos datos = new Datos();
+            List<Int64> ListID = new List<Int64>();
+            try
+            {
+                datos.SetearConsulta("Select IDESTABLECIMIENTO, IDPERSONA from SORIA_TPC.dbo.PERSONASxESTABLECIMIENTO where IDPERSONA=@ID");
+                datos.Comando.Parameters.Clear();
+                datos.Comando.Parameters.AddWithValue("@ID", ID);
+                datos.AbrirConexion();
+                datos.EjecutarConsulta();
+                while (datos.Reader.Read())
+                {
+                    ListID.Add((Int64)datos.Reader[0]);
+                }
+                
+                return ListID;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+        }
     }
 }

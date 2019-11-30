@@ -7,14 +7,13 @@ using System.Web.UI.WebControls;
 using Dominio;
 using Negocio;
 
-namespace TPC_Soria_v2.FolderDocente
+namespace TPC_Soria_v2.Usuarios
 {
-    public partial class MaestraPrincipal : System.Web.UI.Page
+    public partial class DocentePrincipal : System.Web.UI.Page
     {
-        public List<Establecimiento> ListaEstablecimiento { get; set; }
-        private readonly NegocioPersona negocioPersona = new NegocioPersona();
-        //private readonly NegocioDocente negocioDocente = new NegocioDocente();
+        public List<Establecimiento> ListaEstablecimientos = new List<Establecimiento>();
         private readonly NegocioEstablecimiento negocioEstablecimiento = new NegocioEstablecimiento();
+        private readonly NegocioDocente negocioDocente = new NegocioDocente();
         public Persona persona = new Persona();
         public Usuario usuario = new Usuario();
         protected void Page_Load(object sender, EventArgs e)
@@ -30,13 +29,12 @@ namespace TPC_Soria_v2.FolderDocente
                     }
                 }
                 persona = (Persona)Application["Persona"];
-
-                List<Int64> listID = negocioEstablecimiento.GetIDsEstablecimientosWithPersona(persona.ID);
+                List<Int64> listID;
+                listID = negocioEstablecimiento.GetIDsEstablecimientosWithPersona(persona.ID);
                 foreach (var item in listID)
                 {
-                    ListaEstablecimiento.Add(negocioEstablecimiento.GetEstablecimientoWithId(item));
+                    ListaEstablecimientos.Add(negocioEstablecimiento.GetEstablecimientoWithId(item));
                 }
-                //persona = negocioPersona.GetPersonaWithId(usuario.ID);
             }
             catch (Exception ex)
             {

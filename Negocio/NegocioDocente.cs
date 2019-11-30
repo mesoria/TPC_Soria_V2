@@ -121,13 +121,10 @@ namespace Negocio
         {
             Datos datos = new Datos();
             try
-            {   //Select p.ID, p.Nombre, p.Apellido, p.DNI, p.Nacimiento, p.Email, p.Calle, p.Numero, " +
-                //"p.Contraseña, u.Perfil From PERSONAS as p INNER JOIN INSCRIPCIONES AS INST ON INST.IDP=p.ID " +
-                //"INNER JOIN USUARIOS AS U ON U.ID=INST.IDU
-
+            {
                 datos.SetearConsulta("SELECT DOC.ID, p.ID, p.NOMBRE, p.APELLIDO, DOC.NIVEL, p.DNI, p.NACIMIENTO, "+
                     "p.EMAIL, DIR.ID, DIR.CALLE, DIR.NUMERO FROM SORIA_TPC.dbo.DOCENTES AS DOC "+
-                    "LEFT JOIN SORIA_TPC.dbo.PERSONAS as p ON DOC.IDPERSONA = p.ID"+
+                    "LEFT JOIN SORIA_TPC.dbo.PERSONAS as p ON DOC.IDPERSONA = p.ID "+
                     "LEFT JOIN SORIA_TPC.dbo.DIRECCIONES AS DIR ON DIR.ID = p.IDDIRECCION WHERE p.DNI = @DNI");
                 datos.Comando.Parameters.Clear();
                 datos.Comando.Parameters.AddWithValue("@DNI", DNI);

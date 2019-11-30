@@ -20,7 +20,7 @@ namespace TPC_Soria_v2
             {
                 //usuario = (Usuario)Session["Usuario"];
                 usuario = (Usuario)Application["Usuario"];
-                Session["Usuario"] = usuario;
+                //Session["Usuario"] = usuario;
                 if (!IsPostBack)
                 {
                     if (usuario == null || usuario.ID == 0)

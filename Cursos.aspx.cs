@@ -32,7 +32,7 @@ namespace TPC_Soria_v2
                 }
                 persona = (Persona)Application["Persona"];
                 docente = (Docente)Application["Docente"];
-                establecimiento = negocioEstablecimiento.GetEstablecimientoWithPersona(persona.ID);
+                List<Int64> listaIds = negocioEstablecimiento.GetIDsEstablecimientosWithPersona(persona.ID);
                 //docente = negocioDocente.GetDocenteWithDNI(persona.DNI);
                 //Session["Usuario"] = usuario;
                 //Session["Persona"] = persona;

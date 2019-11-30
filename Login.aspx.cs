@@ -25,13 +25,24 @@ namespace TPC_Soria_v2
                 if (negocioLogin.Autenticar(txtUsuario.Text, txtContraseña.Text) == true)
                 {
                     Usuario usuario = negocioLogin.GetUsuario(txtUsuario.Text, txtContraseña.Text);
+                    Persona persona = new Persona();
+                    Docente docente = new Docente();
                     //DataTable tblUsuario = NegocioLogin.prConsultaUsuario(usuario, contraseña);
                     //NegocioLogin.Security(Convert.ToInt32(tblUsuario.Rows[0]["UsuarioID"]), usuario, DateTime.Now, Request.ServerVariables["REMOTE_ADDR"]);
                     Application["Usuario"] = usuario;
-                    Application["Persona"] = negocioPersona.GetPersonaWithId(usuario.ID);
-                    Application["Docente"] = negocioDocente.GetDocenteWithDNI(negocioPersona.GetPersonaWithId(usuario.ID).DNI);
+                    persona = negocioPersona.GetPersonaWithId(usuario.ID);
+                    Application["Persona"] = persona;
+                    docente = negocioDocente.GetDocenteWithDNI(persona.DNI);
+                    Application["Docente"] = docente;
                     //Manda a la principal en caso de ser correcto el login
-                    Response.Redirect("Default.aspx");
+                    if (docente.IdDocente != 0)
+                    {
+                        Response.Redirect("Usuarios/DocentePrincipal.aspx");
+                    }
+                    else
+                    {
+                        Response.Redirect("Default.aspx");
+                    }
                 }
                 else
                 {

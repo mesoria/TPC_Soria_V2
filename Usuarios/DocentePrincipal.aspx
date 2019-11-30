@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Establecimiento" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="MaestraPrincipal.aspx.cs" Inherits="TPC_Soria_v2.FolderDocente.MaestraPrincipal" %>
+﻿<%@ Page Title="Establecimiento" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="DocentePrincipal.aspx.cs" Inherits="TPC_Soria_v2.Usuarios.DocentePrincipal" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <br />
     <div>
@@ -8,7 +8,7 @@
 
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page">Establecimientos</li>
+        <li class="breadcrumb-item active" aria-current="page">Mis Establecimientos</li>
       </ol>
     </nav>
 
@@ -29,7 +29,7 @@
         </tr>
     </thead>
     <%var j = 1;
-    foreach (var item in ListaEstablecimiento)
+    foreach (var item in ListaEstablecimientos)
     {%>
     <tbody>
         <tr>

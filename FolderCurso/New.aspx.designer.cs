@@ -7,7 +7,7 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace TPC_Soria_v2.Curso {
+namespace TPC_Soria_v2.FolderCurso {
     
     
     public partial class New {

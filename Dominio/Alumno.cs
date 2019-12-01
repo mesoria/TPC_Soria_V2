@@ -9,5 +9,6 @@ namespace Dominio
     public class Alumno : Persona
     {
         public Int64 IdAlumno { get; set; }
+        public Persona Tutor { get; set; }
     }
 }

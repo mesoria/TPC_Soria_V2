@@ -11,11 +11,11 @@ namespace TPC_Soria_v2.Usuarios
 {
     public partial class DocentePrincipal : System.Web.UI.Page
     {
-        public List<Establecimiento> ListaEstablecimientos = new List<Establecimiento>();
         private readonly NegocioEstablecimiento negocioEstablecimiento = new NegocioEstablecimiento();
-        private readonly NegocioDocente negocioDocente = new NegocioDocente();
+        public List<Establecimiento> ListaEstablecimientos  = new List<Establecimiento>();
         public Persona persona = new Persona();
         public Usuario usuario = new Usuario();
+        public Docente docente = new Docente();
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -29,12 +29,20 @@ namespace TPC_Soria_v2.Usuarios
                     }
                 }
                 persona = (Persona)Application["Persona"];
-                List<Int64> listID;
-                listID = negocioEstablecimiento.GetIDsEstablecimientosWithPersona(persona.ID);
-                foreach (var item in listID)
-                {
-                    ListaEstablecimientos.Add(negocioEstablecimiento.GetEstablecimientoWithId(item));
-                }
+                docente = (Docente)Application["Docente"];
+
+                //List<Int64> listID;
+                //listID = negocioEstablecimiento.GetIDsEstablecimientosWithPersona(persona.ID);
+                //foreach (var item in listID)
+                //{
+                //    ListaEstablecimientos.Add(negocioEstablecimiento.GetEstablecimientoWithId(item));
+
+                //}
+                //foreach (var item in ListaEstablecimientos)
+                //{
+                //    negocioCurso.GetMyCursoWithEstablecimiento(ListaCursos, item.ID, persona.ID);
+                //}
+                ListaEstablecimientos = negocioEstablecimiento.GetCursoByEstablecimiento(docente.IdDocente);
             }
             catch (Exception ex)
             {

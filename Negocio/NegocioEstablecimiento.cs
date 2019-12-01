@@ -328,5 +328,69 @@ namespace Negocio
                 datos.CerrarConexion();
             }
         }
+
+        public List<Establecimiento> GetCursoByEstablecimiento( Int64 IDDocente)
+        {
+            Datos datos = new Datos();
+            List<Establecimiento> ListaEstablecimientos = new List<Establecimiento>();
+            Establecimiento establecimiento;
+            try
+            {
+                datos.SetearConsulta("SELECT EST.ID, EST.NOMBRE, EST.NIVEL, EST.NUMERO, DIR.ID, DIR.CALLE, DIR.NUMERO, C.ID, C.NOMBRE FROM SORIA_TPC.dbo.CURSOSxESTABLECIMIENTO AS CXE"
+                    + " INNER JOIN SORIA_TPC.dbo.ESTABLECIMIENTOS AS EST ON EST.ID = CXE.IDESTABLECIMIENTO"
+                    +" INNER JOIN SORIA_TPC.dbo.DIRECCIONES AS DIR ON DIR.ID = EST.IDDIRECCION"
+                    +" INNER JOIN SORIA_TPC.dbo.CURSOS AS C ON C.ID = CXE.IDCURSO"
+                    +" WHERE CXE.IDDOCENTE=@IDDocente");
+                datos.Comando.Parameters.Clear();
+                datos.Comando.Parameters.AddWithValue("@IDDocente", IDDocente);
+                datos.AbrirConexion();
+                datos.EjecutarConsulta();
+                while (datos.Reader.Read())
+                {
+                    establecimiento = new Establecimiento
+                    {
+                        ID      = (Int64)datos.Reader[0],
+                        Name    = (string)datos.Reader[1],
+                        Nivel   = (string)datos.Reader[2]
+                    };
+                    if (!Convert.IsDBNull(datos.Reader[3]))
+                    {
+                        establecimiento.Number = (int)datos.Reader[3];
+                    }
+                    if (!Convert.IsDBNull(datos.Reader[4]))
+                    {
+                        establecimiento.Direccion = new Direccion
+                        {
+                            ID      = (Int64)datos.Reader[4],
+                            Calle   = (string)datos.Reader[5],
+                            Number  = (string)datos.Reader[6]
+                        };
+                    }
+                    if (!Convert.IsDBNull(datos.Reader[7]))
+                    {
+                        establecimiento.Curso = new Curso
+                        {
+                            ID      = (Int64)datos.Reader[7],
+                            Name  = (string)datos.Reader[8]
+                        };
+                    }
+                    establecimiento.Curso.Docente = new Docente
+                    {
+                        ID = IDDocente
+                    };
+                    ListaEstablecimientos.Add(establecimiento);
+                }
+                return ListaEstablecimientos;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+        }
     }
 }

@@ -7,10 +7,10 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace TPC_Soria_v2.Curso {
+namespace TPC_Soria_v2.Usuarios {
     
     
-    public partial class Cursos {
+    public partial class DocenteCurso {
         
         /// <summary>
         /// Control lblApellido.
@@ -29,5 +29,23 @@ namespace TPC_Soria_v2.Curso {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lvlName;
+        
+        /// <summary>
+        /// Control txtEstablecimiento.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label txtEstablecimiento;
+        
+        /// <summary>
+        /// Control txtCurso.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label txtCurso;
     }
 }

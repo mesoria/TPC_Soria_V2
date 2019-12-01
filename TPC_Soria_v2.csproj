@@ -110,10 +110,10 @@
     <Content Include="Cursos.aspx" />
     <Content Include="Docentes.aspx" />
     <Content Include="Establecimientos.aspx" />
-    <Content Include="Alumnos\Info.aspx" />
-    <Content Include="Alumnos\New.aspx" />
-    <Content Include="Curso\Info.aspx" />
-    <Content Include="Curso\New.aspx" />
+    <Content Include="FolderAlumno\Info.aspx" />
+    <Content Include="FolderAlumno\New.aspx" />
+    <Content Include="FolderCurso\Info.aspx" />
+    <Content Include="FolderCurso\New.aspx" />
     <Content Include="FolderDocente\Info.aspx" />
     <Content Include="FolderEstablecimiento\Info.aspx" />
     <Content Include="frmLog.aspx" />
@@ -147,7 +147,7 @@
     <Content Include="Content\Bootstrap4\js\bootstrap.bundle.min.js.map" />
     <Content Include="Content\Bootstrap4\js\bootstrap.js.map" />
     <Content Include="Content\Bootstrap4\js\bootstrap.min.js.map" />
-    <Content Include="Curso\Cursos.aspx" />
+    <Content Include="FolderCurso\Cursos.aspx" />
     <Content Include="FolderDocente\MaestraPrincipal.aspx" />
     <Content Include="FolderDocente\New.aspx" />
     <Content Include="FolderEstablecimiento\NewEstablecimiento.aspx" />
@@ -206,6 +206,7 @@
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
+    <Content Include="Usuarios\DocenteCurso.aspx" />
     <Content Include="Usuarios\DocentePrincipal.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
@@ -222,18 +223,18 @@
     <Content Include="Scripts\popper-utils.js.map" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Alumnos\Info.aspx.cs">
+    <Compile Include="FolderAlumno\Info.aspx.cs">
       <DependentUpon>Info.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Alumnos\Info.aspx.designer.cs">
+    <Compile Include="FolderAlumno\Info.aspx.designer.cs">
       <DependentUpon>Info.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Alumnos\New.aspx.cs">
+    <Compile Include="FolderAlumno\New.aspx.cs">
       <DependentUpon>New.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Alumnos\New.aspx.designer.cs">
+    <Compile Include="FolderAlumno\New.aspx.designer.cs">
       <DependentUpon>New.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -259,18 +260,18 @@
       <DependentUpon>Establecimientos.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Curso\Info.aspx.cs">
+    <Compile Include="FolderCurso\Info.aspx.cs">
       <DependentUpon>Info.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Curso\Info.aspx.designer.cs">
+    <Compile Include="FolderCurso\Info.aspx.designer.cs">
       <DependentUpon>Info.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Curso\New.aspx.cs">
+    <Compile Include="FolderCurso\New.aspx.cs">
       <DependentUpon>New.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Curso\New.aspx.designer.cs">
+    <Compile Include="FolderCurso\New.aspx.designer.cs">
       <DependentUpon>New.aspx</DependentUpon>
     </Compile>
     <Compile Include="FolderDocente\Info.aspx.cs">
@@ -318,11 +319,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Curso\Cursos.aspx.cs">
+    <Compile Include="FolderCurso\Cursos.aspx.cs">
       <DependentUpon>Cursos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Curso\Cursos.aspx.designer.cs">
+    <Compile Include="FolderCurso\Cursos.aspx.designer.cs">
       <DependentUpon>Cursos.aspx</DependentUpon>
     </Compile>
     <Compile Include="FolderDocente\MaestraPrincipal.aspx.cs">
@@ -367,6 +368,13 @@
     </Compile>
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Usuarios\DocenteCurso.aspx.cs">
+      <DependentUpon>DocenteCurso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Usuarios\DocenteCurso.aspx.designer.cs">
+      <DependentUpon>DocenteCurso.aspx</DependentUpon>
     </Compile>
     <Compile Include="Usuarios\DocentePrincipal.aspx.cs">
       <DependentUpon>DocentePrincipal.aspx</DependentUpon>

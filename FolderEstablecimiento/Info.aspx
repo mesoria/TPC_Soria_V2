@@ -40,7 +40,7 @@
     <hr />
     <div class="form-row">
         <div class="form-group col-md-5">
-            <asp:Button ID="Button2" runat="server" CssClass="btn btn-primary btn-lg" Text="Volver" PostBackUrl="~/Establecimientos.aspx"/>
+            <asp:Button ID="btnVolver" runat="server" CssClass="btn btn-primary btn-lg" Text="Volver" PostBackUrl="~/Establecimientos.aspx"/>
         </div>
         <div class="form-group col-md-6">
             <a class="btn-warning btn-lg" href="NewEstablecimiento.aspx?idE=<% = Aux.ID %>">Editar</a>

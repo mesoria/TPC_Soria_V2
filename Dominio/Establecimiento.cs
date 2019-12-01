@@ -14,7 +14,7 @@ namespace Dominio
         public string       Nivel { get; set; }
         public Direccion    Direccion { get; set; }
         public Directora    Directora { get; set; }
-        public List<Curso>  Cursos { get; set; }
+        public Curso        Curso { get; set; }
         //public List<Int64>  IdMaestras { get; set; }
     }
 }

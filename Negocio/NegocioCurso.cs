@@ -10,15 +10,14 @@ namespace Negocio
 {
     public class NegocioCurso
     {
-        /*
-        public List<Curso> ListarCurso()
+        public List<Curso> ListarCurso(Int64 IDEstablecimineto)
         {
             Datos datos = new Datos();
             List<Curso> cursos = new List<Curso>();
             Curso aux;
             try
             {
-                datos.SetearConsulta("Select esc.ID, esc.NOMBRE, esc.NUMERO, esc.NIVEL, dir.ID, dir.CALLE, dir.NUMERO from SORIA_TPC.dbo.ESTABLECIMIENTOS as esc inner join SORIA_TPC.dbo.DIRECCIONES as dir on dir.ID = esc.IDDIRECCION");
+                datos.SetearConsulta("SELECT C.ID, C.NOMBRE FROM CURSOSxESTABLECIMIENTO AS CXE INNER JOIN CURSOS AS C ON C.ID=CXE.IDCURSO WHERE CXE.IDESTABLECIMIENTO=@IDESTABLECIMIENTO");
                 datos.AbrirConexion();
                 datos.EjecutarConsulta();
                 while (datos.Reader.Read())
@@ -27,31 +26,7 @@ namespace Negocio
                     {
                         ID = (Int64)datos.Reader[0],
                         Name = (string)datos.Reader[1],
-                        Nivel = (string)datos.Reader[3]
                     };
-                    if (!Convert.IsDBNull(datos.Reader[2]))
-                    {
-                        aux.Number = (int)datos.Reader[2];
-                    }
-
-                    //else
-                    //{
-                    //    aux.Number = 0;
-                    //}
-                    if (!Convert.IsDBNull(datos.Reader[4]))
-                    {
-                        aux.Direccion = new Direccion
-                        {
-                            ID = (Int64)datos.Reader[4],
-                            Calle = (string)datos.Reader[5],
-                            Number = (string)datos.Reader[6]
-                        };
-                    }
-                    //Telefono = new Telefono
-                    //{ 
-                    //  ID             = (string)datos.Reader[8],
-                    //  TipoTelefono   = (string)datos.Reader[9]
-                    //}
                     cursos.Add(aux);
                 }
                 return cursos;
@@ -73,14 +48,11 @@ namespace Negocio
             Datos datos = new Datos();
             try
             {
-                if (this.GetCurso(curso).ID == 0)
+                if (this.GetCursoWithName(curso).ID == 0)
                 {
-                    datos.SetearConsulta("INSERT INTO SORIA_TPC.dbo.ESTABLECIMIENTOS (NOMBRE, NUMERO, NIVEL, IDDIRECCION) values (@Nombre, @Numero, @Nivel, @IDDireccion)");
+                    datos.SetearConsulta("INSERT INTO SORIA_TPC.dbo.CURSOS (NOMBRE) values (@Nombre)");
                     datos.Comando.Parameters.Clear();
                     datos.Comando.Parameters.AddWithValue("@Nombre", curso.Name);
-                    datos.Comando.Parameters.AddWithValue("@Numero", curso.Number);
-                    datos.Comando.Parameters.AddWithValue("@Nivel", curso.Nivel);
-                    datos.Comando.Parameters.AddWithValue("@IDDireccion", curso.Direccion.ID);
                     datos.AbrirConexion();
                     datos.EjecutarAccion();
                 }
@@ -103,16 +75,9 @@ namespace Negocio
             Datos datos = new Datos();
             try
             {
-                datos.SetearConsulta("update SORIA_TPC.dbo.ESTABLECIMIENTOS Set NOMBRE=@Nombre, NUMERO=@Numero, NIVEL=@Nivel, IDDIRECCION=@IdDireccion Where ID=@IdCurso");
+                datos.SetearConsulta("update SORIA_TPC.dbo.CURSOS Set NOMBRE=@Nombre Where ID=@IdCurso");
                 datos.Comando.Parameters.Clear();
                 datos.Comando.Parameters.AddWithValue("@Nombre", curso.Name);
-                datos.Comando.Parameters.AddWithValue("@Numero", curso.Number);
-                datos.Comando.Parameters.AddWithValue("@Nivel", curso.Nivel);
-                datos.Comando.Parameters.AddWithValue("@IdDireccion", curso.Direccion.ID);
-                datos.Comando.Parameters.AddWithValue("@IdCurso", curso.ID);
-                // datos.Comando.Parameters.AddWithValue("@Ciudad", curso.ciudad.ToString());
-                //datos.Comando.Parameters.AddWithValue("@CP", curso.CP.ToString());
-                // datos.Comando.Parameters.AddWithValue("@FechaRegistro", curso.fechaRegistro);
                 datos.AbrirConexion();
                 datos.EjecutarAccion();
             }
@@ -141,43 +106,24 @@ namespace Negocio
             }
         }
 
-        public Curso GetCurso(Curso curso)
+        public Curso GetCursoWithName(Curso curso)
         {
             Datos datos = new Datos();
             try
             {
-                datos.SetearConsulta("Select esc.ID, esc.NOMBRE, esc.NUMERO, esc.NIVEL, dir.ID, dir.CALLE, dir.NUMERO from SORIA_TPC.dbo.ESTABLECIMIENTOS as esc inner join SORIA_TPC.dbo.DIRECCIONES as dir on dir.ID = esc.IDDIRECCION where esc.NUMERO=@number AND esc.NOMBRE=@Nombre");
+                datos.SetearConsulta("SELECT ID, NOMBRE FROM SORIA_TPC.dbo.CURSOS WHERE NOMBRE=@NAME");
                 datos.Comando.Parameters.Clear();
-                datos.Comando.Parameters.AddWithValue("@Nombre", curso.Name);
-                datos.Comando.Parameters.AddWithValue("@number", curso.Number);
+                datos.Comando.Parameters.AddWithValue("@NAME", curso.Name);
                 datos.AbrirConexion();
                 datos.EjecutarConsulta();
-                Curso curso = new Curso();
+                Curso aux = new Curso();
                 if (datos.Reader.Read())
                 {
-                    curso = new Curso
+                    aux = new Curso
                     {
                         ID = (Int64)datos.Reader[0],
-                        Name = (string)datos.Reader[1],
-                        Nivel = (string)datos.Reader[3]
+                        Name = (string)datos.Reader[1]
                     };
-                    if (!Convert.IsDBNull(datos.Reader[2]))
-                    {
-                        curso.Number = (int)datos.Reader[2];
-                    }
-                    else
-                    {
-                        curso.Number = 0;
-                    }
-                    if (!Convert.IsDBNull(datos.Reader[4]))
-                    {
-                        curso.Direccion = new Direccion
-                        {
-                            ID = (Int64)datos.Reader[4],
-                            Calle = (string)datos.Reader[5],
-                            Number = (string)datos.Reader[6]
-                        };
-                    }
                 }
                 else
                 {
@@ -200,7 +146,7 @@ namespace Negocio
             Datos datos = new Datos();
             try
             {
-                datos.SetearConsulta("Select esc.ID, esc.NOMBRE, esc.NUMERO, esc.NIVEL, dir.ID, dir.CALLE, dir.NUMERO from SORIA_TPC.dbo.ESTABLECIMIENTOS as esc inner join SORIA_TPC.dbo.DIRECCIONES as dir on dir.ID = esc.IDDIRECCION where esc.ID=@ID");
+                datos.SetearConsulta("SELECT ID, NOMBRE FROM SORIA_TPC.dbo.CURSOS WHERE ID=@ID");
                 datos.Comando.Parameters.Clear();
                 datos.Comando.Parameters.AddWithValue("@ID", ID);
                 datos.AbrirConexion();
@@ -211,26 +157,8 @@ namespace Negocio
                     curso = new Curso
                     {
                         ID = (Int64)datos.Reader[0],
-                        Name = (string)datos.Reader[1],
-                        Nivel = (string)datos.Reader[3],
+                        Name = (string)datos.Reader[1]
                     };
-                    if (!Convert.IsDBNull(datos.Reader[2]))
-                    {
-                        curso.Number = (int)datos.Reader[2];
-                    }
-                    else
-                    {
-                        curso.Number = 0;
-                    }
-                    if (!Convert.IsDBNull(datos.Reader[4]))
-                    {
-                        curso.Direccion = new Direccion
-                        {
-                            ID = (Int64)datos.Reader[4],
-                            Calle = (string)datos.Reader[5],
-                            Number = (string)datos.Reader[6]
-                        };
-                    }
                 }
                 else
                 {
@@ -248,6 +176,41 @@ namespace Negocio
                 datos.CerrarConexion();
             }
         }
-        */
+        public List<Curso> GetMyCursoWithEstablecimiento(List<Curso> lista, Int64 IDEstablecimiento, Int64 IDDocente)
+        {
+            Datos datos = new Datos();
+            Curso curso;
+            try
+            {
+                datos.SetearConsulta("SELECT C.ID , C.NOMBRE FROM SORIA_TPC.dbo.CURSOSxESTABLECIMIENTO AS CXE"
+                    +" INNER JOIN SORIA_TPC.dbo.ESTABLECIMIENTOS AS E ON E.ID = CXE.IDESTABLECIMIENTO"
+                    +" INNER JOIN SORIA_TPC.dbo.CURSOS AS C ON C.ID = CXE.IDCURSO"
+                    +" WHERE CXE.IDESTABLECIMIENTO=@IDEstablecimiento AND CXE.IDDOCENTE=@IDDocente");
+                datos.Comando.Parameters.Clear();
+                datos.Comando.Parameters.AddWithValue("@IDEstablecimiento", IDEstablecimiento);
+                datos.Comando.Parameters.AddWithValue("@IDDocente", IDDocente);
+                datos.AbrirConexion();
+                datos.EjecutarConsulta();
+                while (datos.Reader.Read())
+                {
+                    curso = new Curso
+                    {
+                        ID = (Int64)datos.Reader[0],
+                        Name = (string)datos.Reader[1]
+                    };
+                    lista.Add(curso);
+                }
+                return lista;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+        }
     }
 }

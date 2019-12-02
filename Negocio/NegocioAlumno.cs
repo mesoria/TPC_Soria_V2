@@ -10,6 +10,81 @@ namespace Negocio
 {
     public class NegocioAlumno
     {
+        public List<Alumno> ListarAlumnosFromCurso(Int64 CXE)
+        {
+            Datos datos = new Datos();
+            List<Alumno> alumnos = new List<Alumno>();
+            Alumno alumno;
+            try
+            {
+                datos.SetearConsulta("SELECT A.ID, p.ID, p.NOMBRE, p.APELLIDO, p.DNI, p.NACIMIENTO, p.EMAIL, DIR.ID, " +
+                    "DIR.CALLE, DIR.NUMERO, T.ID, T.NOMBRE, T.APELLIDO, T.DNI, T.NACIMIENTO, T.EMAIL, DT.ID, " +
+                    "DT.CALLE, DT.NUMERO FROM SORIA_TPC.dbo.ALUMNOSxCURSO AS AXC " +
+                    "LEFT JOIN SORIA_TPC.dbo.ALUMNOS as A ON A.ID=AXC.IDALUMNO " +
+                    "LEFT JOIN SORIA_TPC.dbo.PERSONAS as p ON A.IDPERSONA=p.ID " +
+                    "LEFT JOIN SORIA_TPC.dbo.DIRECCIONES AS DIR ON DIR.ID=p.IDDIRECCION " +
+                    "LEFT JOIN SORIA_TPC.dbo.PERSONAS as T ON A.IDTUTOR=T.ID " +
+                    "LEFT JOIN SORIA_TPC.dbo.DIRECCIONES AS DT ON DT.ID=T.IDDIRECCION WHERE AXC.IDCXE=@ID");
+                datos.Comando.Parameters.Clear();
+                datos.Comando.Parameters.AddWithValue("@ID", CXE);
+                datos.AbrirConexion();
+                datos.EjecutarConsulta();
+                while (datos.Reader.Read())
+                {
+                    alumno = new Alumno
+                    {
+                        IdAlumno   = (Int64)datos.Reader[0],
+                        ID         = (Int64)datos.Reader[1],
+                        Name       = (string)datos.Reader[2],
+                        Apellido   = (string)datos.Reader[3],
+                        DNI        = (string)datos.Reader[4],
+                        Nacimiento = (DateTime)datos.Reader[5],
+                        Email      = (string)datos.Reader[6]
+                    };
+                    if (!Convert.IsDBNull(datos.Reader[7]))
+                    {
+                        alumno.Direccion = new Direccion()
+                        {
+                            ID = (Int64)datos.Reader[7],
+                            Calle = (string)datos.Reader[8],
+                            Number = (string)datos.Reader[9]
+                        };
+                    }
+                    if (!Convert.IsDBNull(datos.Reader[10]))
+                    {
+                        alumno.Tutor = new Persona()
+                        {
+                            ID = (Int64)datos.Reader[10],
+                            Name = (string)datos.Reader[11],
+                            Apellido = (string)datos.Reader[12],
+                            DNI = (string)datos.Reader[13],
+                            Nacimiento = (DateTime)datos.Reader[14],
+                            Email = (string)datos.Reader[15]
+                        };
+                        if (!Convert.IsDBNull(datos.Reader[16]))
+                        {
+                            alumno.Tutor.Direccion = new Direccion()
+                            {
+                                ID = (Int64)datos.Reader[16],
+                                Calle = (string)datos.Reader[17],
+                                Number = (string)datos.Reader[18]
+                            };
+                        }
+                    }
+                    alumnos.Add(alumno);
+                }
+                return alumnos;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+        }
         public List<Alumno> ListarAlumnos(Int64 IdCurso)
         {
             Datos datos = new Datos();
@@ -186,7 +261,7 @@ namespace Negocio
                 datos.AbrirConexion();
                 datos.EjecutarConsulta();
                 Alumno alumno = new Alumno();
-                while (datos.Reader.Read())
+                if (datos.Reader.Read())
                 {
                     alumno.IdAlumno = (Int64)datos.Reader[0];
                     alumno.ID = (Int64)datos.Reader[1];

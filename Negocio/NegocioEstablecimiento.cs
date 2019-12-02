@@ -425,9 +425,9 @@ namespace Negocio
         public Establecimiento GetCursoByEstablecimientoWithID( Int64 IDCXE)
         {
             Datos datos = new Datos();
+            Establecimiento establecimiento = new Establecimiento();
             try
             {
-            Establecimiento establecimiento;
                 datos.SetearConsulta("SELECT EST.ID, EST.NOMBRE, EST.NIVEL, EST.NUMERO, DIR.ID, DIR.CALLE, DIR.NUMERO, C.ID, C.NOMBRE FROM SORIA_TPC.dbo.CURSOSxESTABLECIMIENTO AS CXE"
                     + " INNER JOIN SORIA_TPC.dbo.ESTABLECIMIENTOS AS EST ON EST.ID = CXE.IDESTABLECIMIENTO"
                     + " INNER JOIN SORIA_TPC.dbo.DIRECCIONES AS DIR ON DIR.ID = EST.IDDIRECCION"

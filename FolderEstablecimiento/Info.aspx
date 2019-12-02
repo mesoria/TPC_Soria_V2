@@ -42,7 +42,7 @@
         <div class="form-group col-md-5">
             <asp:Button ID="btnVolver" runat="server" CssClass="btn btn-primary btn-lg" Text="Volver" PostBackUrl="~/Establecimientos.aspx"/>
         </div>
-        <%if (usuario.Perfil == "Administrador")
+        <%if (usuario.Perfil == "Administrador" || usuario.Perfil == "Director")
           {%>
             <div class="form-group col-md-6">
                 <a class="btn-warning btn-lg" href="NewEstablecimiento.aspx?idE=<% = Aux.ID %>">Editar</a>

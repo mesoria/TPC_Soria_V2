@@ -44,7 +44,8 @@ namespace TPC_Soria_v2.Usuarios
                     Response.Redirect("/frmLog.aspx", false);
                 }
                 Int64 IDCXE = Convert.ToInt64( Request.QueryString["idCXE"]);
-                establecimiento = negocioEstablecimiento.GetCursoByEstablecimientoWithID(IDCXE);
+                //establecimiento = negocioEstablecimiento.GetCursoByEstablecimientoWithID(IDCXE);
+                alumnos = negocioAlumno.ListarAlumnosFromCurso(IDCXE);
             }
             catch (Exception ex)
             {

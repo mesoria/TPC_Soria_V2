@@ -32,7 +32,7 @@ namespace TPC_Soria_v2.FolderAlumno
                 }
                 persona = (Persona)Application["Persona"];
                 docente = (Docente)Application["Docente"];
-                if (Request.QueryString["idE"] == null)
+                if (Request.QueryString["idCXE"] == null)
                 {
                     //por si accede a la pagina con el link
                     Session["Error" + Session.SessionID] = "Ups, Aún no has seleccionado un Establecimiento.";
@@ -47,6 +47,11 @@ namespace TPC_Soria_v2.FolderAlumno
                 Session["Error" + Session.SessionID] = ex;
                 Response.Redirect("/frmLog.aspx");
             }
+
+        }
+
+        protected void btnGuardar_Click(object sender, EventArgs e)
+        {
 
         }
     }

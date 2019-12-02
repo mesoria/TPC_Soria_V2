@@ -11,7 +11,7 @@ namespace TPC_Soria_v2.Usuarios
 {
     public partial class DocenteCurso : System.Web.UI.Page
     {
-        //private readonly NegocioEstablecimiento negocioEstablecimiento = new NegocioEstablecimiento();
+        private readonly NegocioEstablecimiento negocioEstablecimiento = new NegocioEstablecimiento();
         //private readonly NegocioCurso           negocioCurso           = new NegocioCurso();
         //private readonly NegocioPersona         negocioPersona         = new NegocioPersona();
         private readonly NegocioAlumno          negocioAlumno          = new NegocioAlumno();
@@ -43,15 +43,17 @@ namespace TPC_Soria_v2.Usuarios
                     Session["Error" + Session.SessionID] = "Ups, Aún no has seleccionado un Establecimiento.";
                     Response.Redirect("/frmLog.aspx", false);
                 }
-                
-                establecimiento.Name = "Escuela";
-                curso.Name = "1° A";
-
+                Int64 IDCXE = Convert.ToInt64( Request.QueryString["idCXE"]);
+                establecimiento = negocioEstablecimiento.GetCursoByEstablecimientoWithID(IDCXE);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+        }
+        public Int64 GetId(Int64 IDE, Int64 IDC)
+        {
+            return negocioEstablecimiento.GetIDCursoByEstablecimiento(IDE,IDC);
         }
     }
 }

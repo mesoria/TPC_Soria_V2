@@ -10,7 +10,7 @@ namespace Negocio
 {
     public class NegocioAlumno
     {
-        public List<Alumno> ListarAlumnos()
+        public List<Alumno> ListarAlumnos(Int64 IdCurso)
         {
             Datos datos = new Datos();
             List<Alumno> alumnos = new List<Alumno>();

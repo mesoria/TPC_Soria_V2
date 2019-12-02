@@ -49,14 +49,9 @@ namespace TPC_Soria_v2.Usuarios
                 throw ex;
             }
         }
-
-        //public string GetApellido()
-        //{
-        //    return docente.Apellido;
-        //}
-        //public string GetName()
-        //{
-        //    return docente.Name;
-        //}
+        public Int64 GetIDCXE( Int64 IDE, Int64 IDC)
+        {
+            return negocioEstablecimiento.GetIDCursoByEstablecimiento(IDE, IDC);
+        }
     }
 }

@@ -42,11 +42,14 @@
         <div class="form-group col-md-5">
             <asp:Button ID="btnVolver" runat="server" CssClass="btn btn-primary btn-lg" Text="Volver" PostBackUrl="~/Establecimientos.aspx"/>
         </div>
-        <div class="form-group col-md-6">
-            <a class="btn-warning btn-lg" href="NewEstablecimiento.aspx?idE=<% = Aux.ID %>">Editar</a>
-        </div>
-        <div class="form-group col-md-1">
-            <asp:Button ID="btnDelete" runat="server" OnClick="btnDelete_Click" Text="Eliminar" CssClass="btn btn-danger btn-lg"/>
-        </div>
+        <%if (usuario.Perfil == "Administrador")
+          {%>
+            <div class="form-group col-md-6">
+                <a class="btn-warning btn-lg" href="NewEstablecimiento.aspx?idE=<% = Aux.ID %>">Editar</a>
+            </div>
+            <div class="form-group col-md-1">
+                <asp:Button ID="btnDelete" runat="server" OnClick="btnDelete_Click" Text="Eliminar" CssClass="btn btn-danger btn-lg"/>
+            </div>
+        <%} %>
     </div>
 </asp:Content>

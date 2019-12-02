@@ -40,7 +40,7 @@
             <th style="width: 15%"><% = item.Name %></th>
             <th style="width: 15%"><% = item.Number %></th>
             <th style="width: 15%"> <a class="btn btn-primary" href="../FolderEstablecimiento/Info.aspx?idE=<% = item.ID %>">Más información</a> </th>
-            <th style="width: 15%"> <a class="btn btn-primary" href="DocenteCurso.aspx?idCXE=<% =item.ID %>"> <% = item.Curso.Name %> </a> </th>
+            <th style="width: 15%"> <a class="btn btn-primary" href="DocenteCurso.aspx?idCXE=<%=GetIDCXE(item.ID,item.Curso.ID)%>"> <% = item.Curso.Name %> </a> </th>
         <%j++;}%>
         </tr>
     </tbody>

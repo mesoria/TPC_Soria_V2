@@ -55,21 +55,11 @@
     <hr />
     <div class="form-row">
         <div class="form-group col-md-5">
-            <a class="btn btn-primary" href="../FolderAlumno/New.aspx?idCXE=<% = curso.ID %>">Nuevo Curso</a>
+            <a class="btn btn-primary" href="../FolderAlumno/New.aspx?idCXE=<% = GetId(establecimiento.ID,curso.ID) %>">Nuevo Curso</a>
         </div>
         <%--<div class="form-group col-md-7">
             <a class="btn btn-primary" href="../Maestra/Cursos.aspx?idM=<% = maestra.ID %>">Ir a Alumnos</a>
         </div>--%>
-    </div> 
-
-
-
-
-    <div>
-        <a class="btn btn-primary" href="../Maestra/MaestraPrincipal.aspx?idM=<% = maestra.ID %>">Atras</a>
-    </div>
-    <div>
-        <a class="btn btn-primary" href="../Maestra/AsistenciaAlumnos.aspx?idM=<% = maestra.ID %>">Alumnos</a>
     </div>
 
 </asp:Content>

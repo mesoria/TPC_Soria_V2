@@ -116,6 +116,8 @@
     <Content Include="FolderCurso\New.aspx" />
     <Content Include="FolderDocente\Info.aspx" />
     <Content Include="FolderEstablecimiento\Info.aspx" />
+    <Content Include="FolderFormularios\Notas.aspx" />
+    <Content Include="FolderFormularios\PasarAsistencia.aspx" />
     <Content Include="frmLog.aspx" />
     <Content Include="FolderDocente\AsistenciaAlumnos.aspx" />
     <Content Include="Contact.aspx" />
@@ -287,6 +289,20 @@
     </Compile>
     <Compile Include="FolderEstablecimiento\Info.aspx.designer.cs">
       <DependentUpon>Info.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FolderFormularios\Notas.aspx.cs">
+      <DependentUpon>Notas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FolderFormularios\Notas.aspx.designer.cs">
+      <DependentUpon>Notas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FolderFormularios\PasarAsistencia.aspx.cs">
+      <DependentUpon>PasarAsistencia.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FolderFormularios\PasarAsistencia.aspx.designer.cs">
+      <DependentUpon>PasarAsistencia.aspx</DependentUpon>
     </Compile>
     <Compile Include="frmLog.aspx.cs">
       <DependentUpon>frmLog.aspx</DependentUpon>

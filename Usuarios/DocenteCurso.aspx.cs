@@ -21,7 +21,6 @@ namespace TPC_Soria_v2.Usuarios
         public Usuario usuario = new Usuario();
         public Persona persona = new Persona();
         public Docente docente = new Docente();
-        public Curso   curso   = new Curso();
         public Alumno alumno;
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -44,17 +43,18 @@ namespace TPC_Soria_v2.Usuarios
                     Response.Redirect("/frmLog.aspx", false);
                 }
                 Int64 IDCXE = Convert.ToInt64( Request.QueryString["idCXE"]);
-                //establecimiento = negocioEstablecimiento.GetCursoByEstablecimientoWithID(IDCXE);
+                establecimiento = negocioEstablecimiento.GetCursoByEstablecimientoWithID(IDCXE);
                 alumnos = negocioAlumno.ListarAlumnosFromCurso(IDCXE);
+                btnVolver.Attributes.Add("onclick", "history.back(); return false;");
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
-        public Int64 GetId(Int64 IDE, Int64 IDC)
+        public Int64 GetIDCXE(Int64 IDE, Int64 IDC)
         {
-            return negocioEstablecimiento.GetIDCursoByEstablecimiento(IDE,IDC);
+            return negocioEstablecimiento.GetIDCursoByEstablecimiento(IDE, IDC);
         }
     }
 }

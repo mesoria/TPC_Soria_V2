@@ -38,10 +38,12 @@
     </table>
 </div>
     <hr />
+   <%-- <%if (usuario.Perfil == "Administrador")
+        {%>--%>
     <div class="form-row">
         <div class="form-group col-md-5">
             <a class="btn btn-primary" href="FolderDocente/New.aspx">Ingresar nuevo Docente</a>
-            <%--<a class="btn btn-primary" href="FolderEstablecimiento/NewEstablecimiento.aspx?idD=<% = docente.ID %>">Ingresar nuevo Docente</a>--%>
         </div>
     </div>
+    <%--<%} %>--%>
 </asp:Content>

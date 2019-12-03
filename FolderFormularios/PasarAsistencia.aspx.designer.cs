@@ -7,19 +7,10 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace TPC_Soria_v2.Usuarios {
+namespace TPC_Soria_v2.FolderFormularios {
     
     
-    public partial class DocenteCurso {
-        
-        /// <summary>
-        /// Control Panel1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel1;
+    public partial class PasarAsistencia {
         
         /// <summary>
         /// Control lblApellido.
@@ -40,22 +31,13 @@ namespace TPC_Soria_v2.Usuarios {
         protected global::System.Web.UI.WebControls.Label lvlName;
         
         /// <summary>
-        /// Control txtEstablecimiento.
+        /// Control checkbox.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label txtEstablecimiento;
-        
-        /// <summary>
-        /// Control txtCurso.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label txtCurso;
+        protected global::System.Web.UI.WebControls.CheckBox checkbox;
         
         /// <summary>
         /// Control btnVolver.
@@ -65,5 +47,14 @@ namespace TPC_Soria_v2.Usuarios {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnVolver;
+        
+        /// <summary>
+        /// Control btnGuardar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnGuardar;
     }
 }

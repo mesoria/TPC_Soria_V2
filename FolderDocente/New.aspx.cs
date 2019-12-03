@@ -106,6 +106,7 @@ namespace TPC_Soria_v2.FolderDocente
                     txtCalle.Value      = Aux.Direccion.Calle;
                     txtAltura.Value     = Aux.Direccion.Number;
                 }
+                btnVolver.Attributes.Add("onclick", "history.back(); return false;");
             }
             catch (Exception ex)
             {

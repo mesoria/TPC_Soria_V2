@@ -46,13 +46,13 @@
     </table>
 </div>
     <hr />
-    <div class="form-row">
-        <div class="form-group col-md-5">
-            <a class="btn btn-primary" href="FolderEstablecimiento/NewEstablecimiento.aspx?idM=<% = maestra.ID %>">Nuevo Establecimiento</a>
+     <%if (usuario.Perfil == "Administrador")
+       {%>
+        <div class="form-row">
+            <div class="form-group col-md-5">
+                <a class="btn btn-primary" href="FolderEstablecimiento/NewEstablecimiento.aspx?idM=<% = maestra.ID %>">Nuevo Establecimiento</a>
+            </div>
         </div>
-        <%--<div class="form-group col-md-7">
-            <a class="btn btn-primary" href="../Curso/Cursos.aspx?idM=<% = maestra.ID %>">Ir a Cursos</a>
-        </div>--%>
-    </div> 
+    <% } %>
 
 </asp:Content>

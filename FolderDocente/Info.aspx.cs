@@ -68,7 +68,7 @@ namespace TPC_Soria_v2.FolderDocente
                 }
                 Int64 idE = Convert.ToInt32(Request.QueryString["idD"]);
                 Aux = negocioDocente.ListarDocentes().Find(P => P.IdDocente == idE);
-
+                btnVolver.Attributes.Add("onclick", "history.back(); return false;");
                 Update();
             }
             catch (Exception ex)

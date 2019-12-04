@@ -1,14 +1,27 @@
-﻿<%@ Page Title="Cursos" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="DocenteCurso.aspx.cs" Inherits="TPC_Soria_v2.Usuarios.DocenteCurso" %>
+﻿<%@ Page Title="Establecimientos" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="DocenteCurso.aspx.cs" Inherits="TPC_Soria_v2.Usuarios.DocenteCurso" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <div>
-        <asp:Panel ID="Panel1" runat="server"></asp:Panel>
-        <asp:Label ID="lblApellido" runat="server" Font-Size="X-Large" Text=""><% = persona.Apellido %></asp:Label>
-        <asp:Label ID="lvlName" runat="server" Font-Size="X-Large" Text=""><% = persona.Name %> </asp:Label>
-    </div>
-    <h1>Establecimiento</h1>
     <div class="form-row">
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-10">
+            <h3>Establecimiento</h3>
+        </div>
+        <div class="form-group col-md-2">
+            <asp:Label ID="lblApellido" runat="server" Font-Size="X-Large" Text=""><% = persona.Apellido %></asp:Label>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-10">
             <asp:Label ID="txtEstablecimiento" runat="server" Font-Size="X-Large" Text=""><% = establecimiento.Name %> </asp:Label>
+        </div>
+        <div class="form-group col-md-2">
+            <asp:Label ID="lvlName" runat="server" Font-Size="X-Large" Text=""><% = persona.Name %> </asp:Label>
+        </div>
+    </div>
+    <hr />
+    <br />
+    <h4>Curso</h4>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <asp:Label ID="txtCurso" runat="server" Font-Size="X-Large" Text="Nombre: "><% = establecimiento.Curso.Name %> </asp:Label>
         </div>
         <div class="form-group col-md-2">
             <a class="btn btn-primary" href="../FolderFormularios/PasarAsistencia.aspx?idCXE=<% = GetIDCXE(establecimiento.ID,establecimiento.Curso.ID) %>">Pasar Asistencia</a>
@@ -16,18 +29,31 @@
         <div class="form-group col-md-2">
             <a class="btn btn-primary" href="../FolderFormularios/Notas.aspx?idCXE=<% = GetIDCXE(establecimiento.ID,establecimiento.Curso.ID) %>">Calificaciones</a>
         </div>
-    </div>
-    <hr />
-    <br />
-    <h3>Curso</h3>
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <asp:Label ID="txtCurso" runat="server" Font-Size="X-Large" Text="Nombre: "><% = establecimiento.Curso.Name %> </asp:Label>
+        <div class="form-group col-md-4">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="cbxMes">Mes</label>
+                    <select id="cbxMes" runat="server" class="form-control" required>
+                        <option selected>Elige el mes...</option>
+                        <option>Enero</option>
+                        <option>Febrero</option>
+                        <option>Marzo</option>
+                        <option>Abril</option>
+                        <option>Mayo</option>
+                        <option>Junio</option>
+                        <option>Julio</option>
+                        <option>Agosto</option>
+                        <option>Septiembre</option>
+                        <option>Octubre</option>
+                        <option>Noviembre</option>
+                        <option>Diciembre</option>
+                    </select>
+                </div>
+            </div>
         </div>
     </div>
-    
     <hr />
-    <h3>Alumnos</h3>
+    <h5>Alumnos</h5>
 
 <div class="table-responsive">
     <table class="table">

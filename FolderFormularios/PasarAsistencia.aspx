@@ -1,20 +1,28 @@
-﻿<%@ Page Title="Alumnos" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="PasarAsistencia.aspx.cs" Inherits="TPC_Soria_v2.FolderFormularios.PasarAsistencia" %>
+﻿<%@ Page Title="Lista de Alumnos." Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="PasarAsistencia.aspx.cs" Inherits="TPC_Soria_v2.FolderFormularios.PasarAsistencia" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <div>
-        <asp:Label ID="lblApellido" runat="server" Font-Size="X-Large" Text=""><% = persona.Apellido %></asp:Label>
-        <asp:Label ID="lvlName" runat="server" Font-Size="X-Large" Text=""><% = persona.Name %> </asp:Label>
+    <div class="form-row">
+        <div class="form-group col-md-10">
+            <asp:Label ID="lblApellido" runat="server" Font-Size="X-Large" Text=""><% = persona.Apellido %></asp:Label>
+            <asp:Label ID="lvlName" runat="server" Font-Size="X-Large" Text=""><% = persona.Name %> </asp:Label>
+        </div>
+        <div class="form-group col-md-2">
+            <asp:Label ID="Date" CssClass="align-items-end" runat="server" Font-Size="X-Large" Text=""><% = DateTime.Today.Year+"-"+DateTime.Today.Month+"-"+DateTime.Today.Day%></asp:Label>
+        </div>
     </div>
     <h2><%: Title %></h2>
 
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="MaestraPrincipal.aspx?idM=<% = persona.ID %>">Escuelas</a></li>
-        <li class="breadcrumb-item"><a href="../Curso/Cursos.aspx?idM=<% = persona.ID %>">Cursos</a></li>
+        <li class="breadcrumb-item"><a href="../MaestraPrincipal.aspx?idM=<% = persona.ID %>">Escuelas</a></li>
+        <li class="breadcrumb-item"><a href="../FolderCurso/Cursos.aspx?idM=<% = persona.ID %>">Cursos</a></li>
         <li class="breadcrumb-item active" aria-current="page">Alumnos</li>
       </ol>
     </nav>
-    <h3>Lista de Alumnos.</h3>
-             
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <asp:Label ID="txtCurso" runat="server" Font-Size="X-Large" Text="Nombre: "><% = establecimiento.Curso.Name %> </asp:Label>
+        </div>
+    </div>      
 <div class="table-responsive">
     <table class="table">
     <thead>
@@ -53,11 +61,14 @@
 </div>
     <br />
     <hr />
-    <div class="form-group col-md-5">
-            <asp:Button ID="btnVolver" runat="server" CssClass="btn btn-primary btn-lg" Text="Volver" PostBackUrl="~/Docentes.aspx"/>
-    </div>
-    <div>
-        <asp:Button ID="btnGuardar" runat="server" OnClick="btnGuardar_Click" Text="Guardar" CssClass="btn btn-primary btn-lg"/>
+
+    <div class="form-row">
+        <div class="form-group col-md-5">
+            <asp:Button ID="btnVolver" runat="server" CssClass="btn btn-primary btn-lg" Text="Volver" />
+        </div>
+        <div class="form-group col-md-7">
+            <asp:Button ID="btnGuardar" runat="server" OnClick="btnGuardar_Click" Text="Guardar" CssClass="btn btn-success btn-lg"/>
+        </div>
     </div>
 
     <address>

@@ -12,8 +12,6 @@ namespace TPC_Soria_v2.Usuarios
     public partial class DocenteCurso : System.Web.UI.Page
     {
         private readonly NegocioEstablecimiento negocioEstablecimiento = new NegocioEstablecimiento();
-        //private readonly NegocioCurso           negocioCurso           = new NegocioCurso();
-        //private readonly NegocioPersona         negocioPersona         = new NegocioPersona();
         private readonly NegocioAlumno          negocioAlumno          = new NegocioAlumno();
 
         public List<Alumno> alumnos { get; set; }
@@ -42,6 +40,7 @@ namespace TPC_Soria_v2.Usuarios
                     Session["Error" + Session.SessionID] = "Ups, Aún no has seleccionado un Establecimiento.";
                     Response.Redirect("/frmLog.aspx", false);
                 }
+                cargarListMes();
                 Int64 IDCXE = Convert.ToInt64( Request.QueryString["idCXE"]);
                 establecimiento = negocioEstablecimiento.GetCursoByEstablecimientoWithID(IDCXE);
                 alumnos = negocioAlumno.ListarAlumnosFromCurso(IDCXE);
@@ -51,6 +50,55 @@ namespace TPC_Soria_v2.Usuarios
             {
                 throw ex;
             }
+        }
+        public void cargarListMes()
+        {
+           
+        }
+        public string mesActual()
+        {
+            string res;
+            DateTime today = DateTime.Today;
+            switch (today.Month)
+            {
+                case 12:
+                    res = "Diciembre";
+                    break;
+                case 11:
+                    res = "Noviembre";
+                    break;
+                case 10:
+                    res = "Octubre";
+                    break;
+                case 9:
+                    res = "Septiembre";
+                    break;
+                case 8:
+                    res = "Agosto";
+                    break;
+                case 7:
+                    res = "Julio";
+                    break;
+                case 6:
+                    res = "Junio";
+                    break;
+                case 5:
+                    res = "Mayo";
+                    break;
+                case 4:
+                    res = "Abril";
+                    break;
+                case 3:
+                    res = "Marzo";
+                    break;
+                case 2:
+                    res = "Febrero";
+                    break;
+                default:
+                    res = "Enero";
+                    break;
+            }
+            return res;
         }
         public Int64 GetIDCXE(Int64 IDE, Int64 IDC)
         {

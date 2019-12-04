@@ -31,6 +31,24 @@ namespace TPC_Soria_v2.FolderFormularios {
         protected global::System.Web.UI.WebControls.Label lvlName;
         
         /// <summary>
+        /// Control Date.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Date;
+        
+        /// <summary>
+        /// Control txtCurso.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label txtCurso;
+        
+        /// <summary>
         /// Control checkbox.
         /// </summary>
         /// <remarks>

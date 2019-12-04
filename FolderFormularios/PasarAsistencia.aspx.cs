@@ -16,9 +16,9 @@ namespace TPC_Soria_v2.FolderFormularios
         private readonly NegocioEstablecimiento negocioEstablecimiento = new NegocioEstablecimiento();
         public NegocioAsistencia negocioAsistencia = new NegocioAsistencia();
         public List<Alumno> ListaAlumnos = new List<Alumno>();
-        public Persona maestra  = new Persona();
         readonly DateTime today = DateTime.Today;
         
+        public Establecimiento establecimiento = new Establecimiento();
         public Persona persona = new Persona();
         public Usuario usuario = new Usuario();
         public Docente docente = new Docente();
@@ -44,6 +44,7 @@ namespace TPC_Soria_v2.FolderFormularios
                     Response.Redirect("/frmLog.aspx", false);
                 }
                 Int64 IDCXE = Convert.ToInt64(Request.QueryString["idCXE"]);
+                establecimiento = negocioEstablecimiento.GetCursoByEstablecimientoWithID(IDCXE);
                 ListaAlumnos = negocioAlumno.ListarAlumnosFromCurso(IDCXE);
                 btnVolver.Attributes.Add("onclick", "history.back(); return false;");
             }

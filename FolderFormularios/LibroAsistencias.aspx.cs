@@ -9,20 +9,20 @@ using Negocio;
 
 namespace TPC_Soria_v2.FolderFormularios
 {
-    public partial class PasarAsistencia : Page
+    public partial class LibroAsistencias : System.Web.UI.Page
     {
         private readonly NegocioPersona negocioPersona = new NegocioPersona();
-        private readonly NegocioAlumno negocioAlumno  = new NegocioAlumno();
+        private readonly NegocioAlumno negocioAlumno = new NegocioAlumno();
         private readonly NegocioEstablecimiento negocioEstablecimiento = new NegocioEstablecimiento();
         public NegocioAsistencia negocioAsistencia = new NegocioAsistencia();
         public List<Alumno> ListaAlumnos = new List<Alumno>();
-        public List<long> ListID = new List<long>();
         readonly DateTime today = DateTime.Today;
-        
+
         public Establecimiento establecimiento = new Establecimiento();
         public Persona persona = new Persona();
         public Usuario usuario = new Usuario();
         public Docente docente = new Docente();
+        public Int64 IDCXE;
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -44,12 +44,9 @@ namespace TPC_Soria_v2.FolderFormularios
                     Session["Error" + Session.SessionID] = "Ups, Aún no has seleccionado un Establecimiento.";
                     Response.Redirect("/frmLog.aspx", false);
                 }
-                Int64 IDCXE = Convert.ToInt64(Request.QueryString["idCXE"]);
+                IDCXE = Convert.ToInt64(Request.QueryString["idCXE"]);
                 establecimiento = negocioEstablecimiento.GetCursoByEstablecimientoWithID(IDCXE);
                 ListaAlumnos = negocioAlumno.ListarAlumnosFromCurso(IDCXE);
-                //esto es lo que necesitamos para el repeater.
-                repetidor.DataSource = ListaAlumnos;
-                repetidor.DataBind();
                 btnVolver.Attributes.Add("onclick", "history.back(); return false;");
             }
             catch (Exception ex)
@@ -82,7 +79,7 @@ namespace TPC_Soria_v2.FolderFormularios
                 throw ex;
             }
         }
-        public string TraductionDayWeek( string day)
+        public string TraductionDayWeek(string day)
         {
             switch (day)
             {
@@ -114,14 +111,14 @@ namespace TPC_Soria_v2.FolderFormularios
         }
         public string DateOne(int year, int month)
         {
-            DateTime week = Convert.ToDateTime("01/"+month+"/"+year);
+            DateTime week = Convert.ToDateTime("01/" + month + "/" + year);
 
-            return TraductionDayWeek( week.DayOfWeek.ToString());
+            return TraductionDayWeek(week.DayOfWeek.ToString());
         }
         public string Dias()
-        {            
-            string wk = DateOne( today.Year, today.Month);
-            
+        {
+            string wk = DateOne(today.Year, today.Month);
+
             int cant = DateTime.DaysInMonth(today.Year, today.Month);
             int d = 1;
             string strT = "";
@@ -165,17 +162,66 @@ namespace TPC_Soria_v2.FolderFormularios
             }
             return strT;
         }
-        public string Asistencia( Persona persona)
+
+        public string DiasDelMes(int month)
         {
-            return "<th><div class=\"custom-control custom-checkbox\"><input type =\"checkbox\" class=\"custom-control-input\" id=\"" + 1 + " \"disabled=\"disabled\" "+ Asistio(1, persona.ID)+">" +
+            
+            string wk = DateOne(today.Year, month+1);
+
+            int cant = DateTime.DaysInMonth(today.Year, month+1);
+            int d = 1;
+            string strT = "";
+            while (d <= cant)
+            {
+                switch (wk)
+                {
+                    case "Lu":
+                        strT += "<th style=\"width: auto; background-color: #77ff77\">" + wk + " " + d + " </ th > ";
+                        wk = "Ma";
+                        break;
+                    case "Ma":
+                        strT += "<th style=\"width: auto; background-color: #77ff77\"> " + wk + " " + d + " </ th > ";
+                        wk = "Mi";
+                        break;
+                    case "Mi":
+                        strT += "<th style=\"width: auto; background-color: #77ff77\"> " + wk + " " + d + " </ th > ";
+                        wk = "Ju";
+                        break;
+                    case "Ju":
+                        strT += "<th style=\"width: auto; background-color: #77ff77\"> " + wk + " " + d + " </ th > ";
+                        wk = "Vi";
+                        break;
+                    case "Vi":
+                        strT += "<th style=\"width: auto; background-color: #77ff77\"> " + wk + " " + d + " </ th > ";
+                        wk = "Lu";
+                        d += 2;
+                        break;
+                    case "Sa":
+                        wk = "Lu";
+                        d++;
+                        break;
+                    case "Do":
+                        wk = "Lu";
+                        break;
+                    default:
+                        break;
+                }
+
+                d++;
+            }
+            return strT;
+        }
+        public string Asistencia(Persona persona)
+        {
+            return "<th><div class=\"custom-control custom-checkbox\"><input type =\"checkbox\" class=\"custom-control-input\" id=\"" + 1 + " \"disabled=\"disabled\" " + Asistio(1, persona.ID) + ">" +
                                     "<label class=\"custom-control-label\" for=\"" + 1 + "\"></label></div></th>";
         }
-        public string Asistencias( Persona item)
+        public string Asistencias(Persona item)
         {
             int d = 1;
             string wk = DateOne(today.Year, today.Month);
             string strT = "";
-            while ( d < today.Day )
+            while (d < today.Day)
             {
                 switch (wk)
                 {
@@ -243,7 +289,7 @@ namespace TPC_Soria_v2.FolderFormularios
 
         public string Asistio(Int64 ID, int dia)
         {
-            if (negocioAsistencia.CheckAsistencia(ID, today.Year, today.Month, dia) )
+            if (negocioAsistencia.CheckAsistencia(ID, today.Year, today.Month, dia))
             {
                 return "checked";
             }
@@ -264,32 +310,62 @@ namespace TPC_Soria_v2.FolderFormularios
             return str;
         }
 
-        protected void cbxArgument_CheckedChanged(object sender, EventArgs e)
+        public string MesActual()
         {
-            // recibimos un argumento desde un asp checkbox a partir de su propiedad CommandArgument.
-            // nota: esto por alguna razón no funciona normalmente con un foreach en el front, para ello
-            // usamos un repeater para crear cada fila de alumnos y cambia un poco la forma de mapear cada parámetro del objeto a 
-            // cada fila y columna.
-            // lo primero es tener en el load la lista linkeada al repeater, que en este caso se llama "repetidor".
-            // El repeater es un simple tag que va en el aspx y dentro del mismo tiene un itemtemplate en el cual
-            // se escribe lo que queremos que se repita. 
-            var argument = ((Button)sender).CommandArgument;
-            if (!ListID.Remove(Convert.ToInt64(argument)) )
+            string res;
+            DateTime today = DateTime.Today;
+            switch (today.Month)
             {
-                ListID.Add(Convert.ToInt64(argument));
+                case 12:
+                    res = "Diciembre";
+                    break;
+                case 11:
+                    res = "Noviembre";
+                    break;
+                case 10:
+                    res = "Octubre";
+                    break;
+                case 9:
+                    res = "Septiembre";
+                    break;
+                case 8:
+                    res = "Agosto";
+                    break;
+                case 7:
+                    res = "Julio";
+                    break;
+                case 6:
+                    res = "Junio";
+                    break;
+                case 5:
+                    res = "Mayo";
+                    break;
+                case 4:
+                    res = "Abril";
+                    break;
+                case 3:
+                    res = "Marzo";
+                    break;
+                case 2:
+                    res = "Febrero";
+                    break;
+                default:
+                    res = "Enero";
+                    break;
             }
+            return res;
         }
+
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-            
+
         }
 
-        protected void btnArgumento_Click(object sender, EventArgs e)
+        protected void btnMostrar_Click(object sender, EventArgs e)
         {
-            var argument = ((Button)sender).CommandArgument;
-            
-                ListID.Add(Convert.ToInt64(argument));
-
+            Session["IDCXE" + Session.SessionID] = IDCXE;
+            Session["Mes" + Session.SessionID] = cbxMes.SelectedIndex;
+            Response.Redirect("~/FolderFormularios/MostrarAsistencias.aspx");
         }
     }
 }

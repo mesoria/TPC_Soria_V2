@@ -29,27 +29,8 @@
         <div class="form-group col-md-2">
             <a class="btn btn-primary" href="../FolderFormularios/Notas.aspx?idCXE=<% = GetIDCXE(establecimiento.ID,establecimiento.Curso.ID) %>">Calificaciones</a>
         </div>
-        <div class="form-group col-md-4">
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="cbxMes">Mes</label>
-                    <select id="cbxMes" runat="server" class="form-control" required>
-                        <option selected>Elige el mes...</option>
-                        <option>Enero</option>
-                        <option>Febrero</option>
-                        <option>Marzo</option>
-                        <option>Abril</option>
-                        <option>Mayo</option>
-                        <option>Junio</option>
-                        <option>Julio</option>
-                        <option>Agosto</option>
-                        <option>Septiembre</option>
-                        <option>Octubre</option>
-                        <option>Noviembre</option>
-                        <option>Diciembre</option>
-                    </select>
-                </div>
-            </div>
+        <div class="form-group col-md-2">
+            <a class="btn btn-primary" href="../FolderFormularios/LibroAsistencias.aspx?idCXE=<% = GetIDCXE(establecimiento.ID,establecimiento.Curso.ID) %>">Libro de Asistencias</a>
         </div>
     </div>
     <hr />

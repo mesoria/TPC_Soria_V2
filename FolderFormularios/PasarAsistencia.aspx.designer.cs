@@ -49,13 +49,13 @@ namespace TPC_Soria_v2.FolderFormularios {
         protected global::System.Web.UI.WebControls.Label txtCurso;
         
         /// <summary>
-        /// Control checkbox.
+        /// Control repetidor.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox checkbox;
+        protected global::System.Web.UI.WebControls.Repeater repetidor;
         
         /// <summary>
         /// Control btnVolver.

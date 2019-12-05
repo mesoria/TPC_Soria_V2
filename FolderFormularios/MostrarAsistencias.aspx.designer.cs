@@ -7,10 +7,10 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace TPC_Soria_v2.Usuarios {
+namespace TPC_Soria_v2.FolderFormularios {
     
     
-    public partial class DocenteCurso {
+    public partial class MostrarAsistencias {
         
         /// <summary>
         /// Control lblApellido.
@@ -22,13 +22,13 @@ namespace TPC_Soria_v2.Usuarios {
         protected global::System.Web.UI.WebControls.Label lblApellido;
         
         /// <summary>
-        /// Control txtEstablecimiento.
+        /// Control Label1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label txtEstablecimiento;
+        protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
         /// Control lvlName.
@@ -38,6 +38,33 @@ namespace TPC_Soria_v2.Usuarios {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lvlName;
+        
+        /// <summary>
+        /// Control cbxMes.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlSelect cbxMes;
+        
+        /// <summary>
+        /// Control btnActualizar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnActualizar;
+        
+        /// <summary>
+        /// Control Label2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label2;
         
         /// <summary>
         /// Control txtCurso.

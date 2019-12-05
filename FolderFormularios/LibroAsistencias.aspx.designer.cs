@@ -7,10 +7,19 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace TPC_Soria_v2.Usuarios {
+namespace TPC_Soria_v2.FolderFormularios {
     
     
-    public partial class DocenteCurso {
+    public partial class LibroAsistencias {
+        
+        /// <summary>
+        /// Control txtTitulo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label txtTitulo;
         
         /// <summary>
         /// Control lblApellido.
@@ -22,15 +31,6 @@ namespace TPC_Soria_v2.Usuarios {
         protected global::System.Web.UI.WebControls.Label lblApellido;
         
         /// <summary>
-        /// Control txtEstablecimiento.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label txtEstablecimiento;
-        
-        /// <summary>
         /// Control lvlName.
         /// </summary>
         /// <remarks>
@@ -38,6 +38,24 @@ namespace TPC_Soria_v2.Usuarios {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lvlName;
+        
+        /// <summary>
+        /// Control cbxMes.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlSelect cbxMes;
+        
+        /// <summary>
+        /// Control btnMostrar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnMostrar;
         
         /// <summary>
         /// Control txtCurso.

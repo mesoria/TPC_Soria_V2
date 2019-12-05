@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Lista de Alumnos." Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="PasarAsistencia.aspx.cs" Inherits="TPC_Soria_v2.FolderFormularios.PasarAsistencia" %>
+﻿<%@ Page Title="Lista de Alumnos." Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="PasarAsistencia.aspx.cs" Inherits="TPC_Soria_v2.FolderFormularios.PasarAsistencia" EnableEventValidation="false"%>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="form-row">
         <div class="form-group col-md-10">
@@ -33,10 +33,27 @@
               Apellidos </th>
             <th style="width: 10%; background-color: #47ff47">
               Nombres </th>
-            <% =Dias() %>
+            <th style="width: 10%; background-color: #77ff77">
+              Presente </th>
         </tr>
     </thead>
-    <%var j = 1;
+        <asp:Repeater runat="server" ID="repetidor">
+            <ItemTemplate>
+    <tbody>
+                <tr>
+                    <th style="width: 5%"><% %></th>
+                    <th style="width: 15%"><%#Eval("Apellido")%></th>
+                    <th style="width: 15%"><%#Eval("Name")%></th>
+                    <th>
+                    <asp:CheckBox ID="cbxArgument" runat="server" CssClass="custom-switch" CommandArgument='<%#Eval("ID")%>' OnCheckedChanged="cbxArgument_CheckedChanged"/>
+                    <asp:Button ID="btnArgumento" CssClass="btn btn-primary" Text="Argumento to Back" CommandArgument='<%#Eval("Id")%>' CommandName="idPokemon" runat="server" OnClick="btnArgumento_Click" />
+                    </th>
+                </tr>
+    </tbody>
+            </ItemTemplate>
+        </asp:Repeater>
+
+    <%--<%var j = 1;
     foreach (var item in ListaAlumnos)
     {%>
     <tbody>
@@ -44,19 +61,15 @@
             <th style="width: 5%"><% = j%></th>
             <th style="width: 15%"><% = item.Apellido %></th>
             <th style="width: 15%"><% = item.Name %></th>
-            <% = Asistencias(item)%>
-        <%if (DateTime.Today.DayOfWeek.ToString() != "Saturday" && DateTime.Today.DayOfWeek.ToString() != "Sunday")
-        {%>
             <th>
                 <div class="custom-control custom-checkbox">
                     <%--<input type ="checkbox" runat="server" class="custom-control-input" id=<% = j%>>--%>
-                    <asp:CheckBox CssClass="custom-checkbox btn-lg" ID="checkbox" runat="server"/>
+                    <%--<asp:CheckBox CssClass="custom-checkbox btn-lg" ID="<%=item.ID %>" runat="server"/>
                 </div>
             </th>
-        <%}
-        j++;}%>
+       <% j++;}%>
         </tr>
-    </tbody>
+    </tbody>--%>
     </table>
 </div>
     <br />

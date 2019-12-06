@@ -92,7 +92,7 @@ namespace TPC_Soria_v2.FolderEstablecimiento
                         txtAltura.Value = establecimiento.Direccion.Number;
                     }
                 }
-                
+                btnVolver.Attributes.Add("onclick", "history.back(); return false;");
             }
             catch (Exception ex)
             {

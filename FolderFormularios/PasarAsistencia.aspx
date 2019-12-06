@@ -45,8 +45,8 @@
                     <th style="width: 15%"><%#Eval("Apellido")%></th>
                     <th style="width: 15%"><%#Eval("Name")%></th>
                     <th>
-                    <asp:CheckBox ID="cbxArgument" runat="server" CssClass="custom-switch" CommandArgument='<%#Eval("ID")%>' OnCheckedChanged="cbxArgument_CheckedChanged"/>
-                    <asp:Button ID="btnArgumento" CssClass="btn btn-primary" Text="Argumento to Back" CommandArgument='<%#Eval("Id")%>' CommandName="idPokemon" runat="server" OnClick="btnArgumento_Click" />
+                        <asp:CheckBox ID="cbxArgument" CssClass="custom-switch" runat="server" CommandArgument='<%#Eval("ID")%>' OnCheckedChanged="cbxArgument_CheckedChanged"/>
+                        <asp:Button ID="btnArgumento" CssClass="btn btn-primary" runat="server" CommandArgument='<%#Eval("Id")%>' CommandName="idBtn"  OnClick="btnArgumento_Click" Text="Presente"/>
                     </th>
                 </tr>
     </tbody>

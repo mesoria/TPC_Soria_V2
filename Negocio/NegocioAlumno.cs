@@ -131,7 +131,12 @@ namespace Negocio
             }
         }
 
-
+        public void AgregarFull(Alumno alumno, long IDCXE)
+        {
+            Agregar(alumno);
+            alumno.IdAlumno = GetIDWithIDPersona(alumno);
+            AgregarAlumnoXCurso(alumno, IDCXE);
+        }
         public void Agregar(Alumno alumno)
         {
             Datos datos = new Datos();
@@ -155,6 +160,95 @@ namespace Negocio
                 {
                     //ya existe un alumno con ese DNI. Deberia hacer un Trigger.
                 }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+        }
+
+        public long GetIDWithIDPersona(Alumno alumno)
+        {
+            Datos datos = new Datos();
+            long IDA;
+            try
+            {
+                datos.SetearConsulta("SELECT A.ID FROM SORIA_TPC.dbo.ALUMNOS AS A INNER JOIN SORIA_TPC.dbo.PERSONAS AS P ON P.ID=A.IDPERSONA WHERE A.IDPERSONA=@IDP AND A.IDTUTOR=@IDT");
+                datos.Comando.Parameters.Clear();
+                datos.Comando.Parameters.AddWithValue("@IDP", alumno.ID);
+                datos.Comando.Parameters.AddWithValue("@IDT", alumno.Tutor.ID);
+                datos.AbrirConexion();
+                datos.EjecutarConsulta();
+
+                if (datos.Reader.Read())
+                {
+                    IDA = (long)datos.Reader[0];
+                }
+                else
+                {
+                    IDA = 0;
+                }
+                return IDA;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+        }
+        public long GetIDCursoWithIDCXE(long IDCXE)
+        {
+            Datos datos = new Datos();
+            long IDC;
+            try
+            {
+                datos.SetearConsulta("SELECT C.ID FROM SORIA_TPC.dbo.CURSOSxESTABLECIMIENTO AS CXE INNER JOIN SORIA_TPC.dbo.CURSOS AS C ON C.ID=CXE.IDCURSO WHERE CXE.ID=@IDCXE");
+                datos.Comando.Parameters.Clear();
+                datos.Comando.Parameters.AddWithValue("@IDCXE", IDCXE);
+                datos.AbrirConexion();
+                datos.EjecutarConsulta();
+
+                if (datos.Reader.Read())
+                {
+                    IDC = (long)datos.Reader[0];
+                }
+                else
+                {
+                    IDC = 0;
+                }
+                return IDC;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+        }
+
+        public void AgregarAlumnoXCurso(Alumno alumno, long IDCXE)
+        {
+            Datos datos = new Datos();
+            long idc = GetIDCursoWithIDCXE(IDCXE);
+            try
+            {
+                datos.SetearConsulta("INSERT INTO SORIA_TPC.dbo.ALUMNOSxCURSO (IDCURSO, IDALUMNO ) values (@IdCurso, @IdAlumno)");
+                datos.Comando.Parameters.Clear();
+                datos.Comando.Parameters.AddWithValue("@IdCurso", idc);
+                datos.Comando.Parameters.AddWithValue("@IdAlumno", IDCXE);
+                datos.AbrirConexion();
+                datos.EjecutarAccion();
             }
             catch (Exception ex)
             {

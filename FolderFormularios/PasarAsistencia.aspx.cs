@@ -38,13 +38,13 @@ namespace TPC_Soria_v2.FolderFormularios
                 persona = (Persona)Application["Persona"];
                 docente = (Docente)Application["Docente"];
                 persona = negocioPersona.GetPersonaWithId(usuario.ID);
-                if (Request.QueryString["idCXE"] == null)
+                if (Request.QueryString["IDCXE"] == null)
                 {
                     //por si accede a la pagina con el link
                     Session["Error" + Session.SessionID] = "Ups, Aún no has seleccionado un Establecimiento.";
                     Response.Redirect("/frmLog.aspx", false);
                 }
-                Int64 IDCXE = Convert.ToInt64(Request.QueryString["idCXE"]);
+                Int64 IDCXE = Convert.ToInt64(Request.QueryString["IDCXE"]);
                 establecimiento = negocioEstablecimiento.GetCursoByEstablecimientoWithID(IDCXE);
                 ListaAlumnos = negocioAlumno.ListarAlumnosFromCurso(IDCXE);
                 //esto es lo que necesitamos para el repeater.
@@ -264,7 +264,7 @@ namespace TPC_Soria_v2.FolderFormularios
             return str;
         }
 
-        protected void cbxArgument_CheckedChanged(object sender, EventArgs e)
+        protected void cbxArgument_CheckedChanged2(object sender, EventArgs e)
         {
             // recibimos un argumento desde un asp checkbox a partir de su propiedad CommandArgument.
             // nota: esto por alguna razón no funciona normalmente con un foreach en el front, para ello
@@ -289,6 +289,11 @@ namespace TPC_Soria_v2.FolderFormularios
             var argument = ((Button)sender).CommandArgument;
             
                 ListID.Add(Convert.ToInt64(argument));
+
+        }
+
+        protected void cbxArgument_CheckedChanged(object sender, EventArgs e)
+        {
 
         }
     }

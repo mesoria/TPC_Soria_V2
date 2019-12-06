@@ -21,7 +21,7 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="cbxMes">Mes</label>
-                    <select id="cbxMes" runat="server" class="form-control" required> <%--onchange="location.reload(true)">--%>
+                    <select id="cbxMes" AutoPostBack="true" runat="server" class="form-control" required> <%--onchange="location.reload(true)">--%>
                         <option selected>Mes actual</option>
                         <option>Enero</option>
                         <option>Febrero</option>
@@ -58,17 +58,17 @@
         </div>
     </div>
     <style>
-    .letrachica{font-size:15px;}
-</style>
+        .letrachica{font-size:15px;}
+    </style>
 <div class="table-responsive">
     <table class="letrachica">
     <thead>
         <tr>
-            <th style="width: 4%; background-color: #00aa00">
+            <th style="width: 2%; background-color: #00aa00">
               # </th>
-            <th style="width: 9%; background-color: #00cc00">
+            <th style="width: 12%; background-color: #00cc00">
               Apellidos </th>
-            <th style="width: 9%; background-color: #47ff47">
+            <th style="width: 12%; background-color: #47ff47">
               Nombres </th>
             <% =DiasDelMes(cbxMes.SelectedIndex) %>
         </tr>
@@ -78,9 +78,9 @@
     {%>
     <tbody>
         <tr>
-            <th style="width: 4%"><% = j%></th>
-            <th style="width: 14%"><% = item.Apellido %></th>
-            <th style="width: 14%"><% = item.Name %></th>
+            <th style="width: 2%"><% = j%></th>
+            <th style="width: 12%"><% = item.Apellido %></th>
+            <th style="width: 12%"><% = item.Name %></th>
             <% = AsistenciasDelMes(item,cbxMes.SelectedIndex)%>
        <% j++;}%>
         </tr>

@@ -20,6 +20,7 @@ namespace TPC_Soria_v2.Usuarios
         public Persona persona = new Persona();
         public Docente docente = new Docente();
         public Alumno alumno;
+        public Int64 IDA = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -34,14 +35,15 @@ namespace TPC_Soria_v2.Usuarios
                 }
                 persona = (Persona)Application["Persona"];
                 docente = (Docente)Application["Docente"];
-                if (Request.QueryString["idCXE"] == null)
+                if (Request.QueryString["IDCXE"] == null)
                 {
                     //por si accede a la pagina con el link
-                    Session["Error" + Session.SessionID] = "Ups, Aún no has seleccionado un Establecimiento.";
+                    Session["Error" + Session.SessionID] = "Ups, Aún no has seleccionado un Curso.";
                     Response.Redirect("/frmLog.aspx", false);
                 }
                 cargarListMes();
-                Int64 IDCXE = Convert.ToInt64( Request.QueryString["idCXE"]);
+                Int64 IDCXE = Convert.ToInt64( Request.QueryString["IDCXE"]);
+                Session["IDCXE" + Session.SessionID] = IDCXE;
                 establecimiento = negocioEstablecimiento.GetCursoByEstablecimientoWithID(IDCXE);
                 alumnos = negocioAlumno.ListarAlumnosFromCurso(IDCXE);
                 btnVolver.Attributes.Add("onclick", "history.back(); return false;");

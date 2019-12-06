@@ -38,13 +38,13 @@ namespace TPC_Soria_v2.FolderFormularios
                 persona = (Persona)Application["Persona"];
                 docente = (Docente)Application["Docente"];
                 persona = negocioPersona.GetPersonaWithId(usuario.ID);
-                if (Request.QueryString["idCXE"] == null)
+                if (Request.QueryString["IDCXE"] == null)
                 {
                     //por si accede a la pagina con el link
                     Session["Error" + Session.SessionID] = "Ups, Aún no has seleccionado un Establecimiento.";
                     Response.Redirect("/frmLog.aspx", false);
                 }
-                IDCXE = Convert.ToInt64(Request.QueryString["idCXE"]);
+                IDCXE = Convert.ToInt64(Request.QueryString["IDCXE"]);
                 establecimiento = negocioEstablecimiento.GetCursoByEstablecimientoWithID(IDCXE);
                 ListaAlumnos = negocioAlumno.ListarAlumnosFromCurso(IDCXE);
                 btnVolver.Attributes.Add("onclick", "history.back(); return false;");

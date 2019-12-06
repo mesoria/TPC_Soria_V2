@@ -62,45 +62,45 @@
     <hr />
     <br />
     <h6>Tutor</h6>
-    <h6>Información del Tutor</h6>
+    <h5>Información del encargado del alumno</h5>
     <div class="form-row">
         <div class="form-group col-md-6">
             <label>Nombres</label>
             <%--<asp:TextBox ID="txtNombre" runat="server" required></asp:TextBox>--%>
-            <input type="Text" class="form-control" id="txtNombreT"  runat="server" placeholder="Juan">
+            <input type="Text" class="form-control" id="txtTNombre"  runat="server" placeholder="Juan">
             
         </div>
         <div class="form-group col-md-6">
             <label>Apellidos</label>
             <%--<asp:TextBox ID="txtNombre" runat="server" required></asp:TextBox>--%>
-            <input type="Text" class="form-control" id="txtApellidoT"  runat="server" placeholder="Perez">
+            <input type="Text" class="form-control" id="txtTApellido"  runat="server" placeholder="Perez">
         </div>
     </div>
     <div class="form-row">
         <div class="form-group col-md-4">
             <label>DNI</label>
                 <%--<asp:TextBox ID="txtNombre" runat="server" required></asp:TextBox>--%>
-            <input type="Text" class="form-control" id="dniT"  runat="server" placeholder="30111222">
+            <input type="Text" class="form-control" id="txtTDNI"  runat="server" placeholder="30111222">
         </div>
         <div class="form-group col-md-4">
-            <label for="txtNacimiento">Fecha de nacimiento</label>
-            <input type="date" id="nacimientoT" name="trip-start" runat="server"
+            <label for="txtTNacimiento">Fecha de nacimiento</label>
+            <input type="date" id="txtTNacimiento" name="trip-start" runat="server"
                 value="1987/08/06"
                 min="1950/01/01" max="2013/12/31" class="form-control">
         </div>
     </div>
     <div class="form-row">
         <div class="form-group col-md-8">
-            <label for="txtCalleT">Dirección</label>
-            <input type="text" class="form-control" id="txtCalleT" runat="server" placeholder="Balam Garden">
+            <label for="txtTCalle">Dirección</label>
+            <input type="text" class="form-control" id="txtTCalle" runat="server" placeholder="Balam Garden">
             <small class="form-text text-muted">Calle</small>
             <div class="invalid-feedback">
                 Por favor, ingrese la calle.
             </div>
         </div>
         <div class="form-group col-md-4">
-            <label for="numeroT">Número</label>
-            <input type="text" class="form-control" id="numeroT" runat="server" placeholder="1234">
+            <label for="txtTAltura">Número</label>
+            <input type="text" class="form-control" id="txtTAltura" runat="server" placeholder="1234">
             <small class="form-text text-muted">Altura</small>
             <div class="invalid-feedback">
                 Por favor, ingrese la altura.
@@ -111,12 +111,12 @@
     <br />
     <h6>Contacto</h6>
     <div class="form-group col-md-6">
-        <label for="txtEmailT">Email</label>
+        <label for="txtTEmail">Email</label>
             <div class="input-group">
             <div class="input-group-prepend">
                 <div class="input-group-text">@</div>
             </div>
-            <input type="text" class="form-control" id="txtEmailT" runat="server" placeholder="name@example.com.ar">
+            <input type="text" class="form-control" id="txtTEmail" runat="server" placeholder="name@example.com.ar">
             </div>
     </div>
     <hr />

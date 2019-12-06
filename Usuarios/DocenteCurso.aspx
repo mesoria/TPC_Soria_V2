@@ -24,13 +24,13 @@
             <asp:Label ID="txtCurso" runat="server" Font-Size="X-Large" Text="Nombre: "><% = establecimiento.Curso.Name %> </asp:Label>
         </div>
         <div class="form-group col-md-2">
-            <a class="btn btn-primary" href="../FolderFormularios/PasarAsistencia.aspx?idCXE=<% = GetIDCXE(establecimiento.ID,establecimiento.Curso.ID) %>">Pasar Asistencia</a>
+            <a class="btn btn-primary" href="../FolderFormularios/PasarAsistencia.aspx?IDCXE=<% = GetIDCXE(establecimiento.ID,establecimiento.Curso.ID) %>">Pasar Asistencia</a>
         </div>
         <div class="form-group col-md-2">
-            <a class="btn btn-primary" href="../FolderFormularios/Notas.aspx?idCXE=<% = GetIDCXE(establecimiento.ID,establecimiento.Curso.ID) %>">Calificaciones</a>
+            <a class="btn btn-primary" href="../FolderFormularios/Notas.aspx?IDCXE=<% = GetIDCXE(establecimiento.ID,establecimiento.Curso.ID) %>">Calificaciones</a>
         </div>
         <div class="form-group col-md-2">
-            <a class="btn btn-primary" href="../FolderFormularios/LibroAsistencias.aspx?idCXE=<% = GetIDCXE(establecimiento.ID,establecimiento.Curso.ID) %>">Libro de Asistencias</a>
+            <a class="btn btn-primary" href="../FolderFormularios/MostrarAsistencias.aspx?IDCXE=<% = GetIDCXE(establecimiento.ID,establecimiento.Curso.ID) %>">Libro de Asistencias</a>
         </div>
     </div>
     <hr />
@@ -60,7 +60,7 @@
             <th style="width:  5%"><% = j%></th>
             <th style="width: 15%"><% = item.Apellido %></th>
             <th style="width: 15%"><% = item.Name %></th>
-            <th style="width: 15%"> <a class="btn btn-primary" href="../FolderAlumno/Info.aspx?idA=<% = item.ID %>">Más información</a> </th>
+            <th style="width: 15%"> <a class="btn btn-primary" href="../FolderAlumno/Info.aspx?IDA=<% =item.IdAlumno %>">Más información</a> </th>
         <%j++;}%>
         </tr>
     </tbody>
@@ -72,7 +72,7 @@
             <asp:Button ID="btnVolver" runat="server" CssClass="btn btn-primary btn-lg" Text="Volver" PostBackUrl="~/Docentes.aspx"/>
         </div>
         <div class="form-group col-md-5">
-            <a class="btn btn-primary" href="../FolderAlumno/New.aspx?idCXE=<% = GetIDCXE(establecimiento.ID,establecimiento.Curso.ID) %>">Nuevo Alumno</a>
+            <a class="btn btn-primary" href="../FolderAlumno/New.aspx?IDA=0">Nuevo Alumno</a>
         </div>
         <%--<div class="form-group col-md-7">
             <a class="btn btn-primary" href="../Maestra/Cursos.aspx?idM=<% = maestra.ID %>">Ir a Alumnos</a>

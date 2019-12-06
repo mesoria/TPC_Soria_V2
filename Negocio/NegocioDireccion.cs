@@ -148,5 +148,51 @@ namespace Negocio
                 datos.CerrarConexion();
             }
         }
+
+        //    public Direccion GetIDDireccionFromIDPersona(Direccion direccion)
+        //    {
+        //        Datos datos = new Datos();
+        //        try
+        //        {
+        //            datos.SetearConsulta("SELECT ID FROM SORIA_TPC.dbo.PERSONAS INNER JOIN SORIA_TPC.dbo.DIRECCIONES AS D ON D.idWHERE CALLE like @calle AND NUMERO = @numero");
+        //            datos.Comando.Parameters.Clear();
+        //            datos.Comando.Parameters.AddWithValue("@calle", direccion.Calle);
+        //            datos.Comando.Parameters.AddWithValue("@numero", direccion.Number);
+        //            datos.AbrirConexion();
+        //            datos.EjecutarConsulta();
+
+        //            Direccion aux;
+
+        //            if (datos.Reader.Read())
+        //            {
+        //                aux = new Direccion
+        //                {
+        //                    ID = (Int64)datos.Reader[0],
+        //                    Calle = (string)datos.Reader[1],
+        //                    Number = (string)datos.Reader[2]
+        //                };
+        //                if (!Convert.IsDBNull(datos.Reader[3]))
+        //                {
+        //                    aux.Departamento = (string)datos.Reader[3];
+        //                    aux.Piso = (int)datos.Reader[4];
+        //                };
+        //            }
+        //            else
+        //            {
+        //                aux = new Direccion();
+        //                aux.ID = 0;
+        //            }
+        //            return aux;
+        //        }
+        //        catch (Exception ex)
+        //        {
+
+        //            throw ex;
+        //        }
+        //        finally
+        //        {
+        //            datos.CerrarConexion();
+        //        }
+        //    }
     }
 }

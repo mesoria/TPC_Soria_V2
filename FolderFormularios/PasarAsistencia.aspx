@@ -22,56 +22,20 @@
         <div class="form-group col-md-6">
             <asp:Label ID="txtCurso" runat="server" Font-Size="X-Large" Text="Nombre: "><% = establecimiento.Curso.Name %> </asp:Label>
         </div>
-    </div>      
-<div class="table-responsive">
-    <table class="table">
-    <thead>
-        <tr>
-            <th style="width: 5%; background-color: #00aa00">
-              # </th>
-            <th style="width: 10%; background-color: #00cc00">
-              Apellidos </th>
-            <th style="width: 10%; background-color: #47ff47">
-              Nombres </th>
-            <th style="width: 10%; background-color: #77ff77">
-              Presente </th>
-        </tr>
-    </thead>
-        <asp:Repeater runat="server" ID="repetidor">
-            <ItemTemplate>
-    <tbody>
-                <tr>
-                    <th style="width: 5%"><% %></th>
-                    <th style="width: 15%"><%#Eval("Apellido")%></th>
-                    <th style="width: 15%"><%#Eval("Name")%></th>
-                    <th>
-                        <asp:CheckBox ID="cbxArgument" CssClass="custom-switch" runat="server" CommandArgument='<%#Eval("ID")%>' OnCheckedChanged="cbxArgument_CheckedChanged"/>
-                        <asp:Button ID="btnArgumento" CssClass="btn btn-primary" runat="server" CommandArgument='<%#Eval("Id")%>' CommandName="idBtn"  OnClick="btnArgumento_Click" Text="Presente"/>
-                    </th>
-                </tr>
-    </tbody>
-            </ItemTemplate>
-        </asp:Repeater>
-
-    <%--<%var j = 1;
-    foreach (var item in ListaAlumnos)
-    {%>
-    <tbody>
-        <tr>
-            <th style="width: 5%"><% = j%></th>
-            <th style="width: 15%"><% = item.Apellido %></th>
-            <th style="width: 15%"><% = item.Name %></th>
-            <th>
-                <div class="custom-control custom-checkbox">
-                    <%--<input type ="checkbox" runat="server" class="custom-control-input" id=<% = j%>>--%>
-                    <%--<asp:CheckBox CssClass="custom-checkbox btn-lg" ID="<%=item.ID %>" runat="server"/>
-                </div>
-            </th>
-       <% j++;}%>
-        </tr>
-    </tbody>--%>
-    </table>
-</div>
+    </div>
+    <asp:GridView CssClass="table table-success" ID="dgvAlumnos" runat="server" AutoGenerateColumns="false">
+                        <Columns>  
+                            <asp:BoundField DataField="Apellido" HeaderText="Apellido" />
+                            <asp:BoundField DataField="Name" HeaderText="Nombre" />
+                            <%--<asp:BoundField DataFormatString="{0:C}" DataField="Precio" HeaderText="Precio" />--%>
+                            <asp:TemplateField HeaderText="Presente">
+                                    <ItemTemplate >
+                                        <asp:CheckBox ID="cbxPresente" CssClass="custom-checkbox" runat="server" AutoPostBack="false"  Checked='false' />
+                                    </ItemTemplate>
+                            </asp:TemplateField>
+                           <%-- <asp:BoundField DataField="ID" HeaderText="ID" Visible="true"/>--%>
+                        </Columns>  
+            </asp:GridView>
     <br />
     <hr />
 
@@ -80,19 +44,7 @@
             <asp:Button ID="btnVolver" runat="server" CssClass="btn btn-primary btn-lg" Text="Volver" />
         </div>
         <div class="form-group col-md-7">
-            <asp:Button ID="btnGuardar" runat="server" OnClick="btnGuardar_Click" Text="Guardar" CssClass="btn btn-success btn-lg"/>
+            <asp:Button ID="btnGuardar" runat="server" OnClick="btnGuardar_Click" Text="Guardar presentismo" CssClass="btn btn-success btn-lg"/>
         </div>
     </div>
-
-    <address>
-        One Microsoft Way<br />
-        Redmond, WA 98052-6399<br />
-        <abbr title="Phone">P:</abbr>
-        425.555.0100
-    </address>
-
-    <address>
-        <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-        <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-    </address>
 </asp:Content>

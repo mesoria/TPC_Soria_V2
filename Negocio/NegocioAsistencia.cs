@@ -80,19 +80,31 @@ namespace Negocio
         public string GetToday()
         {
             DateTime today = DateTime.Today;
-            return today.Year.ToString() + "/"+ today.Month.ToString()+ "/" + today.Day.ToString();
+            string m = today.Month.ToString();
+            if (m.Length == 1)
+            {
+                m = '0' + m;
+            }
+            string d = today.Day.ToString();
+            if (d.Length == 1)
+            {
+                d = '0' + d;
+            }
+            return today.Year.ToString() + "/"+ m+ "/" + d;
         }
-        public void Agregar(Int64 IDPersona)
+        public void Agregar(Int64 IDAlumno, Int64 IDCXE)
         {
             Datos datos = new Datos();
+            DateTime today = DateTime.Today.ToUniversalTime();
             try
             {
                 //if ()//Alguna validación
                 //{
-                    datos.SetearConsulta("INSERT INTO SORIA_TPC.dbo.ASISTENCIAS (IDPERSONA,FECHA) values (@IDPersona, @today");
+                    datos.SetearConsulta("INSERT INTO SORIA_TPC.dbo.ASISTENCIAS (IDALUMNO,IDCXE,FECHA) values (@IDAlumno, @IDCXE,"+"'"+ GetToday()+"')");
                     datos.Comando.Parameters.Clear();
-                    datos.Comando.Parameters.AddWithValue("@IDPersona", IDPersona);
-                    datos.Comando.Parameters.AddWithValue("@today", GetToday() );
+                    datos.Comando.Parameters.AddWithValue("@IDAlumno", IDAlumno);
+                    datos.Comando.Parameters.AddWithValue("@IDCXE"   , IDCXE);
+                    //datos.Comando.Parameters.AddWithValue("@today"   , today);
 
                     datos.AbrirConexion();
                     datos.EjecutarAccion();
@@ -112,18 +124,18 @@ namespace Negocio
             }
         }
 
-        public bool CheckAsistencia(Int64 id,int y, int m, int d)
+        public bool CheckAsistencia(Int64 IDA,int y, int m, int d)
         {
             Datos datos = new Datos();
             try
             {
-                datos.SetearConsulta("Select A.ID from SORIA_TPC.dbo.ASISTENCIAS as A WHERE A.IDPERSONA =@ID AND YEAR(A.FECHA)=@YEAR AND MONTH(A.Fecha)=@MONTH AND DAY(A.FECHA)=@DAY");
+                datos.SetearConsulta("Select A.ID from SORIA_TPC.dbo.ASISTENCIAS as A WHERE A.IDALUMNO=@IDA AND YEAR(A.FECHA)=@YEAR AND MONTH(A.Fecha)=@MONTH AND DAY(A.FECHA)=@DAY");
 
                 datos.Comando.Parameters.Clear();
-                datos.Comando.Parameters.AddWithValue("@ID", id);
-                datos.Comando.Parameters.AddWithValue("@YEAR", y);
+                datos.Comando.Parameters.AddWithValue("@IDA"  , IDA);
+                datos.Comando.Parameters.AddWithValue("@YEAR" , y);
                 datos.Comando.Parameters.AddWithValue("@MONTH", m);
-                datos.Comando.Parameters.AddWithValue("@DAY", d);
+                datos.Comando.Parameters.AddWithValue("@DAY"  , d);
 
                 datos.AbrirConexion();
                 datos.EjecutarConsulta();
@@ -141,6 +153,24 @@ namespace Negocio
             finally
             {
                 datos.CerrarConexion();
+            }
+        }
+        public void Eliminar(long IDAlumno, long IDCXE)
+        {
+            Datos datos = new Datos();
+            try
+            {
+                datos.SetearConsulta("DELETE FROM SORIA_TPC.dbo.ASISTENCIAS WHERE IDALUMNO=@IDAlumno AND IDCXE=@IDCXE AND FECHA=@today");
+                datos.Comando.Parameters.Clear();
+                datos.Comando.Parameters.AddWithValue("@IDAlumno", IDAlumno);
+                datos.Comando.Parameters.AddWithValue("@IDCXE"   , IDCXE);
+                datos.Comando.Parameters.AddWithValue("@today"   , GetToday());
+                datos.AbrirConexion();
+                datos.EjecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
     }

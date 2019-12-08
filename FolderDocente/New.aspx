@@ -1,5 +1,33 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="New.aspx.cs" Inherits="TPC_Soria_v2.FolderDocente.New" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <script>
+         function validar() {
+             var DNI = $('#txtDNI').val();
+             if (!cantidad)
+             {
+                 alert('Debes ingresar una DNI!');
+                 return false;
+
+             }
+             else if (isNaN(DNI) || DNI % 1 !== 0)
+             {
+                 alert('El campo "DNI" debe contener un numero entero!');
+                 return false;
+             }
+             var Altura = $('#txtAltura').val();
+             if (!Altura) {
+                 alert('Debes ingresar una Altura!');
+                 return false;
+
+             }
+             else if (isNaN(Altura) || Altura % 1 !== 0) {
+                 alert('El campo "Altura" debe contener un numero entero!');
+                 return false;
+             }
+         return true;
+         }
+    </script>
+
     <h3> <% =FirstTime() %></h3>
     <br />
     <h6>Información personal</h6>

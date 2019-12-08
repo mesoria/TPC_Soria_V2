@@ -134,8 +134,8 @@ namespace Negocio
         public void AgregarFull(Alumno alumno, long IDCXE)
         {
             Agregar(alumno);
-            alumno.IdAlumno = GetIDWithIDPersona(alumno);
-            AgregarAlumnoXCurso(alumno, IDCXE);
+            alumno.IdAlumno = GetIDWithIDPersona(alumno.ID);
+            AgregarAlumnoXCurso(alumno.IdAlumno, IDCXE);
         }
         public void Agregar(Alumno alumno)
         {
@@ -143,7 +143,7 @@ namespace Negocio
             try
             {
                 NegocioPersona negocioAux = new NegocioPersona();
-                if (this.GetID(alumno.DNI) == 0)
+                if (GetIDWithIDPersona(alumno.ID) == 0)
                 {
                     negocioAux.Agregar(alumno);
                     alumno.ID = negocioAux.GetIDWithDNI(alumno.DNI);
@@ -171,39 +171,39 @@ namespace Negocio
             }
         }
 
-        public long GetIDWithIDPersona(Alumno alumno)
-        {
-            Datos datos = new Datos();
-            long IDA;
-            try
-            {
-                datos.SetearConsulta("SELECT A.ID FROM SORIA_TPC.dbo.ALUMNOS AS A INNER JOIN SORIA_TPC.dbo.PERSONAS AS P ON P.ID=A.IDPERSONA WHERE A.IDPERSONA=@IDP AND A.IDTUTOR=@IDT");
-                datos.Comando.Parameters.Clear();
-                datos.Comando.Parameters.AddWithValue("@IDP", alumno.ID);
-                datos.Comando.Parameters.AddWithValue("@IDT", alumno.Tutor.ID);
-                datos.AbrirConexion();
-                datos.EjecutarConsulta();
+        //public long GetIDWithIDPersona(Alumno alumno)
+        //{
+        //    Datos datos = new Datos();
+        //    long IDA;
+        //    try
+        //    {
+        //        datos.SetearConsulta("SELECT A.ID FROM SORIA_TPC.dbo.ALUMNOS AS A INNER JOIN SORIA_TPC.dbo.PERSONAS AS P ON P.ID=A.IDPERSONA WHERE A.IDPERSONA=@IDP AND A.IDTUTOR=@IDT");
+        //        datos.Comando.Parameters.Clear();
+        //        datos.Comando.Parameters.AddWithValue("@IDP", alumno.ID);
+        //        datos.Comando.Parameters.AddWithValue("@IDT", alumno.Tutor.ID);
+        //        datos.AbrirConexion();
+        //        datos.EjecutarConsulta();
 
-                if (datos.Reader.Read())
-                {
-                    IDA = (long)datos.Reader[0];
-                }
-                else
-                {
-                    IDA = 0;
-                }
-                return IDA;
-            }
-            catch (Exception ex)
-            {
+        //        if (datos.Reader.Read())
+        //        {
+        //            IDA = (long)datos.Reader[0];
+        //        }
+        //        else
+        //        {
+        //            IDA = 0;
+        //        }
+        //        return IDA;
+        //    }
+        //    catch (Exception ex)
+        //    {
 
-                throw ex;
-            }
-            finally
-            {
-                datos.CerrarConexion();
-            }
-        }
+        //        throw ex;
+        //    }
+        //    finally
+        //    {
+        //        datos.CerrarConexion();
+        //    }
+        //}
         public long GetIDCursoWithIDCXE(long IDCXE)
         {
             Datos datos = new Datos();
@@ -237,16 +237,15 @@ namespace Negocio
             }
         }
 
-        public void AgregarAlumnoXCurso(Alumno alumno, long IDCXE)
+        public void AgregarAlumnoXCurso(long IDA, long IDCXE)
         {
             Datos datos = new Datos();
-            long idc = GetIDCursoWithIDCXE(IDCXE);
             try
             {
-                datos.SetearConsulta("INSERT INTO SORIA_TPC.dbo.ALUMNOSxCURSO (IDCURSO, IDALUMNO ) values (@IdCurso, @IdAlumno)");
+                datos.SetearConsulta("INSERT INTO SORIA_TPC.dbo.ALUMNOSxCURSO (IDCXE, IDALUMNO ) values (@IDCXE, @IdAlumno)");
                 datos.Comando.Parameters.Clear();
-                datos.Comando.Parameters.AddWithValue("@IdCurso", idc);
-                datos.Comando.Parameters.AddWithValue("@IdAlumno", IDCXE);
+                datos.Comando.Parameters.AddWithValue("@IDCXE", IDCXE);
+                datos.Comando.Parameters.AddWithValue("@IdAlumno", IDA);
                 datos.AbrirConexion();
                 datos.EjecutarAccion();
             }
@@ -259,14 +258,14 @@ namespace Negocio
                 datos.CerrarConexion();
             }
         }
-        public Int64 GetID(string DNI)
+        public Int64 GetIDWithIDPersona(long IDP)
         {
             Datos datos = new Datos();
             try
             {
-                datos.SetearConsulta("SELECT ID FROM SORIA_TPC.dbo.PERSONAS WHERE DNI=@DNI");
+                datos.SetearConsulta("SELECT ID FROM SORIA_TPC.dbo.ALUMNOS WHERE IDPERSONA=@IDP");
                 datos.Comando.Parameters.Clear();
-                datos.Comando.Parameters.AddWithValue("@DNI", DNI);
+                datos.Comando.Parameters.AddWithValue("@IDP", IDP);
                 datos.AbrirConexion();
                 datos.EjecutarConsulta();
                 while (datos.Reader.Read())
@@ -338,7 +337,7 @@ namespace Negocio
                 datos.CerrarConexion();
             }
         }
-        public Alumno GetAlumnoWithId(Int64 ID)
+        public Alumno GetAlumnoWithId(Int64 IDA)
         {
             Datos datos = new Datos();
             try
@@ -349,9 +348,9 @@ namespace Negocio
                     "LEFT JOIN SORIA_TPC.dbo.PERSONAS as p ON A.IDPERSONA=p.ID "+
                     "LEFT JOIN SORIA_TPC.dbo.DIRECCIONES AS DIR ON DIR.ID=p.IDDIRECCION "+
                     "LEFT JOIN SORIA_TPC.dbo.PERSONAS as T ON A.IDTUTOR=T.ID " +
-                    "LEFT JOIN SORIA_TPC.dbo.DIRECCIONES AS DT ON DT.ID=T.IDDIRECCION WHERE p.ID=@ID");
+                    "LEFT JOIN SORIA_TPC.dbo.DIRECCIONES AS DT ON DT.ID=T.IDDIRECCION WHERE A.ID=@ID");
                 datos.Comando.Parameters.Clear();
-                datos.Comando.Parameters.AddWithValue("@ID", ID);
+                datos.Comando.Parameters.AddWithValue("@ID", IDA);
                 datos.AbrirConexion();
                 datos.EjecutarConsulta();
                 Alumno alumno = new Alumno();

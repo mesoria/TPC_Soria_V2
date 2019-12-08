@@ -65,16 +65,7 @@ namespace TPC_Soria_v2.FolderFormularios
             try
             {
                 NegocioPersona negocioPersona = new NegocioPersona();
-                //var code = CodigoPersona.Value;
-                //Persona voucher = negocioPersona.BuscarPersonas(code);
-                //if (voucher.Code != null)
-                //{
-                //    Response.Redirect("/frmIncripcion.aspx");
-                //}
-                //else
-                //{
-                //    Response.Redirect("/Default.aspx");
-                //}
+                
             }
             catch (Exception ex)
             {
@@ -281,7 +272,7 @@ namespace TPC_Soria_v2.FolderFormularios
         }
         
 
-        public string AsistenciasDelMes(Persona item, int month)
+        public string AsistenciasDelMes(Alumno item, int month)
         {
             if (month == 0)
             {
@@ -297,35 +288,35 @@ namespace TPC_Soria_v2.FolderFormularios
                 {
                     case "Lu":
                         {
-                            strT += "<th><div class=\"custom-control custom-checkbox\"><input type =\"checkbox\" class=\"custom-control-input\" id=\"" + d + "\" " + Asistio(item.ID, d) + " disabled=\"disabled\">" +
+                            strT += "<th><div class=\"custom-control custom-checkbox\"><input type =\"checkbox\" class=\"custom-control-input\" id=\"" + d + "\" " + Asistio(item.IdAlumno, month,d) + " disabled=\"disabled\">" +
                                     "<label class=\"custom-control-label\" for=\"" + d + "\"></label></div></th>";
                             wk = "Ma";
                             break;
                         }
                     case "Ma":
                         {
-                            strT += "<th><div class=\"custom-control custom-checkbox\"><input type =\"checkbox\" class=\"custom-control-input\" id=\"" + d + "\" " + Asistio(item.ID, d) + " disabled=\"disabled\">" +
+                            strT += "<th><div class=\"custom-control custom-checkbox\"><input type =\"checkbox\" class=\"custom-control-input\" id=\"" + d + "\" " + Asistio(item.IdAlumno, month, d) + " disabled=\"disabled\">" +
                                     "<label class=\"custom-control-label\" for=\"" + d + "\"></label></div></th>";
                             wk = "Mi";
                             break;
                         }
                     case "Mi":
                         {
-                            strT += "<th><div class=\"custom-control custom-checkbox\"><input type =\"checkbox\" class=\"custom-control-input\" id=\"" + d + "\" " + Asistio(item.ID, d) + " disabled=\"disabled\">" +
+                            strT += "<th><div class=\"custom-control custom-checkbox\"><input type =\"checkbox\" class=\"custom-control-input\" id=\"" + d + "\" " + Asistio(item.IdAlumno, month, d) + " disabled=\"disabled\">" +
                                     "<label class=\"custom-control-label\" for=\"" + d + "\"></label></div></th>";
                             wk = "Ju";
                             break;
                         }
                     case "Ju":
                         {
-                            strT += "<th><div class=\"custom-control custom-checkbox\"><input type =\"checkbox\" class=\"custom-control-input\" id=\"" + d + "\" " + Asistio(item.ID, d) + " disabled=\"disabled\">" +
+                            strT += "<th><div class=\"custom-control custom-checkbox\"><input type =\"checkbox\" class=\"custom-control-input\" id=\"" + d + "\" " + Asistio(item.IdAlumno, month, d) + " disabled=\"disabled\">" +
                                     "<label class=\"custom-control-label\" for=\"" + d + "\"></label></div></th>";
                             wk = "Vi";
                             break;
                         }
                     case "Vi":
                         {
-                            strT += "<th><div class=\"custom-control custom-checkbox\"><input type =\"checkbox\" class=\"custom-control-input\" id=\"" + d + "\" " + Asistio(d, item.ID) + " disabled=\"disabled\">" +
+                            strT += "<th><div class=\"custom-control custom-checkbox\"><input type =\"checkbox\" class=\"custom-control-input\" id=\"" + d + "\" " + Asistio(item.IdAlumno, month,d) + " disabled=\"disabled\">" +
                                     "<label class=\"custom-control-label\" for=\"" + d + "\" ></label></div></th>";
                             wk = "Lu";
                             d += 2;
@@ -355,9 +346,9 @@ namespace TPC_Soria_v2.FolderFormularios
             return Tabla;
         }
 
-        public string Asistio(Int64 ID, int dia)
+        public string Asistio(Int64 ID, int month, int dia)
         {
-            if (negocioAsistencia.CheckAsistencia(ID, today.Year, today.Month, dia))
+            if (negocioAsistencia.CheckAsistencia(ID, today.Year, month, dia))
             {
                 return "checked";
             }

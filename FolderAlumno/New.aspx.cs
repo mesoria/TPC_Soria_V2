@@ -79,31 +79,31 @@ namespace TPC_Soria_v2.FolderAlumno
             try
             {
                 usuario = (Usuario)Application["Usuario"];
-                persona = (Persona)Application["Persona"];
-                if (Convert.ToInt32(Request.QueryString["IDA"]) == 0)
+                if (usuario == null || usuario.ID == 0)
                 {
-                    isNew = 0; //Es un alumno nuevo
+                    Response.Redirect("~/Login.aspx");
                 }
                 else
                 {
-                    isNew = Convert.ToInt32(Request.QueryString["IDA"]);
-
-                    if (!IsPostBack)
+                    persona = (Persona)Application["Persona"];
+                    IDCXE = (long)Session["IDCXE" + Session.SessionID];
+                    Session["IDCXE" + Session.SessionID] = IDCXE;
+                    if (Convert.ToInt32(Request.QueryString["IDA"]) == 0)
                     {
+                        isNew = 0; //Es un alumno nuevo
+                    }
+                    else
+                    {
+                        isNew = Convert.ToInt32(Request.QueryString["IDA"]);
                         alumno = negocioAlumno.GetAlumnoWithId(isNew);
-                        if (usuario == null || usuario.ID == 0)
-                        {
-                            Response.Redirect("~/Login.aspx");
-                        }
-                        IDCXE = (long)Session["IDCXE" + Session.SessionID];
-                        btnVolver.Attributes.Add("onclick", "history.back(); return false;");
                     }
                 }
+                btnVolver.Attributes.Add("onclick", "history.back(); return false;");
             }
             catch (Exception ex)
             {
                 Session["Error" + Session.SessionID] = ex;
-                Response.Redirect("/frmLog.aspx");
+                Response.Redirect("~/Login.aspx");
             }
         }
 
@@ -174,6 +174,10 @@ namespace TPC_Soria_v2.FolderAlumno
             {
                 negocioAlumno.AgregarFull(alumno, IDCXE);
             }
+
+            string ex = "El alumno se ha guardado correctamente.";
+            Session["Aviso" + Session.SessionID] = ex;
+            Response.Redirect("~/Usuarios/DocenteCurso.aspx", false);
         }
     }
 }

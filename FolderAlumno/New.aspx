@@ -1,5 +1,48 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="New.aspx.cs" Inherits="TPC_Soria_v2.FolderAlumno.New" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <script>
+        function validar() {
+            var txtDNI = $('#txtDNI').val();   
+            if (!txtDNI)
+            {
+                alert('Debes ingresar una cantidad!');
+                return false;
+            }
+            else if (isNaN(txtDNI) || txtDNI % 1 !== 0)
+            {
+                alert('El campo "DNI" debe contener un numero entero!');
+                return false;
+            }
+            var txtAltura = $('#txtAltura').val();
+            if (!txtAltura) {
+                alert('Debes ingresar una cantidad!');
+                return false;
+            }
+            else if (isNaN(txtAltura) || txtAltura % 1 !== 0) {
+                alert('El campo "Altura" debe contener un numero entero!');
+                return false;
+            }
+            var txtTDNI = $('#txtTDNI').val();
+            if (!txtTNombre) {
+                alert('Debes ingresar una cantidad!');
+                return false;
+            }
+            else if (isNaN(txtTDNI) || txtTDNI % 1 !== 0) {
+                alert('El campo "DNI" debe contener un numero entero!');
+                return false;
+            }
+            var txtTAltura = $('#txtTAltura').val();
+            if (!txtAltura) {
+                alert('Debes ingresar una cantidad!');
+                return false;
+            }
+            else if (isNaN(txtTAltura) || txtTAltura % 1 !== 0) {
+                alert('El campo "Altura" debe contener un numero entero!');
+                return false;
+            }
+            return true;
+        }
+    </script>
     <%--<h3> <% =FirstTime() %></h3>--%>
     <br />
     <h6>Información personal</h6>

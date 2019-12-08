@@ -24,19 +24,19 @@ namespace Negocio
                 {
                     aux = new Persona
                     {
-                        ID          = (Int64)datos.Reader[0],
-                        Name        = (string)datos.Reader[1],
-                        Apellido    = (string)datos.Reader[2],
-                        DNI         = (string)datos.Reader[3],
-                        Nacimiento  = (DateTime)datos.Reader[4],
-                        Email       = (string)datos.Reader[5]
+                        ID         = (Int64)datos.Reader[0],
+                        Name       = (string)datos.Reader[1],
+                        Apellido   = (string)datos.Reader[2],
+                        DNI        = (string)datos.Reader[3],
+                        Nacimiento = (DateTime)datos.Reader[4],
+                        Email      = (string)datos.Reader[5]
                     };
                     if (!Convert.IsDBNull(datos.Reader[6]))
                     {
                         aux.Direccion = new Direccion
                         {
-                            ID = (Int64)datos.Reader[6],
-                            Calle = (string)datos.Reader[7],
+                            ID     = (Int64)datos.Reader[6],
+                            Calle  = (string)datos.Reader[7],
                             Number = (string)datos.Reader[8]
                         };
                     }
@@ -141,18 +141,18 @@ namespace Negocio
                 Persona persona = new Persona();
                 while (datos.Reader.Read())
                 {
-                    persona.ID                  = (Int64)datos.Reader[0];
-                    persona.Name                = (string)datos.Reader[1];
-                    persona.Apellido            = (string)datos.Reader[2];
-                    persona.DNI                 = (string)datos.Reader[3];
-                    persona.Nacimiento          = (DateTime)datos.Reader[4];
-                    persona.Email               = (string)datos.Reader[5];
+                    persona.ID         = (Int64)datos.Reader[0];
+                    persona.Name       = (string)datos.Reader[1];
+                    persona.Apellido   = (string)datos.Reader[2];
+                    persona.DNI        = (string)datos.Reader[3];
+                    persona.Nacimiento = (DateTime)datos.Reader[4];
+                    persona.Email      = (string)datos.Reader[5];
                     if (!Convert.IsDBNull(datos.Reader[7]))
                     {
-                        persona.Direccion           = new Direccion();
-                        persona.Direccion.ID        = (Int64)datos.Reader[6];
-                        persona.Direccion.Calle     = (string)datos.Reader[7];
-                        persona.Direccion.Number    = (string)datos.Reader[8];
+                        persona.Direccion        = new Direccion();
+                        persona.Direccion.ID     = (Int64)datos.Reader[6];
+                        persona.Direccion.Calle  = (string)datos.Reader[7];
+                        persona.Direccion.Number = (string)datos.Reader[8];
                     }
                     /*
                     persona.Telefono            = new Telefono();
@@ -186,17 +186,17 @@ namespace Negocio
                 Persona persona = new Persona();
                 while (datos.Reader.Read())
                 {
-                    persona.ID = (Int64)datos.Reader[0];
-                    persona.Name = (string)datos.Reader[1];
-                    persona.Apellido = (string)datos.Reader[2];
-                    persona.DNI = (string)datos.Reader[3];
+                    persona.ID         = (Int64)datos.Reader[0];
+                    persona.Name       = (string)datos.Reader[1];
+                    persona.Apellido   = (string)datos.Reader[2];
+                    persona.DNI        = (string)datos.Reader[3];
                     persona.Nacimiento = (DateTime)datos.Reader[4];
-                    persona.Email = (string)datos.Reader[5];
+                    persona.Email      = (string)datos.Reader[5];
                     if (!Convert.IsDBNull(datos.Reader[7]))
                     {
-                        persona.Direccion = new Direccion();
-                        persona.Direccion.ID = (Int64)datos.Reader[6];
-                        persona.Direccion.Calle = (string)datos.Reader[7];
+                        persona.Direccion        = new Direccion();
+                        persona.Direccion.ID     = (Int64)datos.Reader[6];
+                        persona.Direccion.Calle  = (string)datos.Reader[7];
                         persona.Direccion.Number = (string)datos.Reader[8];
                     }
                     /*
@@ -260,6 +260,5 @@ namespace Negocio
                 throw ex;
             }
         }
-
     }
 }

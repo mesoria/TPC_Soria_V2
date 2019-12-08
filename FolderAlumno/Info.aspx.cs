@@ -12,7 +12,7 @@ namespace TPC_Soria_v2.FolderAlumno
     public partial class Info : System.Web.UI.Page
     {
         private readonly NegocioAlumno negocioAlumno = new NegocioAlumno();
-
+        public Usuario usuario = new Usuario();
         public Alumno Aux = new Alumno();
         public string ConvertToAMD(DateTime fecha)
         {
@@ -69,6 +69,14 @@ namespace TPC_Soria_v2.FolderAlumno
         {
             try
             {
+                usuario = (Usuario)Application["Usuario"];
+                if (!IsPostBack)
+                {
+                    if (usuario == null || usuario.ID == 0)
+                    {
+                        Response.Redirect("~/Login.aspx");
+                    }
+                }
                 if (Request.QueryString["IDA"] == null)
                 {
                     //por si accede a la pagina con el link

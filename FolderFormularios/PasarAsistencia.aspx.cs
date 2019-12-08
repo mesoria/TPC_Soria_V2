@@ -16,7 +16,7 @@ namespace TPC_Soria_v2.FolderFormularios
         private readonly NegocioEstablecimiento negocioEstablecimiento = new NegocioEstablecimiento();
         public NegocioAsistencia negocioAsistencia = new NegocioAsistencia();
         public List<Alumno> ListaAlumnos = new List<Alumno>();
-        public List<long> ListID = new List<long>();
+        Int64 IDCXE =0;
         readonly DateTime today = DateTime.Today;
         
         public Establecimiento establecimiento = new Establecimiento();
@@ -28,29 +28,30 @@ namespace TPC_Soria_v2.FolderFormularios
             try
             {
                 usuario = (Usuario)Application["Usuario"];
+                persona = (Persona)Application["Persona"];
+                docente = (Docente)Application["Docente"];
+                //IDCXE = Convert.ToInt64(Request.QueryString["IDCXE"]);
+                IDCXE = Request.QueryString["IDCXE"] != null ? Convert.ToInt64(Request.QueryString["IDCXE"]) : 0;
+                establecimiento = negocioEstablecimiento.GetCursoByEstablecimientoWithID(IDCXE);
                 if (!IsPostBack)
                 {
                     if (usuario == null || usuario.ID == 0)
                     {
                         Response.Redirect("~/Login.aspx");
                     }
+                    //persona = negocioPersona.GetPersonaWithId(usuario.ID);
+                    if (IDCXE == 0)
+                    {
+                        //por si accede a la pagina con el link
+                        Session["Error" + Session.SessionID] = "Ups, Aún no has seleccionado un Establecimiento.";
+                        Response.Redirect("/frmLog.aspx", false);
+                    }
+                    ListaAlumnos = negocioAlumno.ListarAlumnosFromCurso(IDCXE);
+                    //esto es lo que necesitamos para el repeater.
+                    dgvAlumnos.DataSource = ListaAlumnos;
+                    dgvAlumnos.DataBind();
+                    btnVolver.Attributes.Add("onclick", "history.back(); return false;");
                 }
-                persona = (Persona)Application["Persona"];
-                docente = (Docente)Application["Docente"];
-                persona = negocioPersona.GetPersonaWithId(usuario.ID);
-                if (Request.QueryString["IDCXE"] == null)
-                {
-                    //por si accede a la pagina con el link
-                    Session["Error" + Session.SessionID] = "Ups, Aún no has seleccionado un Establecimiento.";
-                    Response.Redirect("/frmLog.aspx", false);
-                }
-                Int64 IDCXE = Convert.ToInt64(Request.QueryString["IDCXE"]);
-                establecimiento = negocioEstablecimiento.GetCursoByEstablecimientoWithID(IDCXE);
-                ListaAlumnos = negocioAlumno.ListarAlumnosFromCurso(IDCXE);
-                //esto es lo que necesitamos para el repeater.
-                repetidor.DataSource = ListaAlumnos;
-                repetidor.DataBind();
-                btnVolver.Attributes.Add("onclick", "history.back(); return false;");
             }
             catch (Exception ex)
             {
@@ -266,35 +267,34 @@ namespace TPC_Soria_v2.FolderFormularios
 
         protected void cbxArgument_CheckedChanged2(object sender, EventArgs e)
         {
-            // recibimos un argumento desde un asp checkbox a partir de su propiedad CommandArgument.
-            // nota: esto por alguna razón no funciona normalmente con un foreach en el front, para ello
-            // usamos un repeater para crear cada fila de alumnos y cambia un poco la forma de mapear cada parámetro del objeto a 
-            // cada fila y columna.
-            // lo primero es tener en el load la lista linkeada al repeater, que en este caso se llama "repetidor".
-            // El repeater es un simple tag que va en el aspx y dentro del mismo tiene un itemtemplate en el cual
-            // se escribe lo que queremos que se repita. 
-            var argument = ((Button)sender).CommandArgument;
-            if (!ListID.Remove(Convert.ToInt64(argument)) )
-            {
-                ListID.Add(Convert.ToInt64(argument));
-            }
+            
         }
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-            
-        }
-
-        protected void btnArgumento_Click(object sender, EventArgs e)
-        {
-            var argument = ((Button)sender).CommandArgument;
-            
-                ListID.Add(Convert.ToInt64(argument));
-
-        }
-
-        protected void cbxArgument_CheckedChanged(object sender, EventArgs e)
-        {
-
+            Button btn = (Button)sender;
+            NegocioAsistencia negocioAsistencia = new NegocioAsistencia();
+            List<Alumno> listaAlumnos;
+            if (Session["listaAlumnos"] != null)
+            {
+                listaAlumnos = (List<Alumno>)Session["listaAlumnos"];
+            }
+            else
+            {
+                listaAlumnos = negocioAlumno.ListarAlumnosFromCurso(IDCXE);
+            }
+            foreach (GridViewRow dgvItem in this.dgvAlumnos.Rows)
+            {
+                CheckBox Sel = ((CheckBox)dgvAlumnos.Rows[dgvItem.RowIndex].FindControl("cbxPresente"));
+                if (Sel.Checked == true)
+                {
+                    negocioAsistencia.Agregar(listaAlumnos[dgvItem.RowIndex].IdAlumno, IDCXE);
+                }
+                else
+                {
+                    negocioAsistencia.Eliminar(listaAlumnos[dgvItem.RowIndex].IdAlumno, IDCXE);
+                }
+            }
+            Response.Redirect("~/Usuarios/DocentePrincipal.aspx", false);
         }
     }
 }

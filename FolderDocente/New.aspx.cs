@@ -14,7 +14,7 @@ namespace TPC_Soria_v2.FolderDocente
         public NegocioDocente negocioDocente     = new NegocioDocente();
         public NegocioDireccion negocioDireccion = new NegocioDireccion();
         public NegocioPersona negocioPersona     = new NegocioPersona();
-
+        public Usuario usuario = new Usuario();
         public Direccion direccion = new Direccion();
         public Docente Aux         = new Docente();
         public string ConvertToAMD(DateTime fecha)
@@ -51,7 +51,6 @@ namespace TPC_Soria_v2.FolderDocente
         {
             return text.ToString().Trim() != "";
         }
-        
         public string FirstTime()
         {
             if (Request.QueryString["idE"] == null)
@@ -69,44 +68,53 @@ namespace TPC_Soria_v2.FolderDocente
         {
             try
             {
-                if (Request.QueryString["idD"] == null)
+                if (!IsPostBack)
                 {
-                    //Debería agregar un nuevo aux.
-                }
-                else
-                {
-                    Int64 auxId = Convert.ToInt32(Request.QueryString["idD"]);
-                    Aux = negocioDocente.GetDocenteWithId(auxId);
-
-                    //aux = NegocioPersona.ListarPersonas().Find(J => J.ID == auxId);
-                    //grid.DataSource = NegocioVoucher.ListarVouchers();
-                    //grid.DataBind();
-                    //txtNombre.Text = aux.Name;
-                    txtNombre.Value     = Aux.Name;
-                    txtApellido.Value   = Aux.Apellido;
-                    txtDNI.Value        = Aux.DNI;
-                    txtEmail.Value      = Aux.Email;
-                    switch (cbxNivel.SelectedIndex)
+                    usuario = (Usuario)Application["Usuario"];
+                    if (usuario == null || usuario.ID == 0)
                     {
-                        case 1:
-                            Aux.Nivel = "Secundaria";
-                            break;
-                        case 2:
-                            Aux.Nivel = "Facultad";
-                            break;
-                        case 3:
-                            Aux.Nivel = "Universidad";
-                            break;
-                        default:
-                            Aux.Nivel = "Primaria";
-                            break;
+                        Response.Redirect("~/Login.aspx");
                     }
-                    string AMD = ConvertToAMD(Aux.Nacimiento);
-                    txtNacimiento.Value = AMD;
-                    txtCalle.Value      = Aux.Direccion.Calle;
-                    txtAltura.Value     = Aux.Direccion.Number;
+
+                    else if (Request.QueryString["idD"] == null)
+                    {
+                        //Debería agregar un nuevo aux.
+                    }
+                    else
+                    {
+                        Int64 auxId = Convert.ToInt32(Request.QueryString["idD"]);
+                        Aux = negocioDocente.GetDocenteWithId(auxId);
+
+                        //aux = NegocioPersona.ListarPersonas().Find(J => J.ID == auxId);
+                        //grid.DataSource = NegocioVoucher.ListarVouchers();
+                        //grid.DataBind();
+                        //txtNombre.Text = aux.Name;
+                        txtNombre.Value = Aux.Name;
+                        txtApellido.Value = Aux.Apellido;
+                        txtDNI.Value = Aux.DNI;
+                        txtEmail.Value = Aux.Email;
+                        switch (cbxNivel.SelectedIndex)
+                        {
+                            case 1:
+                                Aux.Nivel = "Secundaria";
+                                break;
+                            case 2:
+                                Aux.Nivel = "Facultad";
+                                break;
+                            case 3:
+                                Aux.Nivel = "Universidad";
+                                break;
+                            default:
+                                Aux.Nivel = "Primaria";
+                                break;
+                        }
+                        string AMD = ConvertToAMD(Aux.Nacimiento);
+                        txtNacimiento.Value = AMD;
+                        txtCalle.Value = Aux.Direccion.Calle;
+                        txtAltura.Value = Aux.Direccion.Number;
+                    }
+                    btnVolver.Attributes.Add("onclick", "history.back(); return false;");
                 }
-                btnVolver.Attributes.Add("onclick", "history.back(); return false;");
             }
             catch (Exception ex)
             {
@@ -183,7 +191,7 @@ namespace TPC_Soria_v2.FolderDocente
                     txtDNI.Value = "";
                     txtCalle.Value = "";
                     txtAltura.Value = "";
-                    //Response.Redirect("Maestra/MaestraPrincipal.aspx", false);
+                    Response.Redirect("~/Default.aspx", false);
                     //Response.Redirect("javascript: window.history.back()");
                     //Response.Redirect(Request.UrlReferrer.ToString());
                 }

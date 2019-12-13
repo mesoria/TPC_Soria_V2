@@ -117,6 +117,7 @@
     <Content Include="FolderDocente\Info.aspx" />
     <Content Include="FolderEstablecimiento\Info.aspx" />
     <Content Include="FolderFormularios\LibroAsistencias.aspx" />
+    <Content Include="FolderFormularios\Messenger.aspx" />
     <Content Include="FolderFormularios\MostrarAsistencias.aspx" />
     <Content Include="FolderFormularios\Notas.aspx" />
     <Content Include="FolderFormularios\PasarAsistencia.aspx" />
@@ -298,6 +299,13 @@
     </Compile>
     <Compile Include="FolderFormularios\LibroAsistencias.aspx.designer.cs">
       <DependentUpon>LibroAsistencias.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FolderFormularios\Messenger.aspx.cs">
+      <DependentUpon>Messenger.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FolderFormularios\Messenger.aspx.designer.cs">
+      <DependentUpon>Messenger.aspx</DependentUpon>
     </Compile>
     <Compile Include="FolderFormularios\MostrarAsistencias.aspx.cs">
       <DependentUpon>MostrarAsistencias.aspx</DependentUpon>

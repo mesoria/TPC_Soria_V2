@@ -17,7 +17,7 @@ namespace Negocio
             Establecimiento aux;
             try
             {
-                datos.SetearConsulta("Select esc.ID, esc.NOMBRE, esc.NUMERO, esc.NIVEL, dir.ID, dir.CALLE, dir.NUMERO from SORIA_TPC.dbo.ESTABLECIMIENTOS as esc inner join SORIA_TPC.dbo.DIRECCIONES as dir on dir.ID = esc.IDDIRECCION");
+                datos.SetearConsulta("Select esc.ID, esc.NOMBRE, esc.NUMERO, esc.NIVEL, dir.ID, dir.CALLE, dir.NUMERO from SORIA_TPC.dbo.ESTABLECIMIENTOS as esc inner join SORIA_TPC.dbo.DIRECCIONES as dir on dir.ID = esc.IDDIRECCION ORDER BY ESC.NOMBRE");
                 datos.AbrirConexion();
                 datos.EjecutarConsulta();
                 while (datos.Reader.Read())

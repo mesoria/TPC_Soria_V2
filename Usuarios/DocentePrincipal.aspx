@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Establecimiento" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="DocentePrincipal.aspx.cs" Inherits="TPC_Soria_v2.Usuarios.DocentePrincipal" %>
+﻿    <%@ Page Title="Establecimiento" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="DocentePrincipal.aspx.cs" Inherits="TPC_Soria_v2.Usuarios.DocentePrincipal" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <br />
     <div>

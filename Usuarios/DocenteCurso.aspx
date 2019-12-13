@@ -32,6 +32,9 @@
         <div class="form-group col-md-2">
             <a class="btn btn-primary" href="../FolderFormularios/MostrarAsistencias.aspx?IDCXE=<% = GetIDCXE(establecimiento.ID,establecimiento.Curso.ID) %>">Libro de Asistencias</a>
         </div>
+        <div class="form-group col-md-2">
+            <a class="btn btn-primary" href="../FolderFormularios/Messenger.aspx?IDCXE=<% = GetIDCXE(establecimiento.ID,establecimiento.Curso.ID) %>">Mensajería</a>
+        </div>
     </div>
     <hr />
     <h5>Alumnos</h5>
@@ -48,8 +51,7 @@
               Nombre </th>
             <th style="width: 10%; background-color: #77ff77">
               Info </th>
-            <th style="width: 10%; background-color: #87FF87">
-            </th>
+            <%--<th style="width: 10%; background-color: #87FF87"></th>--%>
         </tr>
     </thead>
     <%var j = 1;

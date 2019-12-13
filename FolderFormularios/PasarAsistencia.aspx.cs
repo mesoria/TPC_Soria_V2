@@ -58,8 +58,6 @@ namespace TPC_Soria_v2.FolderFormularios
                 Session["Error" + Session.SessionID] = ex;
                 Response.Redirect("/frmLog.aspx");
             }
-
-
         }
 
         protected void ValidarPersona_Click(object sender, EventArgs e)

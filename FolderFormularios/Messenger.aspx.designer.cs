@@ -7,136 +7,109 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace TPC_Soria_v2.FolderAlumno {
+namespace TPC_Soria_v2.FolderFormularios {
     
     
-    public partial class New {
+    public partial class Messenger {
         
         /// <summary>
-        /// Control txtNombre.
+        /// Control lblTDescripcion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtNombre;
+        protected global::System.Web.UI.WebControls.Label lblTDescripcion;
         
         /// <summary>
-        /// Control txtApellido.
+        /// Control DDLDestinatari.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtApellido;
+        protected global::System.Web.UI.WebControls.DropDownList DDLDestinatari;
         
         /// <summary>
-        /// Control txtDNI.
+        /// Control dgvReceiver.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDNI;
+        protected global::System.Web.UI.WebControls.GridView dgvReceiver;
         
         /// <summary>
-        /// Control txtNacimiento.
+        /// Control lblemail.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtNacimiento;
+        protected global::System.Web.UI.WebControls.Label lblemail;
         
         /// <summary>
-        /// Control txtCalle.
+        /// Control txtMeEmail.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtCalle;
+        protected global::System.Web.UI.WebControls.TextBox txtMeEmail;
         
         /// <summary>
-        /// Control txtAltura.
+        /// Control lblContraseña.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtAltura;
+        protected global::System.Web.UI.WebControls.Label lblContraseña;
         
         /// <summary>
-        /// Control txtEmail.
+        /// Control txtPass.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtEmail;
+        protected global::System.Web.UI.WebControls.TextBox txtPass;
         
         /// <summary>
-        /// Control txtTNombre.
+        /// Control lblAsunto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtTNombre;
+        protected global::System.Web.UI.WebControls.Label lblAsunto;
         
         /// <summary>
-        /// Control txtTApellido.
+        /// Control txtAsunto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtTApellido;
+        protected global::System.Web.UI.WebControls.TextBox txtAsunto;
         
         /// <summary>
-        /// Control txtTDNI.
+        /// Control lblCuerpo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtTDNI;
+        protected global::System.Web.UI.WebControls.Label lblCuerpo;
         
         /// <summary>
-        /// Control txtTNac.
+        /// Control txtBody.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtTNac;
-        
-        /// <summary>
-        /// Control txtTCalle.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtTCalle;
-        
-        /// <summary>
-        /// Control txtTAltura.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtTAltura;
-        
-        /// <summary>
-        /// Control txtTEmail.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtTEmail;
+        protected global::System.Web.UI.WebControls.TextBox txtBody;
         
         /// <summary>
         /// Control btnVolver.
@@ -148,12 +121,12 @@ namespace TPC_Soria_v2.FolderAlumno {
         protected global::System.Web.UI.WebControls.Button btnVolver;
         
         /// <summary>
-        /// Control btnGuardar.
+        /// Control btnEnviar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnGuardar;
+        protected global::System.Web.UI.WebControls.Button btnEnviar;
     }
 }

@@ -17,7 +17,7 @@ namespace Negocio
             Docente aux;
             try
             {
-                datos.SetearConsulta("Select DOC.ID, p.ID, p.NOMBRE, p.APELLIDO, DOC.NIVEL, p.DNI, p.NACIMIENTO, p.EMAIL, DIR.ID, DIR.CALLE, DIR.NUMERO FROM SORIA_TPC.dbo.DOCENTES AS DOC LEFT JOIN SORIA_TPC.dbo.PERSONAS as p ON DOC.IDPERSONA = p.ID left JOIN SORIA_TPC.dbo.DIRECCIONES AS DIR ON DIR.ID = p.IDDIRECCION");
+                datos.SetearConsulta("Select DOC.ID, p.ID, p.NOMBRE, p.APELLIDO, DOC.NIVEL, p.DNI, p.NACIMIENTO, p.EMAIL, DIR.ID, DIR.CALLE, DIR.NUMERO FROM SORIA_TPC.dbo.DOCENTES AS DOC LEFT JOIN SORIA_TPC.dbo.PERSONAS as p ON DOC.IDPERSONA = p.ID left JOIN SORIA_TPC.dbo.DIRECCIONES AS DIR ON DIR.ID = p.IDDIRECCION ORDER BY P.APELLIDO");
                 datos.AbrirConexion();
                 datos.EjecutarConsulta();
                 while (datos.Reader.Read())
@@ -148,10 +148,6 @@ namespace Negocio
                         docente.Direccion.Calle  = (string)datos.Reader[9];
                         docente.Direccion.Number = (string)datos.Reader[10];
                     }
-                    /*
-                    docente.Telefono            = new Telefono();
-                    docente.Telefono.TipoTelefono = (string)datos.Reader[7];
-                    */
                 }
                 return docente;
             }

@@ -15,7 +15,6 @@ namespace TPC_Soria_v2.FolderAlumno
         private readonly NegocioPersona negocioPersona = new NegocioPersona();
         private readonly NegocioAlumno negocioAlumno = new NegocioAlumno();
 
-        public Establecimiento Aux = new Establecimiento();
         public Usuario usuario = new Usuario();
         public Persona persona = new Persona();
         public Alumno alumno = new Alumno();
@@ -73,29 +72,50 @@ namespace TPC_Soria_v2.FolderAlumno
                 return "Está por editar éste alumno.";
             }
         }
+        private void Update()
+        {
+            //Info alumno
+            txtNombre.Value = alumno.Name;
+            txtApellido.Value = alumno.Apellido;
+            txtDNI.Text = alumno.DNI.ToString();
+            txtEmail.Value = alumno.Email;
+            string AMD = ConvertToAMD(alumno.Nacimiento);
+            txtNacimiento.Value = AMD;
+            txtCalle.Value = alumno.Direccion.Calle;
+            txtAltura.Value = alumno.Direccion.Number;
+            //Info tutor
+            txtTNombre.Value = alumno.Tutor.Name;
+            txtTApellido.Value = alumno.Tutor.Apellido;
+            txtTDNI.Value = alumno.Tutor.DNI.ToString();
+            txtTEmail.Value = alumno.Tutor.Email;
+            string TutorAMD = ConvertToAMD(alumno.Nacimiento);
+            txtTNac.Value = TutorAMD;
+            txtTCalle.Value = alumno.Tutor.Direccion.Calle;
+            txtTAltura.Value = alumno.Tutor.Direccion.Number;
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
                 usuario = (Usuario)Application["Usuario"];
-                if (usuario == null || usuario.ID == 0)
+                persona = (Persona)Application["Persona"];
+                IDCXE = (long)Session["IDCXE" + Session.SessionID];
+                Session["IDCXE" + Session.SessionID] = IDCXE;
+                isNew = Convert.ToInt32(Request.QueryString["IDA"]);
+                if (!IsPostBack)
                 {
-                    Response.Redirect("~/Login.aspx");
-                }
-                else
-                {
-                    persona = (Persona)Application["Persona"];
-                    IDCXE = (long)Session["IDCXE" + Session.SessionID];
-                    Session["IDCXE" + Session.SessionID] = IDCXE;
-                    if (Convert.ToInt32(Request.QueryString["IDA"]) == 0)
+                    if (usuario == null || usuario.ID == 0)
                     {
-                        isNew = 0; //Es un alumno nuevo
+                        Response.Redirect("~/Login.aspx");
                     }
                     else
                     {
-                        isNew = Convert.ToInt32(Request.QueryString["IDA"]);
-                        alumno = negocioAlumno.GetAlumnoWithId(isNew);
+                        if ( isNew != 0)
+                        {
+                            alumno = negocioAlumno.GetAlumnoWithId(isNew);
+                            Update();
+                        }
                     }
                 }
                 btnVolver.Attributes.Add("onclick", "history.back(); return false;");
@@ -116,7 +136,7 @@ namespace TPC_Soria_v2.FolderAlumno
 
             alumno.Name = txtNombre.Value;
             alumno.Apellido = txtApellido.Value;
-            alumno.DNI = txtDNI.Value;
+            alumno.DNI = txtDNI.Text;
             alumno.Email = txtEmail.Value;
             DateTime dt = Convert.ToDateTime(txtNacimiento.Value);
             alumno.Nacimiento = Convert.ToDateTime(ConvertToDMA(dt));
@@ -136,7 +156,7 @@ namespace TPC_Soria_v2.FolderAlumno
             TPersona.Apellido = txtTApellido.Value;
             TPersona.DNI = txtTDNI.Value;
             TPersona.Email = txtTEmail.Value;
-            DateTime TdateTime = Convert.ToDateTime(txtTNacimiento.Value);
+            DateTime TdateTime = Convert.ToDateTime(txtTNac.Value);
             TPersona.Nacimiento = Convert.ToDateTime(ConvertToDMA(TdateTime));
 
             TPersona.Direccion = new Direccion
@@ -167,6 +187,7 @@ namespace TPC_Soria_v2.FolderAlumno
                 alumno.IdAlumno = isNew;
                 negocioDireccion.Modificar(persona.Direccion);
                 negocioDireccion.Modificar(TPersona.Direccion);
+                TPersona.ID = negocioPersona.GetIDWithDNI(TPersona.DNI);
                 negocioPersona.Modificar(TPersona);
                 negocioPersona.Modificar(alumno);
             }
@@ -178,6 +199,22 @@ namespace TPC_Soria_v2.FolderAlumno
             string ex = "El alumno se ha guardado correctamente.";
             Session["Aviso" + Session.SessionID] = ex;
             Response.Redirect("~/Usuarios/DocenteCurso.aspx", false);
+        }
+
+        protected void txtDNI_TextChanged(object sender, EventArgs e)
+        {
+            NegocioAlumno negocioAlumno = new NegocioAlumno();
+            string DNI = txtDNI.Text;
+            alumno = negocioAlumno.GetAlumnoWithDNI(DNI);
+            if (alumno.ID != 0)
+            {
+                Update();
+                Response.Write("<script>alert('DNI existente. Se carga el alumno.')</script>");
+            }
+            else
+            {
+
+            }
         }
     }
 }

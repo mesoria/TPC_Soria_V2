@@ -62,8 +62,108 @@ namespace Negocio
                 datos.CerrarConexion();
             }
         }
+        
+        public string GetMeEmail(long ID)
+        {
+            Datos datos = new Datos();
+            string email = "";
+            try
+            {
+                datos.SetearConsulta("SELECT EMAIL FROM SORIA_TPC.dbo.PERSONAS WHERE ID=@ID");
+                datos.Comando.Parameters.Clear();
+                datos.Comando.Parameters.AddWithValue("@ID", ID);
+                datos.AbrirConexion();
+                datos.EjecutarConsulta();
+                if (datos.Reader.Read())
+                {
+                    email = (string)datos.Reader[0];
+                }
+                return email;
+            }
+            catch (Exception ex)
+            {
 
+                throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+        }
+        public List<Persona> GetContactoEmpleados(long IDCXE)
+        {
+            Datos datos = new Datos();
+            List<Persona> personas = new List<Persona>();
+            Persona aux;
+            try
+            {
+                datos.SetearConsulta("SELECT DISTINCT P.NOMBRE, P.APELLIDO, P.EMAIL FROM SORIA_TPC.dbo.CURSOSxESTABLECIMIENTO AS CXE"
+                    + " INNER JOIN SORIA_TPC.dbo.PERSONASxESTABLECIMIENTO AS PXE ON PXE.IDESTABLECIMIENTO = CXE.IDESTABLECIMIENTO"
+                    + " INNER JOIN SORIA_TPC.dbo.PERSONAS AS P ON P.ID = PXE.IDPERSONA WHERE CXE.ID =@IDCXE ORDER BY P.APELLIDO");
+                datos.Comando.Parameters.Clear();
+                datos.Comando.Parameters.AddWithValue("@IDCXE", IDCXE);
+                datos.AbrirConexion();
+                datos.EjecutarConsulta();
+                while (datos.Reader.Read())
+                {
+                    aux = new Persona
+                    {
+                        Name = (string)datos.Reader[0],
+                        Apellido = (string)datos.Reader[1],
+                        Email = (string)datos.Reader[2]
+                    };
+                    personas.Add(aux);
+                }
+                return personas;
+            }
+            catch (Exception ex)
+            {
 
+                throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+        }
+        public List<Persona> GetContactoTutores(long IDCXE)
+        {
+            Datos datos = new Datos();
+            List<Persona> personas = new List<Persona>();
+            Persona aux;
+            try
+            {
+                datos.SetearConsulta("SELECT DISTINCT P.NOMBRE, P.APELLIDO, T.EMAIL FROM SORIA_TPC.dbo.ALUMNOSxCURSO AS AXC"
+                    + " INNER JOIN SORIA_TPC.dbo.ALUMNOS AS A ON A.ID = AXC.IDALUMNO"
+                    + " INNER JOIN SORIA_TPC.dbo.PERSONAS AS P ON P.ID=A.IDPERSONA"
+                    + " INNER JOIN SORIA_TPC.dbo.PERSONAS AS T ON T.ID=A.IDTUTOR"
+                    + " WHERE AXC.IDCXE=@IDCXE ORDER BY P.APELLIDO");
+                datos.Comando.Parameters.Clear();
+                datos.Comando.Parameters.AddWithValue("@IDCXE", IDCXE);
+                datos.AbrirConexion();
+                datos.EjecutarConsulta();
+                while (datos.Reader.Read())
+                {
+                    aux = new Persona
+                    {
+                        Name = (string)datos.Reader[0],
+                        Apellido = (string)datos.Reader[1],
+                        Email = (string)datos.Reader[2]
+                    };
+                    personas.Add(aux);
+                }
+                return personas;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+        }
         public void Agregar(Persona persona)
         {
             NegocioDireccion negocioDireccion = new NegocioDireccion();

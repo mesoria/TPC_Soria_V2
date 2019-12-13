@@ -24,18 +24,18 @@
         </div>
     </div>
     <asp:GridView CssClass="table table-success" ID="dgvAlumnos" runat="server" AutoGenerateColumns="false">
-                        <Columns>  
-                            <asp:BoundField DataField="Apellido" HeaderText="Apellido" />
-                            <asp:BoundField DataField="Name" HeaderText="Nombre" />
-                            <%--<asp:BoundField DataFormatString="{0:C}" DataField="Precio" HeaderText="Precio" />--%>
-                            <asp:TemplateField HeaderText="Presente">
-                                    <ItemTemplate >
-                                        <asp:CheckBox ID="cbxPresente" CssClass="custom-checkbox" runat="server" AutoPostBack="false"  Checked='false' />
-                                    </ItemTemplate>
-                            </asp:TemplateField>
-                           <%-- <asp:BoundField DataField="ID" HeaderText="ID" Visible="true"/>--%>
-                        </Columns>  
-            </asp:GridView>
+        <Columns>  
+            <asp:BoundField DataField="Apellido" HeaderText="Apellido" />
+            <asp:BoundField DataField="Name" HeaderText="Nombre" />
+            <%--<asp:BoundField DataFormatString="{0:C}" DataField="Precio" HeaderText="Precio" />--%>
+            <asp:TemplateField HeaderText="Presente">
+                    <ItemTemplate >
+                        <asp:CheckBox ID="cbxPresente" CssClass="custom-checkbox" runat="server" AutoPostBack="false"  Checked='false' />
+                    </ItemTemplate>
+            </asp:TemplateField>
+            <%-- <asp:BoundField DataField="ID" HeaderText="ID" Visible="true"/>--%>
+        </Columns>  
+    </asp:GridView>
     <br />
     <hr />
 

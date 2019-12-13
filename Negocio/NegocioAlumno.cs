@@ -92,7 +92,7 @@ namespace Negocio
             Alumno aux;
             try
             {
-                datos.SetearConsulta("Select A.ID, p.ID, p.NOMBRE, p.APELLIDO, DOC.NIVEL, p.DNI, p.NACIMIENTO, p.EMAIL, DIR.ID, DIR.CALLE, DIR.NUMERO FROM SORIA_TPC.dbo.ALUMNOS AS A LEFT JOIN SORIA_TPC.dbo.PERSONAS as p ON A.IDALUMNO = p.ID left JOIN SORIA_TPC.dbo.DIRECCIONES AS DIR ON DIR.ID = p.IDDIRECCION");
+                datos.SetearConsulta("Select A.ID, p.ID, p.NOMBRE, p.APELLIDO, DOC.NIVEL, p.DNI, p.NACIMIENTO, p.EMAIL, DIR.ID, DIR.CALLE, DIR.NUMERO FROM SORIA_TPC.dbo.ALUMNOS AS A LEFT JOIN SORIA_TPC.dbo.PERSONAS as p ON A.IDALUMNO = p.ID left JOIN SORIA_TPC.dbo.DIRECCIONES AS DIR ON DIR.ID = p.IDDIRECCION ORDER BY P.APELLIDO");
                 datos.AbrirConexion();
                 datos.EjecutarConsulta();
                 while (datos.Reader.Read())
@@ -290,16 +290,19 @@ namespace Negocio
             Datos datos = new Datos();
             try
             {
-                datos.SetearConsulta("SELECT A.ID, p.ID, p.NOMBRE, p.APELLIDO, p.DNI, p.NACIMIENTO, " +
-                    "p.EMAIL, DIR.ID, DIR.CALLE, DIR.NUMERO, A.IDTUTOR FROM SORIA_TPC.dbo.ALUMNOS AS A " +
-                    "LEFT JOIN SORIA_TPC.dbo.PERSONAS as p ON A.IDPERSONA = p.ID " +
-                    "LEFT JOIN SORIA_TPC.dbo.DIRECCIONES AS DIR ON DIR.ID = p.IDDIRECCION WHERE p.DNI = @DNI");
+                datos.SetearConsulta("SELECT A.ID, p.ID, p.NOMBRE, p.APELLIDO, p.DNI, p.NACIMIENTO, p.EMAIL, DIR.ID, " +
+                    "DIR.CALLE, DIR.NUMERO, T.ID, T.NOMBRE, T.APELLIDO, T.DNI, T.NACIMIENTO, T.EMAIL, DT.ID, " +
+                    "DT.CALLE, DT.NUMERO FROM SORIA_TPC.dbo.ALUMNOS AS A " +
+                    "LEFT JOIN SORIA_TPC.dbo.PERSONAS as p ON A.IDPERSONA=p.ID " +
+                    "LEFT JOIN SORIA_TPC.dbo.DIRECCIONES AS DIR ON DIR.ID=p.IDDIRECCION " +
+                    "LEFT JOIN SORIA_TPC.dbo.PERSONAS as T ON A.IDTUTOR=T.ID " +
+                    "LEFT JOIN SORIA_TPC.dbo.DIRECCIONES AS DT ON DT.ID=T.IDDIRECCION WHERE p.DNI=@DNI");
                 datos.Comando.Parameters.Clear();
                 datos.Comando.Parameters.AddWithValue("@DNI", DNI);
                 datos.AbrirConexion();
                 datos.EjecutarConsulta();
                 Alumno alumno = new Alumno();
-                while (datos.Reader.Read())
+                if (datos.Reader.Read())
                 {
                     alumno.IdAlumno = (Int64)datos.Reader[0];
                     alumno.ID = (Int64)datos.Reader[1];
@@ -321,8 +324,22 @@ namespace Negocio
                     {
                         alumno.Tutor = new Persona()
                         {
-                            ID = (Int64)datos.Reader[10]
+                            ID = (Int64)datos.Reader[10],
+                            Name = (string)datos.Reader[11],
+                            Apellido = (string)datos.Reader[12],
+                            DNI = (string)datos.Reader[13],
+                            Nacimiento = (DateTime)datos.Reader[14],
+                            Email = (string)datos.Reader[15]
                         };
+                        if (!Convert.IsDBNull(datos.Reader[16]))
+                        {
+                            alumno.Tutor.Direccion = new Direccion()
+                            {
+                                ID = (Int64)datos.Reader[16],
+                                Calle = (string)datos.Reader[17],
+                                Number = (string)datos.Reader[18]
+                            };
+                        }
                     }
                 }
                 return alumno;

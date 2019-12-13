@@ -59,11 +59,33 @@
             <input type="Text" class="form-control" id="txtApellido"  runat="server" placeholder="Perez">
         </div>
     </div>
+
+<!-- Modal -->
+<%--<div class="modal fade" id="mdlAddAlumno" tabindex="-1" role="dialog" aria-labelledby="AddAlumno" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="AddAlumno">Alumno existente</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Alumno existente con este DNI. ¿Quiere cargarlo?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div> data-toggle="modal" data-target="#mdlAddAlumno" --%>
+
     <div class="form-row">
         <div class="form-group col-md-4">
             <label>DNI</label>
-                <%--<asp:TextBox ID="txtNombre" runat="server" required></asp:TextBox>--%>
-            <input type="Text" class="form-control" id="txtDNI"  runat="server" placeholder="30111222">
+            <asp:TextBox ID="txtDNI" runat="server" CssClass="form-control" OnTextChanged="txtDNI_TextChanged" AutoPostBack="true"></asp:TextBox>
+            <%--<input type="Text" class="form-control" id="txtDNI"  runat="server" placeholder="30111222">--%>
         </div>
         <div class="form-group col-md-4">
             <label for="txtNacimiento">Fecha de nacimiento</label>
@@ -126,8 +148,8 @@
             <input type="Text" class="form-control" id="txtTDNI"  runat="server" placeholder="30111222">
         </div>
         <div class="form-group col-md-4">
-            <label for="txtTNacimiento">Fecha de nacimiento</label>
-            <input type="date" id="txtTNacimiento" name="trip-start" runat="server"
+            <label for="txtTNac">Fecha de nacimiento</label>
+            <input type="date" id="txtTNac" name="trip-start" runat="server"
                 value="1987/08/06"
                 min="1950/01/01" max="2013/12/31" class="form-control">
         </div>

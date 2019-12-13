@@ -48,7 +48,7 @@
         <div class="form-group col-md-4">
             <label>DNI</label>
                 <%--<asp:TextBox ID="txtNombre" runat="server" required></asp:TextBox>--%>
-            <input type="Text" class="form-control" id="txtDNI"  runat="server" placeholder="30111222">
+            <input type="Text" class="form-control" id="txtDNI"  runat="server" placeholder="30111222" onchange="txtDNI_TextChanged" AutoPostBack="true">
         </div>
         <div class="form-group col-md-4">
             <label for="txtNacimiento">Fecha de nacimiento</label>

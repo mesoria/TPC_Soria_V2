@@ -14,9 +14,9 @@ namespace TPC_Soria_v2.FolderDocente
         public NegocioDocente negocioDocente     = new NegocioDocente();
         public NegocioDireccion negocioDireccion = new NegocioDireccion();
         public NegocioPersona negocioPersona     = new NegocioPersona();
-        public Usuario usuario = new Usuario();
+        public Usuario   usuario   = new Usuario();
         public Direccion direccion = new Direccion();
-        public Docente Aux         = new Docente();
+        public Docente   Aux       = new Docente();
         public string ConvertToAMD(DateTime fecha)
         {
             string DMA = fecha.ToString().Split(' ')[0];
@@ -64,6 +64,32 @@ namespace TPC_Soria_v2.FolderDocente
                 return "Está por editar éste docente.";
             }
         }
+        public void Update()
+        {
+            txtNombre.Value = Aux.Name;
+            txtApellido.Value = Aux.Apellido;
+            txtDNI.Value = Aux.DNI;
+            txtEmail.Value = Aux.Email;
+            switch (cbxNivel.SelectedIndex)
+            {
+                case 1:
+                    Aux.Nivel = "Secundaria";
+                    break;
+                case 2:
+                    Aux.Nivel = "Facultad";
+                    break;
+                case 3:
+                    Aux.Nivel = "Universidad";
+                    break;
+                default:
+                    Aux.Nivel = "Primaria";
+                    break;
+            }
+            string AMD = ConvertToAMD(Aux.Nacimiento);
+            txtNacimiento.Value = AMD;
+            txtCalle.Value = Aux.Direccion.Calle;
+            txtAltura.Value = Aux.Direccion.Number;
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -89,29 +115,7 @@ namespace TPC_Soria_v2.FolderDocente
                         //grid.DataSource = NegocioVoucher.ListarVouchers();
                         //grid.DataBind();
                         //txtNombre.Text = aux.Name;
-                        txtNombre.Value = Aux.Name;
-                        txtApellido.Value = Aux.Apellido;
-                        txtDNI.Value = Aux.DNI;
-                        txtEmail.Value = Aux.Email;
-                        switch (cbxNivel.SelectedIndex)
-                        {
-                            case 1:
-                                Aux.Nivel = "Secundaria";
-                                break;
-                            case 2:
-                                Aux.Nivel = "Facultad";
-                                break;
-                            case 3:
-                                Aux.Nivel = "Universidad";
-                                break;
-                            default:
-                                Aux.Nivel = "Primaria";
-                                break;
-                        }
-                        string AMD = ConvertToAMD(Aux.Nacimiento);
-                        txtNacimiento.Value = AMD;
-                        txtCalle.Value = Aux.Direccion.Calle;
-                        txtAltura.Value = Aux.Direccion.Number;
+                        Update();
                     }
                     btnVolver.Attributes.Add("onclick", "history.back(); return false;");
                 }
@@ -141,7 +145,6 @@ namespace TPC_Soria_v2.FolderDocente
         {
             try
             {
-
                 if ( Validation() )
                 {
                     direccion.Calle  = txtCalle.Value;
@@ -206,6 +209,22 @@ namespace TPC_Soria_v2.FolderDocente
                 throw ex;
             }
         }
+        protected void txtDNI_TextChanged(object sender, EventArgs e)
+        {
+            NegocioDocente negocioDocente = new NegocioDocente();
+            string DNI = txtDNI.Value;
+            Aux = negocioDocente.GetDocenteWithDNI(DNI);
+            if (Aux.ID != 0)
+            {
+                Update();
+                Response.Write("<script>alert('DNI existente. Se carga el docente.')</script>");
+            }
+            else
+            {
+
+            }
+        }
+
         public void ValidateFalse()
         {
             txtNombre.Value     = "1";

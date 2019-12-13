@@ -48,6 +48,7 @@
     <Compile Include="NegocioDocente.cs" />
     <Compile Include="NegocioEstablecimiento.cs" />
     <Compile Include="NegocioLogin.cs" />
+    <Compile Include="NegocioMessenger.cs" />
     <Compile Include="NegocioPersona.cs" />
     <Compile Include="NegocioTelefono.cs" />
     <Compile Include="NegocioUsuario.cs" />

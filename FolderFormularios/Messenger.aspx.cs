@@ -22,6 +22,12 @@ namespace TPC_Soria_v2.FolderFormularios
             string email = negocioPersona.GetMeEmail(persona.ID);
             return email;
         }
+        protected void BorrarCampos()
+        {
+            txtPass.Text   = "";
+            txtAsunto.Text = "";
+            txtBody.Text   = "";
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -107,13 +113,13 @@ namespace TPC_Soria_v2.FolderFormularios
             negocioMessenger.SenderEmail(txtMeEmail.Text, persona.Name, txtPass.Text, Destinatarios, txtAsunto.Text, txtBody.Text);
             if ( negocioMessenger.Estado)
             {
-                Response.Write("Mensaje enviado.");
+                Response.Write("<script>alert('Mensaje enviado con exito.')</script>");
+                BorrarCampos();
             }
             else
             {
                 Response.Write(negocioMessenger.LogError);
             }
-            //Response.Redirect("~/Usuarios/DocentePrincipal.aspx", false);
         }
     }
 }

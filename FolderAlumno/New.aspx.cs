@@ -129,6 +129,7 @@ namespace TPC_Soria_v2.FolderAlumno
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
+            int anio = DateTime.Today.Year;
             direccion.Calle = txtCalle.Value;
             direccion.Number = txtAltura.Value;
             negocioDireccion.Agregar(direccion);
@@ -188,12 +189,14 @@ namespace TPC_Soria_v2.FolderAlumno
                 negocioDireccion.Modificar(persona.Direccion);
                 negocioDireccion.Modificar(TPersona.Direccion);
                 TPersona.ID = negocioPersona.GetIDWithDNI(TPersona.DNI);
+                alumno.ID   = negocioPersona.GetIDWithDNI(alumno.DNI);
                 negocioPersona.Modificar(TPersona);
                 negocioPersona.Modificar(alumno);
             }
             else
             {
                 negocioAlumno.AgregarFull(alumno, IDCXE);
+                //negocio
             }
 
             string ex = "El alumno se ha guardado correctamente.";

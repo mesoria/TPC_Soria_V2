@@ -7,8 +7,10 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace TPC_Soria_v2.FolderDocente{
-    public partial class AsistenciaAlumnos {
+namespace TPC_Soria_v2.FolderFormularios {
+    
+    
+    public partial class MostrarCalificaciones {
         
         /// <summary>
         /// Control lblApellido.
@@ -29,21 +31,39 @@ namespace TPC_Soria_v2.FolderDocente{
         protected global::System.Web.UI.WebControls.Label lvlName;
         
         /// <summary>
-        /// Control checkbox.
+        /// Control Date.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox checkbox;
+        protected global::System.Web.UI.WebControls.Label Date;
         
         /// <summary>
-        /// Control btnGuardar.
+        /// Control txtCurso.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnGuardar;
+        protected global::System.Web.UI.WebControls.Label txtCurso;
+        
+        /// <summary>
+        /// Control dgvAlumnos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView dgvAlumnos;
+        
+        /// <summary>
+        /// Control btnVolver.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnVolver;
     }
 }

@@ -52,6 +52,7 @@ namespace TPC_Soria_v2.Usuarios
                     Response.Redirect("/frmLog.aspx", false);
                 }
                 establecimiento = negocioEstablecimiento.GetCursoByEstablecimientoWithID(IDCXE);
+                Session["establecimiento" + Session.SessionID] = establecimiento;
                 alumnos = negocioAlumno.ListarAlumnosFromCurso(IDCXE);
                 btnVolver.Attributes.Add("onclick", "history.back(); return false;");
             }

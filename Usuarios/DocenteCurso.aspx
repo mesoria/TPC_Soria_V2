@@ -27,7 +27,7 @@
             <a class="btn btn-primary" href="../FolderFormularios/PasarAsistencia.aspx?IDCXE=<% = GetIDCXE(establecimiento.ID,establecimiento.Curso.ID) %>">Pasar Asistencia</a>
         </div>
         <div class="form-group col-md-2">
-            <a class="btn btn-primary" href="../FolderFormularios/Notas.aspx?IDCXE=<% = GetIDCXE(establecimiento.ID,establecimiento.Curso.ID) %>">Calificaciones</a>
+            <a class="btn btn-primary" href="../FolderFormularios/MostrarCalificaciones.aspx?IDCXE=<% = GetIDCXE(establecimiento.ID,establecimiento.Curso.ID) %>">Calificaciones</a>
         </div>
         <div class="form-group col-md-2">
             <a class="btn btn-primary" href="../FolderFormularios/MostrarAsistencias.aspx?IDCXE=<% = GetIDCXE(establecimiento.ID,establecimiento.Curso.ID) %>">Libro de Asistencias</a>

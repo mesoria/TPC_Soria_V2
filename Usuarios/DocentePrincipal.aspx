@@ -48,13 +48,13 @@
 </div>
     <hr />
 
-
-    <%--<div class="form-row">
+    <%--
+    <div class="form-row">
         <div class="form-group col-md-5">
-            <a class="btn btn-primary" href="New.aspx?idD=<% = persona.ID %>">Nuevo Docente</a>
+            <asp:Button ID="btnVolver" href="../Default.aspx" runat="server" CssClass="btn btn-primary btn-lg" Text="Inicio" />
         </div>
         <div class="form-group col-md-7">
-            <a class="btn btn-primary" href="../Curso/Cursos.aspx?idD=<% = persona.ID %>">Ir a Cursos</a>
+            <asp:Button ID="btnGuardar" runat="server" OnClick="btnGuardar_Click" Text="Guardar presentismo" CssClass="btn btn-success btn-lg"/>
         </div>
-    </div> --%>
+    </div>--%>
 </asp:Content>

@@ -124,14 +124,15 @@ namespace Negocio
             }
         }
 
-        public bool CheckAsistencia(Int64 IDA,int y, int m, int d)
+        public bool CheckAsistencia(long IDCXE, long IDA,int y, int m, int d)
         {
             Datos datos = new Datos();
             try
             {
-                datos.SetearConsulta("Select A.ID from SORIA_TPC.dbo.ASISTENCIAS as A WHERE A.IDALUMNO=@IDA AND YEAR(A.FECHA)=@YEAR AND MONTH(A.Fecha)=@MONTH AND DAY(A.FECHA)=@DAY");
+                datos.SetearConsulta("Select A.ID from SORIA_TPC.dbo.ASISTENCIAS as A WHERE A.IDCXE=@IDCXE AND A.IDALUMNO=@IDA AND YEAR(A.FECHA)=@YEAR AND MONTH(A.Fecha)=@MONTH AND DAY(A.FECHA)=@DAY");
 
                 datos.Comando.Parameters.Clear();
+                datos.Comando.Parameters.AddWithValue("@IDCXE", IDCXE);
                 datos.Comando.Parameters.AddWithValue("@IDA"  , IDA);
                 datos.Comando.Parameters.AddWithValue("@YEAR" , y);
                 datos.Comando.Parameters.AddWithValue("@MONTH", m);

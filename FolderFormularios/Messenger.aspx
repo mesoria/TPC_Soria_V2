@@ -13,7 +13,8 @@
             </asp:DropDownList>
         </div>
     </div>
-    <asp:GridView CssClass="table table-success" ID="dgvReceiver" runat="server" AutoGenerateColumns="false">
+    <asp:GridView CssClass="table table-success" ID="dgvReceiver" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None">
+        <AlternatingRowStyle BackColor="White" />
         <Columns>  
             <asp:BoundField DataField="Apellido" HeaderText="Apellido" />
             <asp:BoundField DataField="Name" HeaderText="Nombre" />
@@ -24,10 +25,20 @@
                     </ItemTemplate>
             </asp:TemplateField>
         </Columns>  
+        <EditRowStyle BackColor="#7C6F57" />
+        <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
+        <HeaderStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
+        <PagerStyle BackColor="#666666" ForeColor="White" HorizontalAlign="Center" />
+        <RowStyle BackColor="#E3EAEB" />
+        <SelectedRowStyle BackColor="#C5BBAF" Font-Bold="True" ForeColor="#333333" />
+        <SortedAscendingCellStyle BackColor="#F8FAFA" />
+        <SortedAscendingHeaderStyle BackColor="#246B61" />
+        <SortedDescendingCellStyle BackColor="#D4DFE1" />
+        <SortedDescendingHeaderStyle BackColor="#15524A" />
     </asp:GridView>
     <br />
     <hr />
-    <div>
+    <%--<div>
         <div class="form-group col-md-12">
             <asp:Label ID="lblemail" runat="server" Text="De: "></asp:Label>
             <asp:TextBox ID="txtMeEmail" runat="server" CssClass="border-success form-control"></asp:TextBox>
@@ -38,7 +49,7 @@
             <asp:Label ID="lblContraseña" runat="server" Text="Contraseña: "></asp:Label>
             <asp:TextBox ID="txtPass" type="Password" runat="server" CssClass="border-success form-control">Mi email</asp:TextBox>
         </div>
-    </div>
+    </div>--%>
     <div>
         <div class="form-group col-md-12">
             <asp:Label ID="lblAsunto" runat="server" Text="Asunto: "></asp:Label>

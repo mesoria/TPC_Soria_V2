@@ -323,16 +323,14 @@ namespace Negocio
             try
             {
                 datos.SetearConsulta("update SORIA_TPC.dbo.PERSONAS SET NOMBRE=@Nombre, APELLIDO=@Apellido, DNI=@DNI, " +
-                    "EMAIL=@Email, IDDIRECCION=@IdDireccion WHERE ID=" + persona.ID);
+                    "EMAIL=@Email, NACIMIENTO=@Nacimiento, IDDIRECCION=@IdDireccion WHERE ID=" + persona.ID);
                 datos.Comando.Parameters.Clear();
                 datos.Comando.Parameters.AddWithValue("@Nombre",      persona.Name);
                 datos.Comando.Parameters.AddWithValue("@Apellido",    persona.Apellido);
                 datos.Comando.Parameters.AddWithValue("@DNI",         persona.DNI);
                 datos.Comando.Parameters.AddWithValue("@Email",       persona.Email);
                 datos.Comando.Parameters.AddWithValue("@IdDireccion", persona.Direccion.ID);
-                //datos.Comando.Parameters.AddWithValue("@Ciudad", persona.ciudad.ToString());
-                //datos.Comando.Parameters.AddWithValue("@CP", persona.CP.ToString());
-                //datos.Comando.Parameters.AddWithValue("@FechaRegistro", persona.fechaRegistro);
+                datos.Comando.Parameters.AddWithValue("@Nacimiento",  persona.Nacimiento);
                 datos.AbrirConexion();
                 datos.EjecutarAccion();
             }

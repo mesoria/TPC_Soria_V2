@@ -13,5 +13,13 @@ namespace TPC_Soria_v2
         {
 
         }
+
+        protected void logOut_Click(object sender, EventArgs e)
+        {
+            Application["Usuario"] = null;
+            Application["Persona"] = null;
+            Application["Docente"] = null;
+            Response.Redirect("~/Login.aspx");
+        }
     }
 }

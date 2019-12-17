@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Lista de Alumnos." Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="PasarAsistencia.aspx.cs" Inherits="TPC_Soria_v2.FolderFormularios.PasarAsistencia" EnableEventValidation="false"%>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="MostrarCalificaciones.aspx.cs" Inherits="TPC_Soria_v2.FolderFormularios.MostrarCalificaciones" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="form-row">
         <div class="form-group col-md-10">
@@ -24,19 +24,46 @@
             <asp:Label ID="txtCurso" runat="server" Font-Size="X-Large" Text="Nombre: "><% = establecimiento.Curso.Name %> </asp:Label>
         </div>
     </div>
-    <asp:GridView CssClass="table table-success" ID="dgvAlumnos" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None">
+    <asp:GridView CssClass="table table-success" ID="dgvAlumnos" runat="server" AutoGenerateColumns="False"
+        OnRowCancelingEdit="dgvAlumnos_RowCancelingEdit" 
+        OnRowEditing="dgvAlumnos_RowEditing"
+        OnRowUpdating="dgvAlumnos_RowUpdating" 
+        DataKeyNames="IdAlumno"
+        CellPadding="4" ForeColor="#333333" GridLines="None">
+
         <AlternatingRowStyle BackColor="White" />
-        <Columns>  
-            <asp:BoundField DataField="Apellido" HeaderText="Apellido" />
-            <asp:BoundField DataField="Name" HeaderText="Nombre" />
-            <%--<asp:BoundField DataFormatString="{0:C}" DataField="Precio" HeaderText="Precio" />--%>
-            <asp:TemplateField HeaderText="Presente">
-                    <ItemTemplate >
-                        <asp:CheckBox ID="cbxPresente" CssClass="custom-checkbox" runat="server" AutoPostBack="false"  Checked='false' />
-                    </ItemTemplate>
+        <Columns>
+            <asp:BoundField DataField="Apellido" HeaderText="Apellido" ReadOnly="true"/>
+            <asp:BoundField DataField="Name" HeaderText="Nombre" ReadOnly="true"/>
+            <asp:TemplateField HeaderText="Primer Parcial">
+                <ItemTemplate>
+                    <asp:Label ID="lblNota1" runat="server" Text='<% # Bind("Calificaciones.Notas.Nota1")%>'></asp:Label>
+                </ItemTemplate>
+                <EditItemTemplate>
+                    <asp:TextBox ID="txtNota1" runat="server" Text='<% # Bind("Calificaciones.Notas.Nota1")%>'></asp:TextBox>
+                </EditItemTemplate>
             </asp:TemplateField>
-            <asp:BoundField DataField="IDAlumno" HeaderText="IDA" Visible="false" />
-        </Columns>  
+
+            <asp:TemplateField HeaderText="Segundo parcial">
+                <ItemTemplate>
+                    <asp:Label ID="lblNota2" runat="server" Text='<% # Bind("Calificaciones.Notas.Nota2")%>'></asp:Label>
+                </ItemTemplate>
+                <EditItemTemplate>
+                    <asp:TextBox ID="txtNota2" runat="server" Text='<% # Bind("Calificaciones.Notas.Nota2")%>'></asp:TextBox>
+                </EditItemTemplate>
+            </asp:TemplateField>
+
+            <asp:TemplateField HeaderText="FINAL">
+                <ItemTemplate>
+                    <asp:Label ID="lblNota3" runat="server" Text='<% # Bind("Calificaciones.Notas.Nota3")%>'></asp:Label>
+                </ItemTemplate>
+                <EditItemTemplate>
+                    <asp:TextBox ID="txtNota3" runat="server" Text='<% # Bind("Calificaciones.Notas.Nota3")%>'></asp:TextBox>
+                </EditItemTemplate>
+            </asp:TemplateField>
+
+            <asp:CommandField ButtonType="Link" ShowEditButton="true" />
+        </Columns>
         <EditRowStyle BackColor="#7C6F57" />
         <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
         <HeaderStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
@@ -55,8 +82,6 @@
         <div class="form-group col-md-5">
             <asp:Button ID="btnVolver" runat="server" CssClass="btn btn-primary btn-lg" Text="Volver" />
         </div>
-        <div class="form-group col-md-7">
-            <asp:Button ID="btnGuardar" runat="server" OnClick="btnGuardar_Click" Text="Guardar presentismo" CssClass="btn btn-success btn-lg"/>
-        </div>
     </div>
+
 </asp:Content>

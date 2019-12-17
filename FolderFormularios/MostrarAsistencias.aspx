@@ -81,7 +81,7 @@
             <th style="width: 2%"><% = j%></th>
             <th style="width: 12%"><% = item.Apellido %></th>
             <th style="width: 12%"><% = item.Name %></th>
-            <% = AsistenciasDelMes(item,cbxMes.SelectedIndex)%>
+            <% =AsistenciasDelMes( item, cbxMes.SelectedIndex, IDCXE)%>
        <% j++;}%>
         </tr>
     </tbody>

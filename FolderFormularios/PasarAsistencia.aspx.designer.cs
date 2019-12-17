@@ -8,8 +8,6 @@
 //------------------------------------------------------------------------------
 
 namespace TPC_Soria_v2.FolderFormularios {
-    
-    
     public partial class PasarAsistencia {
         
         /// <summary>

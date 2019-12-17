@@ -111,18 +111,18 @@
     <Content Include="Docentes.aspx" />
     <Content Include="Establecimientos.aspx" />
     <Content Include="FolderAlumno\Info.aspx" />
+    <Content Include="FolderAlumno\Log.aspx" />
     <Content Include="FolderAlumno\New.aspx" />
     <Content Include="FolderCurso\Info.aspx" />
     <Content Include="FolderCurso\New.aspx" />
     <Content Include="FolderDocente\Info.aspx" />
     <Content Include="FolderEstablecimiento\Info.aspx" />
-    <Content Include="FolderFormularios\LibroAsistencias.aspx" />
+    <Content Include="FolderFormularios\EditarCalificaciones.aspx" />
     <Content Include="FolderFormularios\Messenger.aspx" />
     <Content Include="FolderFormularios\MostrarAsistencias.aspx" />
-    <Content Include="FolderFormularios\Notas.aspx" />
+    <Content Include="FolderFormularios\MostrarCalificaciones.aspx" />
     <Content Include="FolderFormularios\PasarAsistencia.aspx" />
     <Content Include="frmLog.aspx" />
-    <Content Include="FolderDocente\AsistenciaAlumnos.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\Bootstrap4\css\bootstrap-grid.css" />
     <Content Include="Content\Bootstrap4\css\bootstrap-grid.min.css" />
@@ -235,6 +235,13 @@
     <Compile Include="FolderAlumno\Info.aspx.designer.cs">
       <DependentUpon>Info.aspx</DependentUpon>
     </Compile>
+    <Compile Include="FolderAlumno\Log.aspx.cs">
+      <DependentUpon>Log.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FolderAlumno\Log.aspx.designer.cs">
+      <DependentUpon>Log.aspx</DependentUpon>
+    </Compile>
     <Compile Include="FolderAlumno\New.aspx.cs">
       <DependentUpon>New.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -293,12 +300,12 @@
     <Compile Include="FolderEstablecimiento\Info.aspx.designer.cs">
       <DependentUpon>Info.aspx</DependentUpon>
     </Compile>
-    <Compile Include="FolderFormularios\LibroAsistencias.aspx.cs">
-      <DependentUpon>LibroAsistencias.aspx</DependentUpon>
+    <Compile Include="FolderFormularios\EditarCalificaciones.aspx.cs">
+      <DependentUpon>EditarCalificaciones.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="FolderFormularios\LibroAsistencias.aspx.designer.cs">
-      <DependentUpon>LibroAsistencias.aspx</DependentUpon>
+    <Compile Include="FolderFormularios\EditarCalificaciones.aspx.designer.cs">
+      <DependentUpon>EditarCalificaciones.aspx</DependentUpon>
     </Compile>
     <Compile Include="FolderFormularios\Messenger.aspx.cs">
       <DependentUpon>Messenger.aspx</DependentUpon>
@@ -314,12 +321,12 @@
     <Compile Include="FolderFormularios\MostrarAsistencias.aspx.designer.cs">
       <DependentUpon>MostrarAsistencias.aspx</DependentUpon>
     </Compile>
-    <Compile Include="FolderFormularios\Notas.aspx.cs">
-      <DependentUpon>Notas.aspx</DependentUpon>
+    <Compile Include="FolderFormularios\MostrarCalificaciones.aspx.cs">
+      <DependentUpon>MostrarCalificaciones.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="FolderFormularios\Notas.aspx.designer.cs">
-      <DependentUpon>Notas.aspx</DependentUpon>
+    <Compile Include="FolderFormularios\MostrarCalificaciones.aspx.designer.cs">
+      <DependentUpon>MostrarCalificaciones.aspx</DependentUpon>
     </Compile>
     <Compile Include="FolderFormularios\PasarAsistencia.aspx.cs">
       <DependentUpon>PasarAsistencia.aspx</DependentUpon>
@@ -334,13 +341,6 @@
     </Compile>
     <Compile Include="frmLog.aspx.designer.cs">
       <DependentUpon>frmLog.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="FolderDocente\AsistenciaAlumnos.aspx.cs">
-      <DependentUpon>AsistenciaAlumnos.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="FolderDocente\AsistenciaAlumnos.aspx.designer.cs">
-      <DependentUpon>AsistenciaAlumnos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>

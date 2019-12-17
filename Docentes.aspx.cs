@@ -25,21 +25,11 @@ namespace TPC_Soria_v2
                 }
                 NegocioEstablecimiento negocioEstablecimiento = new NegocioEstablecimiento();
                 ListaDocentes = negocioDocente.ListarDocentes();
-                //maestra = negocioPersona.GetPersona("36475321");
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
-
-        //public string GetApellido()
-        //{
-        //    return maestra.Apellido;
-        //}
-        //public string GetName()
-        //{
-        //    return maestra.Name;
-        //}
     }
 }

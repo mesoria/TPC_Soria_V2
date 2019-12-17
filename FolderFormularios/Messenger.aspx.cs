@@ -24,7 +24,7 @@ namespace TPC_Soria_v2.FolderFormularios
         }
         protected void BorrarCampos()
         {
-            txtPass.Text   = "";
+            //txtPass.Text   = "";
             txtAsunto.Text = "";
             txtBody.Text   = "";
         }
@@ -44,14 +44,13 @@ namespace TPC_Soria_v2.FolderFormularios
                     {
                         Response.Redirect("~/Login.aspx");
                     }
-                    //persona = negocioPersona.GetPersonaWithId(usuario.ID);
                     if (IDCXE == 0)
                     {
                         //por si accede a la pagina con el link
                         Session["Error" + Session.SessionID] = "Ups, Aún no has seleccionado un Establecimiento.";
                         Response.Redirect("/frmLog.aspx", false);
                     }
-                    txtMeEmail.Text = negocioPersona.GetMeEmail(persona.ID);
+                    //txtMeEmail.Text = negocioPersona.GetMeEmail(persona.ID);
                     ListaPersonas = negocioPersona.GetContactoTutores(IDCXE);
                     dgvReceiver.DataSource = ListaPersonas;
                     dgvReceiver.DataBind();
@@ -110,7 +109,8 @@ namespace TPC_Soria_v2.FolderFormularios
                 }
             }
             NegocioMessenger negocioMessenger = new NegocioMessenger();
-            negocioMessenger.SenderEmail(txtMeEmail.Text, persona.Name, txtPass.Text, Destinatarios, txtAsunto.Text, txtBody.Text);
+            //negocioMessenger.SenderEmail(txtMeEmail.Text, persona.Name, txtPass.Text, Destinatarios, txtAsunto.Text, txtBody.Text);
+            negocioMessenger.SenderEmail("aplicacion.miescuela@gmail.com", persona.Apellido+" "+persona.Name, "33294.frgp", Destinatarios, txtAsunto.Text, txtBody.Text);
             if ( negocioMessenger.Estado)
             {
                 Response.Write("<script>alert('Mensaje enviado con exito.')</script>");

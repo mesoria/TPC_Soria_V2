@@ -24,7 +24,7 @@ namespace Negocio
                     "LEFT JOIN SORIA_TPC.dbo.PERSONAS as p ON A.IDPERSONA=p.ID " +
                     "LEFT JOIN SORIA_TPC.dbo.DIRECCIONES AS DIR ON DIR.ID=p.IDDIRECCION " +
                     "LEFT JOIN SORIA_TPC.dbo.PERSONAS as T ON A.IDTUTOR=T.ID " +
-                    "LEFT JOIN SORIA_TPC.dbo.DIRECCIONES AS DT ON DT.ID=T.IDDIRECCION WHERE AXC.IDCXE=@ID");
+                    "LEFT JOIN SORIA_TPC.dbo.DIRECCIONES AS DT ON DT.ID=T.IDDIRECCION WHERE AXC.IDCXE=@ID ORDER BY P.APELLIDO");
                 datos.Comando.Parameters.Clear();
                 datos.Comando.Parameters.AddWithValue("@ID", CXE);
                 datos.AbrirConexion();
@@ -85,38 +85,30 @@ namespace Negocio
                 datos.CerrarConexion();
             }
         }
-        public List<Alumno> ListarAlumnos(Int64 IdCurso)
+        public List<Alumno> ListarAlumnosByte(long CXE)
         {
             Datos datos = new Datos();
             List<Alumno> alumnos = new List<Alumno>();
-            Alumno aux;
+            Alumno alumno;
             try
             {
-                datos.SetearConsulta("Select A.ID, p.ID, p.NOMBRE, p.APELLIDO, DOC.NIVEL, p.DNI, p.NACIMIENTO, p.EMAIL, DIR.ID, DIR.CALLE, DIR.NUMERO FROM SORIA_TPC.dbo.ALUMNOS AS A LEFT JOIN SORIA_TPC.dbo.PERSONAS as p ON A.IDALUMNO = p.ID left JOIN SORIA_TPC.dbo.DIRECCIONES AS DIR ON DIR.ID = p.IDDIRECCION ORDER BY P.APELLIDO");
+                datos.SetearConsulta("SELECT A.ID, p.ID, p.NOMBRE, p.APELLIDO FROM SORIA_TPC.dbo.ALUMNOSxCURSO AS AXC " +
+                    "LEFT JOIN SORIA_TPC.dbo.ALUMNOS as A ON A.ID=AXC.IDALUMNO " +
+                    "LEFT JOIN SORIA_TPC.dbo.PERSONAS as p ON A.IDPERSONA=p.ID WHERE AXC.IDCXE=@ID ORDER BY P.APELLIDO");
+                datos.Comando.Parameters.Clear();
+                datos.Comando.Parameters.AddWithValue("@ID", CXE);
                 datos.AbrirConexion();
                 datos.EjecutarConsulta();
                 while (datos.Reader.Read())
                 {
-                    aux = new Alumno
+                    alumno = new Alumno
                     {
                         IdAlumno = (Int64)datos.Reader[0],
-                        ID = (Int64)datos.Reader[1],
-                        Name = (string)datos.Reader[2],
+                        ID       = (Int64)datos.Reader[1],
+                        Name     = (string)datos.Reader[2],
                         Apellido = (string)datos.Reader[3],
-                        DNI = (string)datos.Reader[5],
-                        Nacimiento = (DateTime)datos.Reader[6],
-                        Email = (string)datos.Reader[7]
                     };
-                    if (!Convert.IsDBNull(datos.Reader[8]))
-                    {
-                        aux.Direccion = new Direccion
-                        {
-                            ID = (Int64)datos.Reader[8],
-                            Calle = (string)datos.Reader[9],
-                            Number = (string)datos.Reader[10]
-                        };
-                    }
-                    alumnos.Add(aux);
+                    alumnos.Add(alumno);
                 }
                 return alumnos;
             }

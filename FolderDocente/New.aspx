@@ -35,20 +35,20 @@
         <div class="form-group col-md-6">
             <label>Nombres</label>
             <%--<asp:TextBox ID="txtNombre" runat="server" required></asp:TextBox>--%>
-            <input type="Text" class="form-control" id="txtNombre"  runat="server" placeholder="Squall">
+            <input type="Text" class="form-control" id="txtNombre"  runat="server" placeholder="Squall" required>
             
         </div>
         <div class="form-group col-md-6">
             <label>Apellidos</label>
             <%--<asp:TextBox ID="txtNombre" runat="server" required></asp:TextBox>--%>
-            <input type="Text" class="form-control" id="txtApellido"  runat="server" placeholder="Lionheart">
+            <input type="Text" class="form-control" id="txtApellido"  runat="server" placeholder="Lionheart" required>
         </div>
     </div>
     <div class="form-row">
         <div class="form-group col-md-4">
             <label>DNI</label>
                 <%--<asp:TextBox ID="txtNombre" runat="server" required></asp:TextBox>--%>
-            <input type="Text" class="form-control" id="txtDNI"  runat="server" placeholder="30111222" onchange="txtDNI_TextChanged" AutoPostBack="true">
+            <input type="Text" class="form-control" id="txtDNI"  runat="server" placeholder="30111222" onchange="txtDNI_TextChanged" AutoPostBack="true" required>
         </div>
         <div class="form-group col-md-4">
             <label for="txtNacimiento">Fecha de nacimiento</label>
@@ -60,7 +60,7 @@
     <div class="form-row">
         <div class="form-group col-md-8">
             <label for="txtCalle">Dirección</label>
-            <input type="text" class="form-control" id="txtCalle" runat="server" placeholder="Balam Garden">
+            <input type="text" class="form-control" id="txtCalle" runat="server" placeholder="Balam Garden" required>
             <small class="form-text text-muted">Calle</small>
             <div class="invalid-feedback">
                 Por favor, ingrese la calle.
@@ -68,7 +68,7 @@
         </div>
         <div class="form-group col-md-4">
             <label for="txtAltura">Número</label>
-            <input type="text" class="form-control" id="txtAltura" runat="server" placeholder="1234">
+            <input type="text" class="form-control" id="txtAltura" runat="server" placeholder="1234" required>
             <small class="form-text text-muted">Altura</small>
             <div class="invalid-feedback">
                 Por favor, ingrese la altura.
@@ -84,7 +84,7 @@
             <div class="input-group-prepend">
                 <div class="input-group-text">@</div>
             </div>
-            <input type="text" class="form-control" id="txtEmail" runat="server" placeholder="name@example.com.ar">
+            <input type="text" class="form-control" id="txtEmail" runat="server" placeholder="name@example.com.ar" required>
             </div>
     </div>
     <hr />

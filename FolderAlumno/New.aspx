@@ -60,27 +60,6 @@
         </div>
     </div>
 
-<!-- Modal -->
-<%--<div class="modal fade" id="mdlAddAlumno" tabindex="-1" role="dialog" aria-labelledby="AddAlumno" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="AddAlumno">Alumno existente</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Alumno existente con este DNI. ¿Quiere cargarlo?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary">Aceptar</button>
-      </div>
-    </div>
-  </div>
-</div> data-toggle="modal" data-target="#mdlAddAlumno" --%>
-
     <div class="form-row">
         <div class="form-group col-md-4">
             <label>DNI</label>

@@ -24,7 +24,7 @@ namespace TPC_Soria_v2.FolderAlumno
         public Int64 isNew;
         long IDCXE;
 
-        public string ConvertToAMD(DateTime fecha)
+        private string ConvertToAMD(DateTime fecha)
         {
             string DMA = fecha.ToString().Split(' ')[0];
             string d = DMA.Split('/')[0];
@@ -39,7 +39,7 @@ namespace TPC_Soria_v2.FolderAlumno
             }
             return DMA.Split('/')[2] + '-' + m + '-' + d;
         }
-        public string ConvertToDMA(DateTime fecha)
+        private string ConvertToDMA(DateTime fecha)
         {
             string AMD = fecha.ToString().Split(' ')[0];
             string d = AMD.Split('/')[2];
@@ -58,7 +58,40 @@ namespace TPC_Soria_v2.FolderAlumno
         {
             return text.ToString().Trim() != "";
         }
-
+        private Alumno Backup()
+        {
+            Alumno aux = new Alumno();
+            //Info alumno
+            aux.Name = txtNombre.Value;
+            aux.Apellido = txtApellido.Value;
+            aux.DNI      = txtDNI.Text;
+            aux.Email    = txtEmail.Value;
+            if ( Completed(txtNacimiento.Value) )
+            {
+                DateTime dt  = Convert.ToDateTime(txtNacimiento.Value);
+                aux.Nacimiento = Convert.ToDateTime(ConvertToDMA(dt));
+            }
+            Direccion direccion = new Direccion();
+            aux.Direccion = direccion;
+            aux.Direccion.Calle  = txtCalle.Value;
+            aux.Direccion.Number = txtAltura.Value;
+            //Info tutor
+            Persona tutor = new Persona();
+            aux.Tutor = tutor;
+            aux.Tutor.Name      = txtTNombre.Value;
+            aux.Tutor.Apellido  = txtTApellido.Value;
+            aux.Tutor.DNI       = txtTDNI.Value;
+            aux.Tutor.Email     = txtTEmail.Value;
+            if (Completed(txtTNac.Value))
+            {
+                DateTime TdateTime = Convert.ToDateTime(txtTNac.Value);
+                TPersona.Nacimiento = Convert.ToDateTime(ConvertToDMA(TdateTime));
+            }
+            aux.Tutor.Direccion = direccion;
+            aux.Tutor.Direccion.Calle  = txtTCalle.Value;
+            aux.Tutor.Direccion.Number = txtTAltura.Value;
+            return aux;
+        }
         public string FirstTime()
         {
             if (Request.QueryString["IDA"] == null || Convert.ToInt32(Request.QueryString["IDA"]) == 0)
@@ -72,26 +105,26 @@ namespace TPC_Soria_v2.FolderAlumno
                 return "Está por editar éste alumno.";
             }
         }
-        private void Update()
+        private void Update(Alumno aux)
         {
             //Info alumno
-            txtNombre.Value = alumno.Name;
-            txtApellido.Value = alumno.Apellido;
-            txtDNI.Text = alumno.DNI.ToString();
-            txtEmail.Value = alumno.Email;
-            string AMD = ConvertToAMD(alumno.Nacimiento);
+            txtNombre.Value = aux.Name;
+            txtApellido.Value = aux.Apellido;
+            txtDNI.Text = aux.DNI.ToString();
+            txtEmail.Value = aux.Email;
+            string AMD = ConvertToAMD(aux.Nacimiento);
             txtNacimiento.Value = AMD;
-            txtCalle.Value = alumno.Direccion.Calle;
-            txtAltura.Value = alumno.Direccion.Number;
+            txtCalle.Value = aux.Direccion.Calle;
+            txtAltura.Value = aux.Direccion.Number;
             //Info tutor
-            txtTNombre.Value = alumno.Tutor.Name;
-            txtTApellido.Value = alumno.Tutor.Apellido;
-            txtTDNI.Value = alumno.Tutor.DNI.ToString();
-            txtTEmail.Value = alumno.Tutor.Email;
-            string TutorAMD = ConvertToAMD(alumno.Nacimiento);
+            txtTNombre.Value = aux.Tutor.Name;
+            txtTApellido.Value = aux.Tutor.Apellido;
+            txtTDNI.Value = aux.Tutor.DNI.ToString();
+            txtTEmail.Value = aux.Tutor.Email;
+            string TutorAMD = ConvertToAMD(aux.Nacimiento);
             txtTNac.Value = TutorAMD;
-            txtTCalle.Value = alumno.Tutor.Direccion.Calle;
-            txtTAltura.Value = alumno.Tutor.Direccion.Number;
+            txtTCalle.Value = aux.Tutor.Direccion.Calle;
+            txtTAltura.Value = aux.Tutor.Direccion.Number;
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -103,6 +136,14 @@ namespace TPC_Soria_v2.FolderAlumno
                 IDCXE = (long)Session["IDCXE" + Session.SessionID];
                 Session["IDCXE" + Session.SessionID] = IDCXE;
                 isNew = Convert.ToInt32(Request.QueryString["IDA"]);
+                if (Session["Alumno" + Session.SessionID] != null)
+                {
+                    alumno = (Alumno)Session["Alumno" + Session.SessionID];
+                }
+                else if (Session["Backup" + Session.SessionID] != null)
+                {
+                    alumno = (Alumno)Session["Backup" + Session.SessionID];
+                }
                 if (!IsPostBack)
                 {
                     if (usuario == null || usuario.ID == 0)
@@ -114,7 +155,11 @@ namespace TPC_Soria_v2.FolderAlumno
                         if ( isNew != 0)
                         {
                             alumno = negocioAlumno.GetAlumnoWithId(isNew);
-                            Update();
+                            Update(alumno);
+                        }
+                        else if (alumno.ID != 0)
+                        {
+                            Update(alumno);
                         }
                     }
                 }
@@ -129,57 +174,57 @@ namespace TPC_Soria_v2.FolderAlumno
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-            int anio = DateTime.Today.Year;
-            direccion.Calle = txtCalle.Value;
-            direccion.Number = txtAltura.Value;
+            int anio          = DateTime.Today.Year;
+            direccion.Calle   = txtCalle.Value;
+            direccion.Number  = txtAltura.Value;
             negocioDireccion.Agregar(direccion);
-            direccion = negocioDireccion.GetDireccion(direccion);
+            direccion         = negocioDireccion.GetDireccion(direccion);
 
-            alumno.Name = txtNombre.Value;
-            alumno.Apellido = txtApellido.Value;
-            alumno.DNI = txtDNI.Text;
-            alumno.Email = txtEmail.Value;
-            DateTime dt = Convert.ToDateTime(txtNacimiento.Value);
+            alumno.Name       = txtNombre.Value;
+            alumno.Apellido   = txtApellido.Value;
+            alumno.DNI        = txtDNI.Text;
+            alumno.Email      = txtEmail.Value;
+            DateTime dt       = Convert.ToDateTime(txtNacimiento.Value);
             alumno.Nacimiento = Convert.ToDateTime(ConvertToDMA(dt));
 
-            alumno.Direccion = new Direccion
+            alumno.Direccion  = new Direccion
             {
-                ID = direccion.ID,
-                Calle = direccion.Calle,
+                ID     = direccion.ID,
+                Calle  = direccion.Calle,
                 Number = direccion.Number
             };
             //Tutor
-            TDireccion.Calle = txtTCalle.Value;
+            TDireccion.Calle  = txtTCalle.Value;
             TDireccion.Number = txtTAltura.Value;
             negocioDireccion.Agregar(TDireccion);
-            TDireccion = negocioDireccion.GetDireccion(TDireccion);
-            TPersona.Name = txtTNombre.Value;
+            TDireccion        = negocioDireccion.GetDireccion(TDireccion);
+            TPersona.Name     = txtTNombre.Value;
             TPersona.Apellido = txtTApellido.Value;
-            TPersona.DNI = txtTDNI.Value;
-            TPersona.Email = txtTEmail.Value;
+            TPersona.DNI      = txtTDNI.Value;
+            TPersona.Email    = txtTEmail.Value;
             DateTime TdateTime = Convert.ToDateTime(txtTNac.Value);
             TPersona.Nacimiento = Convert.ToDateTime(ConvertToDMA(TdateTime));
 
             TPersona.Direccion = new Direccion
             {
-                ID = TDireccion.ID,
-                Calle = TDireccion.Calle,
+                ID     = TDireccion.ID,
+                Calle  = TDireccion.Calle,
                 Number = TDireccion.Number
             };
 
             alumno.Tutor = new Persona
             {
-                Name = TPersona.Name,
-                Apellido = TPersona.Apellido,
-                DNI = TPersona.DNI,
-                Email = TPersona.Email,
+                Name       = TPersona.Name,
+                Apellido   = TPersona.Apellido,
+                DNI        = TPersona.DNI,
+                Email      = TPersona.Email,
                 Nacimiento = TPersona.Nacimiento,
             };
 
             alumno.Tutor.Direccion = new Direccion
             {
-                ID = TPersona.Direccion.ID,
-                Calle = TPersona.Direccion.Calle,
+                ID     = TPersona.Direccion.ID,
+                Calle  = TPersona.Direccion.Calle,
                 Number = TPersona.Direccion.Number
             };
 
@@ -189,7 +234,15 @@ namespace TPC_Soria_v2.FolderAlumno
                 negocioDireccion.Modificar(persona.Direccion);
                 negocioDireccion.Modificar(TPersona.Direccion);
                 TPersona.ID = negocioPersona.GetIDWithDNI(TPersona.DNI);
-                alumno.ID   = negocioPersona.GetIDWithDNI(alumno.DNI);
+                if ( TPersona.ID == 0)
+                {
+                    TPersona.ID = negocioPersona.GetIDWithDNI(TPersona.DNI);
+                }
+                alumno.ID = negocioPersona.GetIDWithDNI(alumno.DNI);
+                if (alumno.ID == 0)
+                {
+                    alumno.ID = negocioPersona.GetIDWithDNI(alumno.DNI);
+                }
                 negocioPersona.Modificar(TPersona);
                 negocioPersona.Modificar(alumno);
             }
@@ -211,12 +264,9 @@ namespace TPC_Soria_v2.FolderAlumno
             alumno = negocioAlumno.GetAlumnoWithDNI(DNI);
             if (alumno.ID != 0)
             {
-                Update();
-                Response.Write("<script>alert('DNI existente. Se carga el alumno.')</script>");
-            }
-            else
-            {
-
+                Session["Alumno" + Session.SessionID] = alumno;
+                Session["Backup" + Session.SessionID] = Backup();
+                Response.Redirect("~/FolderAlumno/Validation.aspx");
             }
         }
     }

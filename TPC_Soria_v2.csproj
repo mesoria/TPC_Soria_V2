@@ -113,6 +113,7 @@
     <Content Include="FolderAlumno\Info.aspx" />
     <Content Include="FolderAlumno\Log.aspx" />
     <Content Include="FolderAlumno\New.aspx" />
+    <Content Include="FolderAlumno\Validation.aspx" />
     <Content Include="FolderCurso\Info.aspx" />
     <Content Include="FolderCurso\New.aspx" />
     <Content Include="FolderDocente\Info.aspx" />
@@ -272,6 +273,13 @@
       <DependentUpon>Establecimientos.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="FolderAlumno\Validation.aspx.cs">
+      <DependentUpon>Validation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FolderAlumno\Validation.aspx.designer.cs">
+      <DependentUpon>Validation.aspx</DependentUpon>
+    </Compile>
     <Compile Include="FolderCurso\Info.aspx.cs">
       <DependentUpon>Info.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

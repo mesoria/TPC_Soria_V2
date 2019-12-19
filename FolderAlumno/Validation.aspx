@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="TPC_Soria_v2.Login" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Validation.aspx.cs" Inherits="TPC_Soria_v2.FolderAlumno.Validation" %>
 
 <!DOCTYPE html>
 
@@ -52,11 +52,19 @@ img
 	position: absolute;
 }
 /*--------Empiezan Clases para el Login----------*/
-.TextoBienvenido
+.TextoMensaje
 {
-	font-size: 13px;
+	font-size: 14px;
 	color: #748ab3;
 	font-family: Arial;
+	background-color: transparent;
+}
+.TextoPregunta
+{
+	font-size: 16px;
+	color: #748ab3;
+	font-family: Arial;
+    font:600;
 	background-color: transparent;
 }
 .TextoLogin
@@ -121,7 +129,7 @@ img
 }
 .LeftFormaLogin
 {
-	background-image: url('Images/login/izquierda.png');
+	background-image: url('../Images/login/izquierda.png');
 	background-repeat: no-repeat;
 	height: 356px;
 	width: 22px;
@@ -129,7 +137,7 @@ img
 }
 .CenterFormaLogin
 {
-	background-image: url('Images/login/centro.png');
+	background-image: url('../Images/login/centro.png');
 	background-repeat:repeat-x;
 	height: 356px;
 	width: 450px;
@@ -137,7 +145,7 @@ img
 }
 .RightFormaLogin
 {
-	background-image: url('Images/login/derecha.png');
+	background-image: url('../Images/login/derecha.png');
 	background-repeat: no-repeat;
 	height: 356px;
 	width: 41px;
@@ -168,29 +176,32 @@ img
         <div class="LeftFormaLogin">
         </div>
         <div class="CenterFormaLogin">
-            <div class="cPosRel" style="width: 370px; height: 90px; margin: 34px auto 0px auto; text-align:justify;">
-                <span class="TextoBienvenido">Al ingresar al Sistema ústed está de acuerdo en aceptar
-                    nuestros Términos y condiciones legales, cualquier cambio que realize en esta página
-                    será monitoreado.</span>
+            <div class="cPosRel" style="width: 370px; height: 90px; margin: 34px auto 0px auto; text-align:justify center;">
+                <span class="TextoMensaje">Alumno ya existente en la base de datos.</span>
                 <br />
+                <br />
+                <br />
+                <span class="TextoPregunta">¿Quiére ingresar este alumno?</span>
             </div>
             <div class="cFL cPosRel" style="width: 450px; height: 150px;">
                 <div class="cFL cPosRel" style="width: 100px; height: 25px;">
-                    <span class="cFR cPosRel TextoLogin" style="margin-top: 7px;">Usuario:</span>
+                    <span class="cFR cPosRel TextoLogin" style="margin-top: 7px;">DNI:</span>
                 </div>
                 <div class="cFL cPosRel" style="width: 290px; height: 25px;">
-                    <asp:TextBox ID="txtUsuario" CssClass="txtControl" runat="server"></asp:TextBox>
+                    <asp:textBox ID="lblDNI" CssClass="txtControl" runat="server"></asp:textBox>
                 </div>
                 <div class="cFL cPosRel" style="width: 100px; height: 25px; margin-top: 15px;">
-                    <span class="cFR cPosRel TextoLogin" style="margin-top: 7px;">Password:</span>
+                    <span class="cFR cPosRel TextoLogin" style="margin-top: 7px;">Alumno:</span>
                 </div>
                 <div class="cFL cPosRel" style="width: 290px; height: 25px; margin-top: 15px;">
-                    <asp:TextBox ID="txtContraseña" TextMode="Password" CssClass="txtControl" runat="server"></asp:TextBox>
+                    <asp:textBox ID="lblApellido" CssClass="txtControl" runat="server" ReadOnly="true"></asp:textBox>
                 </div>
-                <div class="cFL cPosRel" style="width: 460px;">
-                    <div style="width: 120px; height: 30px; margin-left: auto; margin-right: auto; margin-top: 15px;">
-                        <asp:ImageButton ID="btnIniciar" ImageUrl="~/Images/login/ingresarsistema.jpg" runat="server" OnClick="btnIniciar_Click" />
-                    </div>
+               
+                <div class="cFL cPosRel" style="width: 120px; height: 25px; margin-top: 15px; margin-left: 115px">
+                        <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" onclick="btnCancelar_Click" />
+                </div>
+                <div class="cFL cPosRel" style="width: 200px; height: 25px; margin-top: 15px;">
+                        <asp:Button ID="btnAceptar" runat="server" OnClick="btnAceptar_Click" Text="Aceptar" ReadOnly="true"/>                
                 </div>
             </div>
             <asp:Label ID="lblMensaje" CssClass="cFL" runat="server" ForeColor="#996600"></asp:Label>

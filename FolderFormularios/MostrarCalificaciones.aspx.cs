@@ -39,6 +39,7 @@ namespace TPC_Soria_v2.FolderFormularios
                 docente = (Docente)Application["Docente"];
                 //IDCXE = Convert.ToInt64(Request.QueryString["IDCXE"]);
                 IDCXE = Request.QueryString["IDCXE"] != null ? Convert.ToInt64(Request.QueryString["IDCXE"]) : 0;
+                Session["IDCXE " + Session.SessionID] = IDCXE;
                 establecimiento = Session["establecimiento" + Session.SessionID] != null ? (Establecimiento)Session["establecimiento" + Session.SessionID] : establecimiento;
                 if (!IsPostBack)
                 {
@@ -77,17 +78,25 @@ namespace TPC_Soria_v2.FolderFormularios
 
         protected void dgvAlumnos_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
-            GridViewRow fila = dgvAlumnos.Rows[e.RowIndex];
-            long  IDA   = Convert.ToInt64(dgvAlumnos.DataKeys[e.RowIndex].Values[0]);
-            byte nota1 = Convert.ToByte( (fila.FindControl("txtNota1") as TextBox).Text);
-            byte nota2 = Convert.ToByte( (fila.FindControl("txtNota2") as TextBox).Text);
-            byte nota3 = Convert.ToByte( (fila.FindControl("txtNota3") as TextBox).Text);
+            try
+            {
+                GridViewRow fila = dgvAlumnos.Rows[e.RowIndex];
+                long IDA = Convert.ToInt64(dgvAlumnos.DataKeys[e.RowIndex].Values[0]);
+                byte nota1 = Convert.ToByte((fila.FindControl("txtNota1") as TextBox).Text);
+                byte nota2 = Convert.ToByte((fila.FindControl("txtNota2") as TextBox).Text);
+                byte nota3 = Convert.ToByte((fila.FindControl("txtNota3") as TextBox).Text);
 
-            Alumno a = negocioAlumno.GetAlumnoWithId(IDA);
-            negocioCalificaciones.ModificarNotas(IDCXE, a.IdAlumno, Convert.ToInt16(today.Year), nota1, nota2, nota3);
+                Alumno a = negocioAlumno.GetAlumnoWithId(IDA);
+                negocioCalificaciones.ModificarNotas(IDCXE, a.IdAlumno, Convert.ToInt16(today.Year), nota1, nota2, nota3);
 
-            dgvAlumnos.EditIndex = -1;
-            CargarGrilla();
+                dgvAlumnos.EditIndex = -1;
+                CargarGrilla();
+            }
+            catch (Exception)
+            {
+                Response.Redirect("~/FolderFormularios/LogMostrarCalificaciones.aspx");
+            }
+            
         }
     }
 }

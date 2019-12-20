@@ -63,7 +63,7 @@
     <div class="form-row">
         <div class="form-group col-md-4">
             <label>DNI</label>
-            <asp:TextBox ID="txtDNI" runat="server" CssClass="form-control" OnTextChanged="txtDNI_TextChanged" AutoPostBack="true" OnClientChange="return validar()" required></asp:TextBox>
+            <asp:TextBox ID="txtDNI" runat="server" CssClass="form-control" OnTextChanged="txtDNI_TextChanged" AutoPostBack="true" type="number" min="1" CausesValidation="true" required="true"></asp:TextBox>
             <%--<input type="Text" class="form-control" id="txtDNI"  runat="server" placeholder="30111222">--%>
         </div>
         <div class="form-group col-md-4">
@@ -77,18 +77,13 @@
         <div class="form-group col-md-8">
             <label for="txtCalle">Dirección</label>
             <input type="text" class="form-control" id="txtCalle" runat="server" placeholder="Balam Garden" required>
-            <small class="form-text text-muted">Calle</small>
-            <div class="invalid-feedback">
-                Por favor, ingrese la calle.
-            </div>
         </div>
         <div class="form-group col-md-4">
             <label for="txtAltura">Número</label>
-            <input type="text" class="form-control" id="txtAltura" runat="server" placeholder="1234" OnClientChange="return validar()" required>
-            <small class="form-text text-muted">Altura</small>
-            <div class="invalid-feedback">
-                Por favor, ingrese la altura.
-            </div>
+
+            <asp:TextBox ID="txtAltura" runat="server" CssClass="form-control"  type="number" min="1" CausesValidation="true" required="true"></asp:TextBox>
+            <%--<input class="form-control" id="txtAltura" runat="server" placeholder="1234" type="text" min="1" CausesValidation="true" required>--%>
+            <%--<small class="form-text text-muted">Altura</small>--%>
         </div>
     </div>
     <hr />
@@ -123,8 +118,8 @@
     <div class="form-row">
         <div class="form-group col-md-4">
             <label>DNI</label>
-                <%--<asp:TextBox ID="txtNombre" runat="server" required></asp:TextBox>--%>
-            <input type="Text" class="form-control" id="txtTDNI"  runat="server" placeholder="30111222">
+                <asp:TextBox ID="txtTDNI" runat="server" type="number" min="1" CausesValidation="true" required="true"></asp:TextBox>
+            <%--<input class="form-control" id="txtTDNIq"  runat="server" placeholder="30111222" type="number" min="1" CausesValidation="true">--%>
         </div>
         <div class="form-group col-md-4">
             <label for="txtTNac">Fecha de nacimiento</label>
@@ -138,17 +133,13 @@
             <label for="txtTCalle">Dirección</label>
             <input type="text" class="form-control" id="txtTCalle" runat="server" placeholder="Balam Garden" required>
             <small class="form-text text-muted">Calle</small>
-            <div class="invalid-feedback">
-                Por favor, ingrese la calle.
-            </div>
         </div>
         <div class="form-group col-md-4">
-            <label for="txtTAltura">Número</label>
-            <input type="text" class="form-control" id="txtTAltura" runat="server" placeholder="1234" required>
+            <%--<label for="txtTAltura">Número</label>--%>
+            <label>Número</label>
+            <asp:TextBox class="form-control"  ID="txtTAltura" runat="server" type="number" min="1" CausesValidation="true" required="true"></asp:TextBox>
+            <%--<input class="form-control" id="txtTAltura" runat="server" placeholder="1234" type="number" min="1" CausesValidation="true" required>--%>
             <small class="form-text text-muted">Altura</small>
-            <div class="invalid-feedback">
-                Por favor, ingrese la altura.
-            </div>
         </div>
     </div>
     <hr />

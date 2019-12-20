@@ -37,7 +37,7 @@ namespace TPC_Soria_v2.FolderDocente {
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtDNI;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtDNI;
         
         /// <summary>
         /// Control txtNacimiento.
@@ -64,7 +64,7 @@ namespace TPC_Soria_v2.FolderDocente {
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtAltura;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtAltura;
         
         /// <summary>
         /// Control txtEmail.

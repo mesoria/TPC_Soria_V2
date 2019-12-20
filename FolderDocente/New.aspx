@@ -48,7 +48,7 @@
         <div class="form-group col-md-4">
             <label>DNI</label>
                 <%--<asp:TextBox ID="txtNombre" runat="server" required></asp:TextBox>--%>
-            <input type="Text" class="form-control" id="txtDNI"  runat="server" placeholder="30111222" onchange="txtDNI_TextChanged" AutoPostBack="true" required>
+            <input class="form-control" id="txtDNI"  runat="server" placeholder="30111222" onchange="txtDNI_TextChanged" AutoPostBack="true" type="number" min="1" CausesValidation="true" required>
         </div>
         <div class="form-group col-md-4">
             <label for="txtNacimiento">Fecha de nacimiento</label>
@@ -68,7 +68,7 @@
         </div>
         <div class="form-group col-md-4">
             <label for="txtAltura">Número</label>
-            <input type="text" class="form-control" id="txtAltura" runat="server" placeholder="1234" required>
+            <input class="form-control" id="txtAltura" runat="server" placeholder="1234" type="number" min="1" CausesValidation="true" required>
             <small class="form-text text-muted">Altura</small>
             <div class="invalid-feedback">
                 Por favor, ingrese la altura.

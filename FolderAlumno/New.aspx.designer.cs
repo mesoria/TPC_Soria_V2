@@ -64,7 +64,7 @@ namespace TPC_Soria_v2.FolderAlumno {
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtAltura;
+        protected global::System.Web.UI.WebControls.TextBox txtAltura;
         
         /// <summary>
         /// Control txtEmail.
@@ -100,7 +100,7 @@ namespace TPC_Soria_v2.FolderAlumno {
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtTDNI;
+        protected global::System.Web.UI.WebControls.TextBox txtTDNI;
         
         /// <summary>
         /// Control txtTNac.
@@ -127,7 +127,7 @@ namespace TPC_Soria_v2.FolderAlumno {
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtTAltura;
+        protected global::System.Web.UI.WebControls.TextBox txtTAltura;
         
         /// <summary>
         /// Control txtTEmail.

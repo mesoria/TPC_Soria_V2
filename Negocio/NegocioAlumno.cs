@@ -127,6 +127,10 @@ namespace Negocio
         {
             Agregar(alumno);
             alumno.IdAlumno = GetIDWithIDPersona(alumno.ID);
+            if (alumno.IdAlumno == 0)
+            {
+                alumno.IdAlumno = GetAlumnoWithDNI(alumno.DNI).IdAlumno;
+            }
             AgregarAlumnoXCurso(alumno.IdAlumno, IDCXE);
         }
         public void Agregar(Alumno alumno)
@@ -135,7 +139,7 @@ namespace Negocio
             try
             {
                 NegocioPersona negocioAux = new NegocioPersona();
-                if (GetIDWithIDPersona(alumno.ID) == 0)
+                if (GetIDWithIDPersona(alumno.ID) == 0 && GetAlumnoWithDNI(alumno.DNI).ID == 0 )
                 {
                     negocioAux.Agregar(alumno);
                     alumno.ID = negocioAux.GetIDWithDNI(alumno.DNI);

@@ -31,17 +31,6 @@ namespace TPC_Soria_v2.Usuarios
                 persona = (Persona)Application["Persona"];
                 docente = (Docente)Application["Docente"];
 
-                //List<Int64> listID;
-                //listID = negocioEstablecimiento.GetIDsEstablecimientosWithPersona(persona.ID);
-                //foreach (var item in listID)
-                //{
-                //    ListaEstablecimientos.Add(negocioEstablecimiento.GetEstablecimientoWithId(item));
-
-                //}
-                //foreach (var item in ListaEstablecimientos)
-                //{
-                //    negocioCurso.GetMyCursoWithEstablecimiento(ListaCursos, item.ID, persona.ID);
-                //}
                 ListaEstablecimientos = negocioEstablecimiento.GetCursoByEstablecimiento(docente.IdDocente);
             }
             catch (Exception ex)

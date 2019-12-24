@@ -122,6 +122,8 @@
     <Content Include="FolderDocente\Info.aspx" />
     <Content Include="FolderEstablecimiento\Info.aspx" />
     <Content Include="FolderFormularios\EditarCalificaciones.aspx" />
+    <Content Include="FolderFormularios\LogMessenger.aspx" />
+    <Content Include="FolderFormularios\LogMessengerExito.aspx" />
     <Content Include="FolderFormularios\LogMostrarCalificaciones.aspx" />
     <Content Include="FolderFormularios\Messenger.aspx" />
     <Content Include="FolderFormularios\MostrarAsistencias.aspx" />
@@ -318,6 +320,20 @@
     </Compile>
     <Compile Include="FolderFormularios\EditarCalificaciones.aspx.designer.cs">
       <DependentUpon>EditarCalificaciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FolderFormularios\LogMessenger.aspx.cs">
+      <DependentUpon>LogMessenger.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FolderFormularios\LogMessenger.aspx.designer.cs">
+      <DependentUpon>LogMessenger.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FolderFormularios\LogMessengerExito.aspx.cs">
+      <DependentUpon>LogMessengerExito.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FolderFormularios\LogMessengerExito.aspx.designer.cs">
+      <DependentUpon>LogMessengerExito.aspx</DependentUpon>
     </Compile>
     <Compile Include="FolderFormularios\LogMostrarCalificaciones.aspx.cs">
       <DependentUpon>LogMostrarCalificaciones.aspx</DependentUpon>

@@ -53,13 +53,13 @@
     <div>
         <div class="form-group col-md-12">
             <asp:Label ID="lblAsunto" runat="server" Text="Asunto: "></asp:Label>
-            <asp:TextBox ID="txtAsunto" runat="server" CssClass="border-success form-control"> </asp:TextBox>
+            <asp:TextBox ID="txtAsunto" runat="server" CssClass="border-success form-control" required="true"> </asp:TextBox>
         </div>
     </div>
     <div>
         <div class="form-group col-md-12">
             <asp:Label ID="lblCuerpo" runat="server" Text="Mensaje: "></asp:Label>
-            <asp:TextBox ID="txtBody" runat="server" CssClass="border-success form-control" TextMode="MultiLine" Rows="10"> </asp:TextBox>
+            <asp:TextBox ID="txtBody" runat="server" CssClass="border-success form-control" TextMode="MultiLine" Rows="10" required="true"> </asp:TextBox>
         </div>
     </div>
 

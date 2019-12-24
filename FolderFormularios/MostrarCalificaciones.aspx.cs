@@ -74,6 +74,15 @@ namespace TPC_Soria_v2.FolderFormularios
         {
             dgvAlumnos.EditIndex = e.NewEditIndex;
             CargarGrilla();
+            GridViewRow fila = dgvAlumnos.Rows[dgvAlumnos.EditIndex];
+            Calificaciones calificaciones = new Calificaciones();
+
+            long IDA = Convert.ToInt64(dgvAlumnos.DataKeys[dgvAlumnos.EditIndex].Values[0]);
+            calificaciones = negocioCalificaciones.GetCalificacion(IDCXE, IDA, (short)today.Year);
+            (fila.FindControl("txtNota1") as DropDownList).SelectedValue = calificaciones.Notas.Nota1.ToString();
+            (fila.FindControl("txtNota2") as DropDownList).SelectedValue = calificaciones.Notas.Nota2.ToString();
+            (fila.FindControl("txtNota3") as DropDownList).SelectedValue = calificaciones.Notas.Nota3.ToString();
+
         }
 
         protected void dgvAlumnos_RowUpdating(object sender, GridViewUpdateEventArgs e)
@@ -82,9 +91,9 @@ namespace TPC_Soria_v2.FolderFormularios
             {
                 GridViewRow fila = dgvAlumnos.Rows[e.RowIndex];
                 long IDA = Convert.ToInt64(dgvAlumnos.DataKeys[e.RowIndex].Values[0]);
-                byte nota1 = Convert.ToByte((fila.FindControl("txtNota1") as TextBox).Text);
-                byte nota2 = Convert.ToByte((fila.FindControl("txtNota2") as TextBox).Text);
-                byte nota3 = Convert.ToByte((fila.FindControl("txtNota3") as TextBox).Text);
+                byte nota1 = Convert.ToByte((fila.FindControl("txtNota1") as DropDownList).Text);
+                byte nota2 = Convert.ToByte((fila.FindControl("txtNota2") as DropDownList).Text);
+                byte nota3 = Convert.ToByte((fila.FindControl("txtNota3") as DropDownList).Text);
 
                 Alumno a = negocioAlumno.GetAlumnoWithId(IDA);
                 negocioCalificaciones.ModificarNotas(IDCXE, a.IdAlumno, Convert.ToInt16(today.Year), nota1, nota2, nota3);

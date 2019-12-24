@@ -52,7 +52,6 @@ namespace TPC_Soria_v2
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }

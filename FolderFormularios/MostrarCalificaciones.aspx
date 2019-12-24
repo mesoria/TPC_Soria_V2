@@ -40,7 +40,20 @@
                     <asp:Label ID="lblNota1" runat="server"  Text='<% # Bind("Calificaciones.Notas.Nota1")%>'></asp:Label>
                 </ItemTemplate>
                 <EditItemTemplate>
-                    <asp:TextBox ID="txtNota1" runat="server" type="number" min="0" max="10" CausesValidation="true" Text='<% # Bind("Calificaciones.Notas.Nota1")%>'></asp:TextBox>
+                    <asp:DropDownList ID="txtNota1" runat="server"
+                        SelectedValue='<% # Bind("Calificaciones.Notas.Nota1")%>' >
+                        <asp:ListItem>0</asp:ListItem>
+                        <asp:ListItem>1</asp:ListItem>
+                        <asp:ListItem>2</asp:ListItem>
+                        <asp:ListItem>3</asp:ListItem>
+                        <asp:ListItem>4</asp:ListItem>
+                        <asp:ListItem>5</asp:ListItem>
+                        <asp:ListItem>6</asp:ListItem>
+                        <asp:ListItem>7</asp:ListItem>
+                        <asp:ListItem>8</asp:ListItem>
+                        <asp:ListItem>9</asp:ListItem>
+                        <asp:ListItem>10</asp:ListItem>
+                    </asp:DropDownList>
                 </EditItemTemplate>
             </asp:TemplateField>
 
@@ -49,7 +62,20 @@
                     <asp:Label ID="lblNota2" runat="server" Text='<% # Bind("Calificaciones.Notas.Nota2")%>'></asp:Label>
                 </ItemTemplate>
                 <EditItemTemplate>
-                    <asp:TextBox ID="txtNota2" runat="server" type="number" min="0" max="10" CausesValidation="true" Text='<% # Bind("Calificaciones.Notas.Nota2")%>'></asp:TextBox>
+                    <asp:DropDownList ID="txtNota2" runat="server"
+                        SelectedValue='<% # Bind("Calificaciones.Notas.Nota1")%>' >
+                        <asp:ListItem>0</asp:ListItem>
+                        <asp:ListItem>1</asp:ListItem>
+                        <asp:ListItem>2</asp:ListItem>
+                        <asp:ListItem>3</asp:ListItem>
+                        <asp:ListItem>4</asp:ListItem>
+                        <asp:ListItem>5</asp:ListItem>
+                        <asp:ListItem>6</asp:ListItem>
+                        <asp:ListItem>7</asp:ListItem>
+                        <asp:ListItem>8</asp:ListItem>
+                        <asp:ListItem>9</asp:ListItem>
+                        <asp:ListItem>10</asp:ListItem>
+                    </asp:DropDownList>
                 </EditItemTemplate>
             </asp:TemplateField>
 
@@ -58,7 +84,20 @@
                     <asp:Label ID="lblNota3" runat="server" Text='<% # Bind("Calificaciones.Notas.Nota3")%>'></asp:Label>
                 </ItemTemplate>
                 <EditItemTemplate>
-                    <asp:TextBox ID="txtNota3" runat="server" type="number" min="0" max="10" CausesValidation="true" Text='<% # Bind("Calificaciones.Notas.Nota3")%>'></asp:TextBox>
+                    <asp:DropDownList ID="txtNota3" runat="server"
+                        SelectedValue='<% # Bind("Calificaciones.Notas.Nota1")%>' >
+                        <asp:ListItem>0</asp:ListItem>
+                        <asp:ListItem>1</asp:ListItem>
+                        <asp:ListItem>2</asp:ListItem>
+                        <asp:ListItem>3</asp:ListItem>
+                        <asp:ListItem>4</asp:ListItem>
+                        <asp:ListItem>5</asp:ListItem>
+                        <asp:ListItem>6</asp:ListItem>
+                        <asp:ListItem>7</asp:ListItem>
+                        <asp:ListItem>8</asp:ListItem>
+                        <asp:ListItem>9</asp:ListItem>
+                        <asp:ListItem>10</asp:ListItem>
+                    </asp:DropDownList>
                 </EditItemTemplate>
             </asp:TemplateField>
 

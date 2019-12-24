@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="TPC_Soria_v2.SiteMaster" %>
+﻿    <%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="TPC_Soria_v2.SiteMaster" %>
 
 <!DOCTYPE html>
 
@@ -31,7 +31,6 @@
 
                     <li class="nav-item">
                         <a class="nav-link" runat="server" href="~/Establecimientos">Establecimientos<span class="sr-only">(current)</span></a>
-                        
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" runat="server" href="~/Docentes">Docentes<span class="sr-only">(current)</span></a>

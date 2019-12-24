@@ -36,7 +36,10 @@ namespace TPC_Soria_v2.FolderFormularios
                 persona = (Persona)Application["Persona"];
                 //IDCXE = Convert.ToInt64(Request.QueryString["IDCXE"]);
                 IDCXE = Request.QueryString["IDCXE"] != null ? Convert.ToInt64(Request.QueryString["IDCXE"]) : 0;
-                //establecimiento = negocioEstablecimiento.GetCursoByEstablecimientoWithID(IDCXE);
+                if (IDCXE == 0)
+                {
+                    IDCXE = (long)Session["IDCXE" + Session.SessionID];
+                }
                 List<Persona> ListaPersonas = new List<Persona>();
                 if (!IsPostBack)
                 {
@@ -50,7 +53,8 @@ namespace TPC_Soria_v2.FolderFormularios
                         Session["Error" + Session.SessionID] = "Ups, Aún no has seleccionado un Establecimiento.";
                         Response.Redirect("/frmLog.aspx", false);
                     }
-                    //txtMeEmail.Text = negocioPersona.GetMeEmail(persona.ID);
+                    txtAsunto.Text = Session["Asunto" + Session.SessionID] != null ? (string)Session["Asunto" + Session.SessionID] : "";
+                    txtBody.Text   = Session["Cuerpo" + Session.SessionID] != null ? (string)Session["Cuerpo" + Session.SessionID] : "";
                     ListaPersonas = negocioPersona.GetContactoTutores(IDCXE);
                     dgvReceiver.DataSource = ListaPersonas;
                     dgvReceiver.DataBind();
@@ -82,43 +86,63 @@ namespace TPC_Soria_v2.FolderFormularios
 
         protected void btnEnviar_Click(object sender, EventArgs e)
         {
-            Button btn = (Button)sender;
-            NegocioAsistencia negocioAsistencia = new NegocioAsistencia();
-            List<Persona> ListaPersonas;
-            List<string> Destinatarios = new List<string>();
+            try
+            {
+                Button btn = (Button)sender;
+                NegocioAsistencia negocioAsistencia = new NegocioAsistencia();
+                List<Persona> ListaPersonas;
+                List<string> Destinatarios = new List<string>();
 
-            if (Session["listaAlumnos"] != null)
-            {
-                ListaPersonas = (List<Persona>)Session["listaAlumnos"];
-            }
-            else if (DDLDestinatari.SelectedIndex == 0)
-            {
-                ListaPersonas = negocioPersona.GetContactoTutores(IDCXE);
-            }
-            else
-            {
-                ListaPersonas = negocioPersona.GetContactoEmpleados(IDCXE);
-            }
-            foreach (GridViewRow dgvItem in this.dgvReceiver.Rows)
-            {
-
-                CheckBox Sel = ((CheckBox)dgvReceiver.Rows[dgvItem.RowIndex].FindControl("cbxEnviar"));
-                if (Sel.Checked == true)
+                if (Session["listaAlumnos"] != null)
                 {
-                    Destinatarios.Add(ListaPersonas[dgvItem.RowIndex].Email);
+                    ListaPersonas = (List<Persona>)Session["listaAlumnos"];
+                }
+                else if (DDLDestinatari.SelectedIndex == 0)
+                {
+                    ListaPersonas = negocioPersona.GetContactoTutores(IDCXE);
+                }
+                else
+                {
+                    ListaPersonas = negocioPersona.GetContactoEmpleados(IDCXE);
+                }
+                foreach (GridViewRow dgvItem in this.dgvReceiver.Rows)
+                {
+
+                    CheckBox Sel = ((CheckBox)dgvReceiver.Rows[dgvItem.RowIndex].FindControl("cbxEnviar"));
+                    if (Sel.Checked == true)
+                    {
+                        Destinatarios.Add(ListaPersonas[dgvItem.RowIndex].Email);
+                    }
+                }
+                if (Destinatarios.Count() > 0)
+                {
+                    NegocioMessenger negocioMessenger = new NegocioMessenger();
+                    //negocioMessenger.SenderEmail(txtMeEmail.Text, persona.Name, txtPass.Text, Destinatarios, txtAsunto.Text, txtBody.Text);
+                    negocioMessenger.SenderEmail("aplicacion.miescuela@gmail.com", persona.Apellido + " " + persona.Name, "33294.frgp", Destinatarios, txtAsunto.Text, txtBody.Text);
+
+                    if (negocioMessenger.Estado)
+                    {
+                        Session["Mensaje" + Session.SessionID] = "Mensaje enviado con exito.";
+                        BorrarCampos();
+                        Response.Redirect("~/FolderFormularios/LogMessengerExito.aspx");
+                    }
+                    else
+                    {
+                        Session["Mensaje" + Session.SessionID] = negocioMessenger.LogError;
+                        Response.Redirect("~/FolderFormularios/LogMessenger.aspx");
+                    }
+                }
+                else
+                {
+                    Session["Mensaje" + Session.SessionID] = "Debe agregar un destinatario";
+                    Session["Asunto" + Session.SessionID]  = txtAsunto.Text;
+                    Session["Cuerpo" + Session.SessionID]  = txtBody.Text;
+                    Response.Redirect("~/FolderFormularios/LogMessenger.aspx");
                 }
             }
-            NegocioMessenger negocioMessenger = new NegocioMessenger();
-            //negocioMessenger.SenderEmail(txtMeEmail.Text, persona.Name, txtPass.Text, Destinatarios, txtAsunto.Text, txtBody.Text);
-            negocioMessenger.SenderEmail("aplicacion.miescuela@gmail.com", persona.Apellido+" "+persona.Name, "33294.frgp", Destinatarios, txtAsunto.Text, txtBody.Text);
-            if ( negocioMessenger.Estado)
+            catch (Exception)
             {
-                Response.Write("<script>alert('Mensaje enviado con exito.')</script>");
-                BorrarCampos();
-            }
-            else
-            {
-                Response.Write(negocioMessenger.LogError);
+                throw;
             }
         }
     }

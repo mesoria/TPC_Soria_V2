@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="LogMostrarCalificaciones.aspx.cs" Inherits="TPC_Soria_v2.FolderFormularios.LogMostrarCalificaciones" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="LogMessenger.aspx.cs" Inherits="TPC_Soria_v2.FolderFormularios.LogMessenger" %>
 
 <!DOCTYPE html>
 
@@ -177,18 +177,18 @@ img
         </div>
         <div class="CenterFormaLogin">
             <div class="cPosRel" style="width: 370px; height: 90px; margin: 34px auto 0px auto; text-align:justify center;">
-                <span class="TextoMensaje">A ingresado datos erroneos.</span>
+                <%--<span class="TextoMensaje">Mensaje enviado correctamente.</span>--%>
                 <br />
                 <br />
                 <br />
-                <span class="TextoPregunta">Los valores posibles a ingresar son: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 o 10.</span>
+                <asp:Label ID="lblMensaje" runat="server" Text="Label"></asp:Label>
+                <span class="TextoPregunta" id="txtMensaje" runat="server"></span>
             </div>
             <div class="cFL cPosRel" style="width: 450px; height: 150px;">
                 <div class="cFL cPosRel" style="width: 200px; height: 25px; margin-top: 15px;">
-                        <asp:Button ID="btnAceptar" runat="server" PostBackUrl="~/FolderFormularios/MostrarCalificaciones.aspx?IDCXE=<% =IDCXE %>" Text="Aceptar"/>
+                    <asp:Button ID="btnAceptar" runat="server" onclick="btnAceptar_Click" Text="Aceptar"/>
                 </div>
             </div>
-            <asp:Label ID="lblMensaje" CssClass="cFL" runat="server" ForeColor="#996600"></asp:Label>
         </div>
         <div class="RightFormaLogin">
         </div>

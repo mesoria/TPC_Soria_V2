@@ -76,9 +76,6 @@
         <div class="form-group col-md-5">
             <a class="btn btn-primary" href="../FolderAlumno/New.aspx?IDA=0">Nuevo Alumno</a>
         </div>
-        <%--<div class="form-group col-md-7">
-            <a class="btn btn-primary" href="../Maestra/Cursos.aspx?idM=<% = maestra.ID %>">Ir a Alumnos</a>
-        </div>--%>
     </div>
 
 </asp:Content>

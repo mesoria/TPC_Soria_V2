@@ -48,13 +48,4 @@
 </div>
     <hr />
 
-    <%--
-    <div class="form-row">
-        <div class="form-group col-md-5">
-            <asp:Button ID="btnVolver" href="../Default.aspx" runat="server" CssClass="btn btn-primary btn-lg" Text="Inicio" />
-        </div>
-        <div class="form-group col-md-7">
-            <asp:Button ID="btnGuardar" runat="server" OnClick="btnGuardar_Click" Text="Guardar presentismo" CssClass="btn btn-success btn-lg"/>
-        </div>
-    </div>--%>
 </asp:Content>

@@ -1,6 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="MostrarCalificaciones.aspx.cs" Inherits="TPC_Soria_v2.FolderFormularios.MostrarCalificaciones" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="MostrarCalificaciones2.aspx.cs" Inherits="TPC_Soria_v2.FolderFormularios.MostrarCalificaciones2" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="form-row">
+<div class="form-row">
         <div class="form-group col-md-10">
             <asp:Label ID="lblApellido" runat="server" Font-Size="X-Large" Text=""><% = persona.Apellido %></asp:Label>
 
@@ -35,74 +35,56 @@
         <Columns>
             <asp:BoundField DataField="Apellido" HeaderText="Apellido" ReadOnly="true"/>
             <asp:BoundField DataField="Name" HeaderText="Nombre" ReadOnly="true"/>
-            <asp:TemplateField HeaderText="Primer Parcial">
+            <asp:TemplateField HeaderText="Primer trimestre">
                 <ItemTemplate>
-                    <asp:Label ID="lblNota1" runat="server" Text='<% # Bind("Calificaciones.Notas.Nota1")%>'></asp:Label>
+                    <asp:Label ID="lblNota1" runat="server" Text='<% # Bind("Calificaciones.Letras.Letra1")%>'></asp:Label>
                 </ItemTemplate>
                 <EditItemTemplate>
                     <asp:DropDownList ID="txtNota1" runat="server"
-                        SelectedValue='<% # Bind("Calificaciones.Notas.Nota1")%>' >
-                        <asp:ListItem>0</asp:ListItem>
-                        <asp:ListItem>1</asp:ListItem>
-                        <asp:ListItem>2</asp:ListItem>
-                        <asp:ListItem>3</asp:ListItem>
-                        <asp:ListItem>4</asp:ListItem>
-                        <asp:ListItem>5</asp:ListItem>
-                        <asp:ListItem>6</asp:ListItem>
-                        <asp:ListItem>7</asp:ListItem>
-                        <asp:ListItem>8</asp:ListItem>
-                        <asp:ListItem>9</asp:ListItem>
-                        <asp:ListItem>10</asp:ListItem>
+                        SelectedValue='<% # Bind("Calificaciones.Letras.Letra1")%>' >
+                        <asp:ListItem></asp:ListItem>
+                        <asp:ListItem>R</asp:ListItem>
+                        <asp:ListItem>B</asp:ListItem>
+                        <asp:ListItem>MB</asp:ListItem>
+                        <asp:ListItem>S</asp:ListItem>
                     </asp:DropDownList>
                 </EditItemTemplate>
             </asp:TemplateField>
 
-            <asp:TemplateField HeaderText="Segundo parcial">
+            <asp:TemplateField HeaderText="Segundo Trimestre">
                 <ItemTemplate>
-                    <asp:Label ID="lblNota2" runat="server" Text='<% # Bind("Calificaciones.Notas.Nota2")%>'></asp:Label>
+                    <asp:Label ID="lblNota2" runat="server" Text='<% # Bind("Calificaciones.Letras.Letra2")%>'></asp:Label>
                 </ItemTemplate>
                 <EditItemTemplate>
                     <asp:DropDownList ID="txtNota2" runat="server"
-                        SelectedValue='<% # Bind("Calificaciones.Notas.Nota2")%>' >
-                        <asp:ListItem>0</asp:ListItem>
-                        <asp:ListItem>1</asp:ListItem>
-                        <asp:ListItem>2</asp:ListItem>
-                        <asp:ListItem>3</asp:ListItem>
-                        <asp:ListItem>4</asp:ListItem>
-                        <asp:ListItem>5</asp:ListItem>
-                        <asp:ListItem>6</asp:ListItem>
-                        <asp:ListItem>7</asp:ListItem>
-                        <asp:ListItem>8</asp:ListItem>
-                        <asp:ListItem>9</asp:ListItem>
-                        <asp:ListItem>10</asp:ListItem>
+                        SelectedValue='<% # Bind("Calificaciones.Letras.Letra2")%>' >
+                        <asp:ListItem></asp:ListItem>
+                        <asp:ListItem>R</asp:ListItem>
+                        <asp:ListItem>B</asp:ListItem>
+                        <asp:ListItem>MB</asp:ListItem>
+                        <asp:ListItem>S</asp:ListItem>
                     </asp:DropDownList>
                 </EditItemTemplate>
             </asp:TemplateField>
 
-            <asp:TemplateField HeaderText="FINAL">
+            <asp:TemplateField HeaderText="Tercer Trimestre">
                 <ItemTemplate>
-                    <asp:Label ID="lblNota3" runat="server" Text='<% # Bind("Calificaciones.Notas.Nota3")%>'></asp:Label>
+                    <asp:Label ID="lblNota3" runat="server" Text='<% # Bind("Calificaciones.Letras.Letra3")%>'></asp:Label>
                 </ItemTemplate>
                 <EditItemTemplate>
                     <asp:DropDownList ID="txtNota3" runat="server"
-                        SelectedValue='<% # Bind("Calificaciones.Notas.Nota3")%>' >
-                        <asp:ListItem>0</asp:ListItem>
-                        <asp:ListItem>1</asp:ListItem>
-                        <asp:ListItem>2</asp:ListItem>
-                        <asp:ListItem>3</asp:ListItem>
-                        <asp:ListItem>4</asp:ListItem>
-                        <asp:ListItem>5</asp:ListItem>
-                        <asp:ListItem>6</asp:ListItem>
-                        <asp:ListItem>7</asp:ListItem>
-                        <asp:ListItem>8</asp:ListItem>
-                        <asp:ListItem>9</asp:ListItem>
-                        <asp:ListItem>10</asp:ListItem>
+                        SelectedValue='<% # Bind("Calificaciones.Letras.Letra3")%>' >
+                        <asp:ListItem></asp:ListItem>
+                        <asp:ListItem>R</asp:ListItem>
+                        <asp:ListItem>B</asp:ListItem>
+                        <asp:ListItem>MB</asp:ListItem>
+                        <asp:ListItem>S</asp:ListItem>
                     </asp:DropDownList>
                 </EditItemTemplate>
             </asp:TemplateField>
-
             <asp:CommandField ButtonType="Link" ShowEditButton="true" />
         </Columns>
+
         <EditRowStyle BackColor="#7C6F57" />
         <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
         <HeaderStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
@@ -122,5 +104,4 @@
             <asp:Button ID="btnVolver" runat="server" CssClass="btn btn-primary btn-lg" Text="Volver" />
         </div>
     </div>
-
 </asp:Content>

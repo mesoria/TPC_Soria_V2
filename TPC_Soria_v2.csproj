@@ -128,6 +128,7 @@
     <Content Include="FolderFormularios\Messenger.aspx" />
     <Content Include="FolderFormularios\MostrarAsistencias.aspx" />
     <Content Include="FolderFormularios\MostrarCalificaciones.aspx" />
+    <Content Include="FolderFormularios\MostrarCalificaciones2.aspx" />
     <Content Include="FolderFormularios\PasarAsistencia.aspx" />
     <Content Include="frmLog.aspx" />
     <Content Include="Contact.aspx" />
@@ -362,6 +363,13 @@
     </Compile>
     <Compile Include="FolderFormularios\MostrarCalificaciones.aspx.designer.cs">
       <DependentUpon>MostrarCalificaciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FolderFormularios\MostrarCalificaciones2.aspx.cs">
+      <DependentUpon>MostrarCalificaciones2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FolderFormularios\MostrarCalificaciones2.aspx.designer.cs">
+      <DependentUpon>MostrarCalificaciones2.aspx</DependentUpon>
     </Compile>
     <Compile Include="FolderFormularios\PasarAsistencia.aspx.cs">
       <DependentUpon>PasarAsistencia.aspx</DependentUpon>

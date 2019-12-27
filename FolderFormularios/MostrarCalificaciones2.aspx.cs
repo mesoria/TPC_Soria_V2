@@ -9,7 +9,7 @@ using Negocio;
 
 namespace TPC_Soria_v2.FolderFormularios
 {
-    public partial class MostrarCalificaciones : System.Web.UI.Page
+    public partial class MostrarCalificaciones2 : System.Web.UI.Page
     {
         private readonly NegocioAlumno negocioAlumno = new NegocioAlumno();
         private readonly NegocioCalificaciones negocioCalificaciones = new NegocioCalificaciones();
@@ -25,7 +25,7 @@ namespace TPC_Soria_v2.FolderFormularios
             ListaAlumnos = negocioAlumno.ListarAlumnosByte(IDCXE);
             foreach (var item in ListaAlumnos)
             {
-                item.Calificaciones = negocioCalificaciones.GetNota(IDCXE, item.IdAlumno, (short)today.Year);
+                item.Calificaciones = negocioCalificaciones.GetCalificacion(IDCXE, item.IdAlumno, (short)today.Year);
             }
             dgvAlumnos.DataSource = ListaAlumnos;
             dgvAlumnos.DataBind();
@@ -76,12 +76,13 @@ namespace TPC_Soria_v2.FolderFormularios
             CargarGrilla();
             GridViewRow fila = dgvAlumnos.Rows[dgvAlumnos.EditIndex];
             Calificaciones calificaciones = new Calificaciones();
-
+            Letras Letras = new Letras();
+            calificaciones.Letras = Letras;
             long IDA = Convert.ToInt64(dgvAlumnos.DataKeys[dgvAlumnos.EditIndex].Values[0]);
-            calificaciones = negocioCalificaciones.GetNota(IDCXE, IDA, (short)today.Year);
-            (fila.FindControl("txtNota1") as DropDownList).SelectedValue = calificaciones.Notas.Nota1.ToString();
-            (fila.FindControl("txtNota2") as DropDownList).SelectedValue = calificaciones.Notas.Nota2.ToString();
-            (fila.FindControl("txtNota3") as DropDownList).SelectedValue = calificaciones.Notas.Nota3.ToString();
+            calificaciones = negocioCalificaciones.GetCalificacion(IDCXE, IDA, (short)today.Year);
+            (fila.FindControl("txtNota1") as DropDownList).SelectedValue = calificaciones.Letras.Letra1;
+            (fila.FindControl("txtNota2") as DropDownList).SelectedValue = calificaciones.Letras.Letra2;
+            (fila.FindControl("txtNota3") as DropDownList).SelectedValue = calificaciones.Letras.Letra3;
 
         }
 
@@ -91,12 +92,12 @@ namespace TPC_Soria_v2.FolderFormularios
             {
                 GridViewRow fila = dgvAlumnos.Rows[e.RowIndex];
                 long IDA = Convert.ToInt64(dgvAlumnos.DataKeys[e.RowIndex].Values[0]);
-                byte nota1 = Convert.ToByte((fila.FindControl("txtNota1") as DropDownList).Text);
-                byte nota2 = Convert.ToByte((fila.FindControl("txtNota2") as DropDownList).Text);
-                byte nota3 = Convert.ToByte((fila.FindControl("txtNota3") as DropDownList).Text);
+                string nota1 = (fila.FindControl("txtNota1") as DropDownList).Text;
+                string nota2 = (fila.FindControl("txtNota2") as DropDownList).Text;
+                string nota3 = (fila.FindControl("txtNota3") as DropDownList).Text;
 
                 Alumno a = negocioAlumno.GetAlumnoWithId(IDA);
-                negocioCalificaciones.ModificarNotas(IDCXE, a.IdAlumno, Convert.ToInt16(today.Year), nota1, nota2, nota3);
+                negocioCalificaciones.ModificarCalificaciones(IDCXE, a.IdAlumno, Convert.ToInt16(today.Year), nota1, nota2, nota3);
 
                 dgvAlumnos.EditIndex = -1;
                 CargarGrilla();
@@ -105,7 +106,7 @@ namespace TPC_Soria_v2.FolderFormularios
             {
                 Response.Redirect("~/FolderFormularios/LogMostrarCalificaciones.aspx");
             }
-            
+
         }
     }
 }

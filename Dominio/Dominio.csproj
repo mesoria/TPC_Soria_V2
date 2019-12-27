@@ -53,6 +53,7 @@
     <Compile Include="Establecimiento.cs" />
     <Compile Include="Docente.cs" />
     <Compile Include="Helper.cs" />
+    <Compile Include="Letras.cs" />
     <Compile Include="Notas.cs" />
     <Compile Include="Persona.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

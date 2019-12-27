@@ -336,7 +336,7 @@ namespace Negocio
             Establecimiento establecimiento;
             try
             {
-                datos.SetearConsulta("SELECT EST.ID, EST.NOMBRE, EST.NIVEL, EST.NUMERO, DIR.ID, DIR.CALLE, DIR.NUMERO, C.ID, C.NOMBRE FROM SORIA_TPC.dbo.CURSOSxESTABLECIMIENTO AS CXE"
+                datos.SetearConsulta("SELECT EST.ID, EST.NOMBRE, EST.NIVEL, EST.NUMERO, DIR.ID, DIR.CALLE, DIR.NUMERO, C.ID, C.NOMBRE, C.CICLO FROM SORIA_TPC.dbo.CURSOSxESTABLECIMIENTO AS CXE"
                     + " INNER JOIN SORIA_TPC.dbo.ESTABLECIMIENTOS AS EST ON EST.ID = CXE.IDESTABLECIMIENTO"
                     + " INNER JOIN SORIA_TPC.dbo.DIRECCIONES AS DIR ON DIR.ID = EST.IDDIRECCION"
                     + " INNER JOIN SORIA_TPC.dbo.CURSOS AS C ON C.ID = CXE.IDCURSO"
@@ -373,6 +373,14 @@ namespace Negocio
                             ID = (Int64)datos.Reader[7],
                             Name = (string)datos.Reader[8]
                         };
+                    }
+                    if (!Convert.IsDBNull(datos.Reader[9]))
+                    {
+                        establecimiento.Curso.Ciclo = (byte)datos.Reader[9];
+                    }
+                    else
+                    {
+                        establecimiento.Curso.Ciclo = 1;
                     }
                     establecimiento.Curso.Docente = new Docente
                     {
@@ -428,7 +436,7 @@ namespace Negocio
             Establecimiento establecimiento = new Establecimiento();
             try
             {
-                datos.SetearConsulta("SELECT EST.ID, EST.NOMBRE, EST.NIVEL, EST.NUMERO, DIR.ID, DIR.CALLE, DIR.NUMERO, C.ID, C.NOMBRE FROM SORIA_TPC.dbo.CURSOSxESTABLECIMIENTO AS CXE"
+                datos.SetearConsulta("SELECT EST.ID, EST.NOMBRE, EST.NIVEL, EST.NUMERO, DIR.ID, DIR.CALLE, DIR.NUMERO, C.ID, C.NOMBRE, C.CICLO FROM SORIA_TPC.dbo.CURSOSxESTABLECIMIENTO AS CXE"
                     + " INNER JOIN SORIA_TPC.dbo.ESTABLECIMIENTOS AS EST ON EST.ID = CXE.IDESTABLECIMIENTO"
                     + " INNER JOIN SORIA_TPC.dbo.DIRECCIONES AS DIR ON DIR.ID = EST.IDDIRECCION"
                     + " INNER JOIN SORIA_TPC.dbo.CURSOS AS C ON C.ID = CXE.IDCURSO"
@@ -465,6 +473,10 @@ namespace Negocio
                             ID = (Int64)datos.Reader[7],
                             Name = (string)datos.Reader[8]
                         };
+                    }
+                    if (!Convert.IsDBNull(datos.Reader[9]))
+                    {
+                        establecimiento.Curso.Ciclo = (byte)datos.Reader[9];
                     }
                     //establecimiento.Curso.Docente = new Docente
                     //{

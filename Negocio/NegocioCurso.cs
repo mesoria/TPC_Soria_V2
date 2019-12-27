@@ -17,7 +17,7 @@ namespace Negocio
             Curso aux;
             try
             {
-                datos.SetearConsulta("SELECT C.ID, C.NOMBRE FROM CURSOSxESTABLECIMIENTO AS CXE INNER JOIN CURSOS AS C ON C.ID=CXE.IDCURSO WHERE CXE.IDESTABLECIMIENTO=@IDESTABLECIMIENTO");
+                datos.SetearConsulta("SELECT C.ID, C.NOMBRE, C.CICLO FROM CURSOSxESTABLECIMIENTO AS CXE INNER JOIN CURSOS AS C ON C.ID=CXE.IDCURSO WHERE CXE.IDESTABLECIMIENTO=@IDESTABLECIMIENTO");
                 datos.AbrirConexion();
                 datos.EjecutarConsulta();
                 while (datos.Reader.Read())

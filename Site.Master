@@ -1,26 +1,26 @@
-﻿    <%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="TPC_Soria_v2.SiteMaster" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="TPC_Soria_v2.SiteMaster" %>
 
 <!DOCTYPE html>
 
 <html lang="es">
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%: Page.Title %> - Mi escuela ASP.NET</title>
 
     <link href="Content/Bootstrap4/css/bootstrap.min.css" rel="stylesheet" />
-    
+
     <script src="Scripts/jquery-3.3.1.slim.js"></script>
     <script src="Content/Bootstrap4/js/bootstrap.min.js"></script>
     <script src="Scripts/popper.min.js"></script>
 </head>
 <body>
     <form runat="server">
-        
+
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" runat="server" href="~/">Inicio</a>
-            
+
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
